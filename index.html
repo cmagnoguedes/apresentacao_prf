@@ -1,0 +1,3697 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Painel Nacional de Doações PRF — Apresentação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary-color: #003366;
+  --primary-deep: #001f3f;
+  --primary-soft: #0b3d6d;
+  --gold: #d4af37;
+  --gold-bright: #f4cf5a;
+  --gold-soft: #f5d27a;
+  --bg-main: #021528;
+  --panel: rgba(8, 32, 58, 0.62);
+  --panel-strong: rgba(4, 24, 44, 0.92);
+  --glass-border: rgba(143, 198, 255, 0.16);
+  --glass-border-strong: rgba(173, 216, 255, 0.28);
+  --text-main: #f8fbff;
+  --text-muted: #b8cbe0;
+  --text-dim: #8aa5c2;
+  --accent-cyan: #5ec8ff;
+  --accent-cyan-bright: #7ad6ff;
+  --accent-green: #34d399;
+  --warning: #fbbf24;
+  --danger: #fb7185;
+
+  --radius-xl: 26px;
+  --radius-lg: 18px;
+  --radius-md: 14px;
+
+  --font-body: 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', 'Manrope', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+
+  --shadow-deep: 0 30px 80px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 60px rgba(94, 200, 255, 0.18);
+  --shadow-gold: 0 0 80px rgba(212, 175, 55, 0.14);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  padding: 30px;
+  min-height: 100vh;
+  color: var(--text-main);
+  background:
+    radial-gradient(ellipse 80% 60% at 12% 8%, rgba(94, 200, 255, 0.18), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 88% 14%, rgba(212, 175, 55, 0.16), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 50% 110%, rgba(14, 165, 233, 0.14), transparent 60%),
+    linear-gradient(135deg, #020a14 0%, #002a52 42%, #02152a 100%);
+  position: relative;
+}
+
+/* ===== ATMOSFERA ANIMADA DE FUNDO ===== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.65), transparent 92%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(94, 200, 255, 0.10), transparent 35%);
+  transition: background 0.8s ease;
+}
+
+/* Partículas flutuantes */
+.bg-particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.bg-particles span {
+  position: absolute;
+  bottom: -20px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.6);
+  animation: floatUp linear infinite;
+  opacity: 0;
+}
+
+.bg-particles span:nth-child(odd) {
+  background: rgba(94, 200, 255, 0.45);
+  box-shadow: 0 0 14px rgba(94, 200, 255, 0.55);
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.8; }
+  100% { transform: translateY(-110vh) translateX(40px); opacity: 0; }
+}
+
+/* ===== CONTAINERS ===== */
+.dashboard-container {
+  width: min(1320px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 24px;
+}
+
+.glass-panel {
+  position: relative;
+  background:
+    linear-gradient(155deg, rgba(13, 52, 88, 0.72), rgba(3, 22, 42, 0.88));
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--glass-border-strong);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    var(--shadow-deep),
+    inset 0 1px 0 rgba(255,255,255,.10),
+    inset 0 -1px 0 rgba(255,255,255,.04);
+  overflow: hidden;
+}
+
+.glass-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(155deg, rgba(173, 216, 255, 0.22), transparent 40%, rgba(212, 175, 55, 0.12));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ===== HEADER DE CADA PÁGINA ===== */
+header.glass-panel {
+  position: relative;
+  overflow: hidden;
+  padding: 48px 38px;
+  text-align: left;
+  background:
+    radial-gradient(ellipse at 86% 8%, rgba(212, 175, 55, 0.22), transparent 30%),
+    radial-gradient(ellipse at 14% 90%, rgba(94, 200, 255, 0.18), transparent 36%),
+    linear-gradient(135deg, rgba(0, 51, 102, 0.92), rgba(2, 21, 40, 0.94));
+}
+
+header.glass-panel::after {
+  content: attr(data-watermark);
+  position: absolute;
+  right: 28px;
+  bottom: -22px;
+  font-family: var(--font-display);
+  font-size: clamp(3.6rem, 11vw, 9rem);
+  font-weight: 700;
+  letter-spacing: -0.085em;
+  color: rgba(212, 175, 55, 0.10);
+  line-height: 0.85;
+  pointer-events: none;
+  text-shadow: 0 0 80px rgba(212, 175, 55, 0.12);
+}
+
+header.glass-panel h1 {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 18px;
+  max-width: 940px;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.2vw, 4.4rem);
+  line-height: 0.96;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  color: #ffffff;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.45);
+}
+
+header.glass-panel p {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 11px 18px;
+  border-radius: 999px;
+  color: var(--gold-bright);
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.20), rgba(212, 175, 55, 0.06));
+  border: 1px solid rgba(212, 175, 55, 0.40);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+header.glass-panel p::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  box-shadow: 0 0 12px var(--gold);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* ===== TOTAIS ===== */
+.totals-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 22px;
+}
+
+.total-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 150px;
+  padding: 32px 34px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
+}
+
+.total-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-deep), 0 0 80px rgba(94, 200, 255, 0.16);
+}
+
+.total-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: linear-gradient(to bottom, var(--accent-cyan-bright), #0ea5e9);
+  box-shadow: 0 0 24px var(--accent-cyan);
+}
+
+.total-card.armaments::before {
+  background: linear-gradient(to bottom, var(--accent-green), #10b981);
+  box-shadow: 0 0 24px var(--accent-green);
+}
+
+.total-card::after {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  right: -90px;
+  top: -80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(94, 200, 255, 0.20), transparent 70%);
+  pointer-events: none;
+}
+
+.total-card.armaments::after {
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.20), transparent 70%);
+}
+
+.total-card .label {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  max-width: 240px;
+  line-height: 1.4;
+}
+
+.total-card .value {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: clamp(2.8rem, 5.2vw, 4.6rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 4px 28px rgba(0,0,0,.4);
+  line-height: 1;
+}
+
+/* ===== SUB-CARDS ===== */
+.sub-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  padding: 24px 22px;
+  text-align: left;
+  transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: var(--shadow-deep), 0 0 60px rgba(94, 200, 255, 0.18);
+}
+
+.card::before {
+  content: "";
+  display: block;
+  width: 52px;
+  height: 5px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+  background: linear-gradient(90deg, var(--accent-cyan-bright), rgba(94, 200, 255, 0.18));
+  box-shadow: 0 0 14px rgba(94, 200, 255, 0.55);
+}
+
+.card:nth-child(2)::before { background: linear-gradient(90deg, var(--accent-green), rgba(52, 211, 153, 0.18)); box-shadow: 0 0 14px rgba(52, 211, 153, 0.55);}
+.card:nth-child(3)::before { background: linear-gradient(90deg, var(--gold), rgba(212, 175, 55, 0.18)); box-shadow: 0 0 14px rgba(212, 175, 55, 0.55);}
+.card:nth-child(4)::before { background: linear-gradient(90deg, var(--warning), rgba(251, 191, 36, 0.18)); box-shadow: 0 0 14px rgba(251, 191, 36, 0.55);}
+
+.card h3 {
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.card .number {
+  font-family: var(--font-mono);
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin: 0 0 10px;
+  color: #ffffff;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.card .subtitle {
+  font-size: 0.86rem;
+  color: var(--accent-cyan-bright);
+  margin: 0;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+/* ===== SEÇÃO DE DADOS ===== */
+.data-section {
+  padding: 32px 34px;
+}
+
+.data-section h2 {
+  margin: 0 0 26px;
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2vw, 2.05rem);
+  font-weight: 700;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  padding-bottom: 18px;
+  letter-spacing: -0.025em;
+  position: relative;
+}
+
+.data-section h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 80px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold), var(--accent-cyan));
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.5);
+}
+
+.data-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-size: 1.06rem;
+  font-weight: 600;
+  color: #dbeafe;
+  margin-top: 32px;
+  margin-bottom: 16px;
+  letter-spacing: -0.012em;
+}
+
+.data-section h3::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-cyan-bright);
+  box-shadow: 0 0 0 5px rgba(94, 200, 255, 0.18), 0 0 16px var(--accent-cyan);
+  flex: 0 0 auto;
+}
+
+/* ===== TABELAS ===== */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 12px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255,255,255,0.10);
+  background: var(--panel-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+th, td {
+  padding: 15px 18px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  vertical-align: middle;
+  line-height: 1.5;
+}
+
+th {
+  background: rgba(255,255,255,0.05);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: #dbeafe;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+}
+
+td {
+  color: #edf6ff;
+  font-size: 0.93rem;
+}
+
+td strong {
+  color: #ffffff;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 1.0rem;
+}
+
+tbody tr:nth-child(even):not(.total-row) { background: rgba(255,255,255,0.022); }
+tbody tr:not(.total-row) {
+  transition: background .2s ease;
+}
+tbody tr:hover:not(.total-row) {
+  background: rgba(94, 200, 255, 0.09);
+}
+tbody tr:last-child td { border-bottom: none; }
+
+.total-row {
+  font-weight: 800;
+  background: linear-gradient(90deg, rgba(94, 200, 255, 0.16), rgba(212, 175, 55, 0.06)) !important;
+}
+
+.total-row td {
+  border-top: 1px solid rgba(94, 200, 255, 0.22);
+  border-bottom: none;
+  color: #ffffff;
+  font-family: var(--font-display);
+}
+
+.total-row strong {
+  color: var(--accent-cyan-bright);
+}
+
+/* ===== BADGES E LINKS ===== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  background: rgba(94, 200, 255, 0.10);
+  border: 1px solid rgba(94, 200, 255, 0.24);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #e5f6ff;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: all .2s ease;
+}
+
+.state-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 28px;
+  margin: 2px 1px;
+  color: #e5f6ff;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 2px 11px;
+  border-radius: 999px;
+  background: rgba(94, 200, 255, 0.10);
+  border: 1px solid rgba(94, 200, 255, 0.24);
+  transition: all 0.25s cubic-bezier(.2,.8,.2,1);
+  position: relative;
+  overflow: hidden;
+}
+
+.state-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.state-link:hover {
+  background: linear-gradient(90deg, var(--gold-bright), var(--gold));
+  color: #061a2f;
+  border-color: var(--gold);
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.35);
+}
+
+.state-link:hover::after { transform: translateX(100%); }
+
+/* ===== BARRAS DE PROGRESSO ===== */
+.bar {
+  margin-top: 8px;
+  height: 7px;
+  width: 100%;
+  background: rgba(255,255,255,0.07);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-cyan-bright), var(--gold));
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(94, 200, 255, 0.4);
+  width: 0;
+  transition: width 1.4s cubic-bezier(.2,.8,.2,1);
+}
+
+.bar span::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  animation: shimmer 2.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ===== NOTAS ===== */
+.nota {
+  background: linear-gradient(90deg, rgba(251, 191, 36, 0.15), rgba(251,191,36,0.04));
+  border-left: 5px solid var(--warning);
+  border-top: 1px solid rgba(251, 191, 36, 0.20);
+  border-right: 1px solid rgba(251, 191, 36, 0.10);
+  border-bottom: 1px solid rgba(251, 191, 36, 0.10);
+  padding: 18px 22px;
+  margin-top: 32px;
+  border-radius: 0 16px 16px 0;
+  font-size: 0.94rem;
+  color: var(--text-main);
+  line-height: 1.7;
+}
+
+.nota strong { color: #ffd36c; font-weight: 700; }
+
+.rateio-sobra-nota {
+  border-left-color: var(--gold);
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.16), rgba(94, 200, 255, 0.05));
+  border-top-color: rgba(212, 175, 55, 0.22);
+  border-right-color: rgba(212, 175, 55, 0.12);
+  border-bottom-color: rgba(212, 175, 55, 0.12);
+}
+
+/* ===== ESTADO DETAILS ===== */
+.state-details {
+  scroll-margin-top: 100px;
+  transition: box-shadow .4s ease, outline .4s ease;
+}
+
+.state-details ul {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 10px;
+}
+
+.state-details li {
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.9rem;
+  transition: all .2s ease;
+}
+
+.state-details li:hover {
+  background: rgba(94, 200, 255, 0.06);
+  border-color: rgba(94, 200, 255, 0.20);
+  transform: translateX(2px);
+}
+
+.state-details li strong {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.state-details:target {
+  outline: 2px solid rgba(212, 175, 55, .55);
+  box-shadow: 0 0 0 5px rgba(212, 175, 55, .12), var(--shadow-deep);
+}
+
+.state-details a[href="#"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  color: var(--accent-green);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.22);
+  transition: all .2s ease;
+}
+
+.state-details a[href="#"]:hover {
+  background: rgba(52, 211, 153, 0.16);
+  transform: translateY(-1px);
+}
+
+/* ===== LANDING ===== */
+.landing-section {
+  min-height: calc(100vh - 60px);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.landing-shell {
+  width: min(1100px, 100%);
+  position: relative;
+  overflow: hidden;
+  padding: clamp(40px, 6.5vw, 80px);
+  text-align: left;
+  background:
+    radial-gradient(ellipse at 88% 12%, rgba(212, 175, 55, 0.28), transparent 36%),
+    radial-gradient(ellipse at 8% 92%, rgba(94, 200, 255, 0.22), transparent 38%),
+    linear-gradient(135deg, rgba(0, 51, 102, 0.95), rgba(2, 21, 40, 0.94));
+}
+
+.landing-shell::after {
+  content: "PRF";
+  position: absolute;
+  right: 28px;
+  bottom: -22px;
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 19vw, 14rem);
+  font-weight: 700;
+  letter-spacing: -0.10em;
+  color: rgba(212,175,55,.13);
+  line-height: .8;
+  pointer-events: none;
+  animation: gentleFloat 8s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Decoração SVG nos cantos */
+.landing-shell .corner-deco {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  width: 60px;
+  height: 60px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.landing-shell .corner-deco-2 {
+  top: auto;
+  bottom: 22px;
+  right: 22px;
+  left: auto;
+  transform: rotate(180deg);
+  opacity: 0.35;
+}
+
+.landing-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 17px;
+  border-radius: 999px;
+  color: var(--gold-bright);
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.22), rgba(212, 175, 55, 0.06));
+  border: 1px solid rgba(212, 175, 55, 0.40);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .76rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 26px;
+  position: relative;
+  z-index: 2;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 8px 30px rgba(212,175,55,.12);
+}
+
+.landing-kicker::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  box-shadow: 0 0 14px var(--gold-bright);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.landing-shell h1 {
+  max-width: 860px;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.7rem, 7.2vw, 6.4rem);
+  line-height: .94;
+  letter-spacing: -.045em;
+  font-weight: 700;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 6px 40px rgba(0,0,0,.45);
+}
+
+.landing-shell h1 .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: wordIn 0.8s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes wordIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.landing-shell h1 .accent {
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 4px 20px rgba(212, 175, 55, 0.4));
+}
+
+.landing-shell p {
+  max-width: 720px;
+  margin: 24px 0 0;
+  color: #dbeafe;
+  font-size: clamp(1.05rem, 1.9vw, 1.32rem);
+  font-weight: 500;
+  line-height: 1.55;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  animation: fadeInUp 0.9s ease 0.6s forwards;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.landing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 36px;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  animation: fadeInUp 0.9s ease 0.85s forwards;
+}
+
+.primary-action, .secondary-action {
+  font-family: var(--font-display);
+  cursor: pointer;
+  border: 0;
+  padding: 15px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .94rem;
+  letter-spacing: 0.01em;
+  transition: all .3s cubic-bezier(.2,.8,.2,1);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.primary-action {
+  color: #061a2f;
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  box-shadow: 0 14px 40px rgba(212, 175, 55, .35), inset 0 1px 0 rgba(255,255,255,.4);
+}
+
+.primary-action::after {
+  content: "→";
+  font-family: var(--font-mono);
+  transition: transform .3s ease;
+}
+
+.primary-action:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 18px 50px rgba(212, 175, 55, .5), inset 0 1px 0 rgba(255,255,255,.4);
+}
+
+.primary-action:hover::after { transform: translateX(4px); }
+
+.secondary-action {
+  color: #e5f6ff;
+  background: rgba(94, 200, 255, 0.10);
+  border: 1px solid rgba(94, 200, 255, 0.30);
+  backdrop-filter: blur(10px);
+}
+
+.secondary-action:hover {
+  transform: translateY(-2px);
+  background: rgba(94, 200, 255, 0.18);
+  border-color: rgba(94, 200, 255, 0.50);
+}
+
+.landing-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 32px;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  animation: fadeInUp 0.9s ease 1.05s forwards;
+}
+
+.landing-meta span {
+  display: inline-flex;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  color: #cfe9ff;
+  border: 1px solid rgba(255,255,255,.12);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .74rem;
+  letter-spacing: 0.04em;
+  transition: all .2s ease;
+}
+
+.landing-meta span:hover {
+  background: rgba(94, 200, 255, 0.14);
+  border-color: rgba(94, 200, 255, 0.30);
+  transform: translateY(-1px);
+}
+
+/* ===== NAV ===== */
+.app-nav {
+  position: sticky;
+  top: 10px;
+  z-index: 10000;
+  margin: 0 auto 24px;
+  width: min(1320px, 100%);
+  display: none;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(8, 38, 68, 0.78), rgba(2, 21, 40, 0.86));
+  border: 1px solid rgba(143, 198, 255, 0.22);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  box-shadow:
+    0 18px 55px rgba(0,0,0,.32),
+    inset 0 1px 0 rgba(255,255,255,.10);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.app-nav::-webkit-scrollbar { display: none; }
+
+body.app-started .app-nav { display: flex; }
+
+.nav-btn {
+  font-family: var(--font-display);
+  cursor: pointer;
+  border: 0;
+  padding: 11px 16px;
+  border-radius: 999px;
+  color: #dbeafe;
+  background: rgba(94, 200, 255, 0.08);
+  border: 1px solid rgba(94, 200, 255, 0.16);
+  font-weight: 600;
+  font-size: .82rem;
+  letter-spacing: 0.01em;
+  transition: all .25s cubic-bezier(.2,.8,.2,1);
+  white-space: nowrap;
+  text-decoration: none;
+  flex: 0 0 auto;
+}
+
+.nav-btn:hover {
+  color: #fff;
+  background: rgba(94, 200, 255, 0.18);
+  border-color: rgba(94, 200, 255, 0.36);
+  transform: translateY(-1px);
+}
+
+.nav-btn.active {
+  color: #061a2f;
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  border-color: rgba(212, 175, 55, 0.55);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, .35);
+}
+
+/* ===== PÁGINAS ===== */
+.page-section {
+  display: none;
+  height: auto;
+}
+
+.page-section.active {
+  display: block;
+  animation: pageIn 0.55s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+body.app-started #landing { display: none; }
+
+/* ===== STAGGER REVEAL para cards e tabelas ===== */
+.page-section.active .glass-panel {
+  opacity: 0;
+  animation: panelReveal 0.7s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+.page-section.active .glass-panel:nth-child(1) { animation-delay: 0.05s; }
+.page-section.active .glass-panel:nth-child(2) { animation-delay: 0.15s; }
+.page-section.active .glass-panel:nth-child(3) { animation-delay: 0.22s; }
+.page-section.active .glass-panel:nth-child(4) { animation-delay: 0.30s; }
+.page-section.active .glass-panel:nth-child(5) { animation-delay: 0.38s; }
+.page-section.active .glass-panel:nth-child(6) { animation-delay: 0.46s; }
+.page-section.active .glass-panel:nth-child(7) { animation-delay: 0.54s; }
+.page-section.active .glass-panel:nth-child(n+8) { animation-delay: 0.6s; }
+
+@keyframes panelReveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.985);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.page-section.active .totals-grid .total-card,
+.page-section.active .sub-cards-grid .card {
+  opacity: 0;
+  animation: cardPop 0.6s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+.page-section.active .totals-grid .total-card:nth-child(1) { animation-delay: 0.18s; }
+.page-section.active .totals-grid .total-card:nth-child(2) { animation-delay: 0.26s; }
+.page-section.active .sub-cards-grid .card:nth-child(1) { animation-delay: 0.32s; }
+.page-section.active .sub-cards-grid .card:nth-child(2) { animation-delay: 0.40s; }
+.page-section.active .sub-cards-grid .card:nth-child(3) { animation-delay: 0.48s; }
+.page-section.active .sub-cards-grid .card:nth-child(4) { animation-delay: 0.56s; }
+
+@keyframes cardPop {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* tabela: linhas surgem em cascata */
+.page-section.active tbody tr {
+  opacity: 0;
+  animation: rowIn 0.5s ease forwards;
+}
+
+.page-section.active tbody tr:nth-child(1) { animation-delay: 0.6s; }
+.page-section.active tbody tr:nth-child(2) { animation-delay: 0.66s; }
+.page-section.active tbody tr:nth-child(3) { animation-delay: 0.72s; }
+.page-section.active tbody tr:nth-child(4) { animation-delay: 0.78s; }
+.page-section.active tbody tr:nth-child(5) { animation-delay: 0.84s; }
+.page-section.active tbody tr:nth-child(6) { animation-delay: 0.90s; }
+.page-section.active tbody tr:nth-child(7) { animation-delay: 0.95s; }
+.page-section.active tbody tr:nth-child(n+8) { animation-delay: 1.0s; }
+
+@keyframes rowIn {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ===== NÚMEROS ANIMADOS ===== */
+.anim-counter {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+
+.anim-counter.counter-running {
+  animation: counterPulse .65s ease both;
+}
+
+@keyframes counterPulse {
+  0% {
+    opacity: .55;
+    transform: translateY(8px) scale(.985);
+    filter: blur(2px);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== CONCLUSÃO — FLOW STEPS ===== */
+.conclusion-flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.flow-step {
+  position: relative;
+  padding: 22px 18px;
+  border-radius: 18px;
+  background:
+    linear-gradient(155deg, rgba(13, 52, 88, 0.62), rgba(3, 22, 42, 0.84));
+  border: 1px solid rgba(173, 216, 255, 0.18);
+  min-height: 150px;
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+
+.flow-step:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 16px 40px rgba(0,0,0,.32), 0 0 30px rgba(212, 175, 55, 0.18);
+}
+
+.flow-step::after {
+  content: "→";
+  position: absolute;
+  right: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 800;
+  z-index: 2;
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+}
+
+.flow-step:last-child::after { content: ""; }
+
+.flow-step .step-number {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #061a2f;
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  font-family: var(--font-mono);
+  font-weight: 800;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
+}
+
+.flow-step h4 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -.015em;
+}
+
+.flow-step p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: .89rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.conclusion-highlight {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.highlight-card {
+  padding: 20px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(10,41,71,.92), rgba(5,28,50,.94));
+  border: 1px solid rgba(143,198,255,.16);
+  transition: transform .3s ease, border-color .3s ease;
+}
+
+.highlight-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(94, 200, 255, 0.35);
+}
+
+.highlight-card span {
+  display: block;
+  font-family: var(--font-display);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .68rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.highlight-card strong {
+  display: block;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.closing-quote {
+  margin-top: 26px;
+  padding: 24px 28px;
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(212,175,55,.18), rgba(94,200,255,.10));
+  border: 1px solid rgba(212,175,55,.30);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.14rem;
+  line-height: 1.6;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+
+.closing-quote::before {
+  content: """;
+  position: absolute;
+  top: -40px;
+  left: 14px;
+  font-size: 8rem;
+  font-family: var(--font-display);
+  color: rgba(212, 175, 55, 0.18);
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* Modificador para cards do rateio macro */
+.rateio-macro-cards .card .number {
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+}
+
+.rateio-geral-bloco {
+  border: 1px solid rgba(212, 175, 55, 0.26);
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 1180px) {
+  .sub-cards-grid, .conclusion-highlight {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .totals-grid {
+    grid-template-columns: 1fr;
+  }
+  .conclusion-flow {
+    grid-template-columns: 1fr;
+  }
+  .flow-step::after {
+    content: "↓";
+    right: 22px;
+    top: auto;
+    bottom: -18px;
+    transform: none;
+  }
+  .flow-step:last-child::after { content: ""; }
+}
+
+@media (max-width: 768px) {
+  body { padding: 15px; }
+  header.glass-panel { padding: 28px 22px; }
+  header.glass-panel h1 { font-size: clamp(1.7rem, 8vw, 2.5rem); }
+  .sub-cards-grid, .conclusion-highlight { grid-template-columns: 1fr; gap: 14px; }
+  .data-section { padding: 22px 16px; }
+  .data-section table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    min-width: 0;
+  }
+
+  .landing-shell { padding: 32px 22px; }
+  .landing-shell h1 { font-size: clamp(2.1rem, 11vw, 3.5rem); }
+
+  .total-card { flex-direction: column; align-items: flex-start; min-height: auto; padding: 22px; gap: 12px; }
+  .total-card .value { font-size: clamp(2.4rem, 14vw, 3.8rem); }
+
+  .app-nav { gap: 6px; padding: 8px; }
+  .nav-btn { padding: 9px 12px; font-size: 0.76rem; }
+
+  .state-details ul { grid-template-columns: 1fr; }
+  .state-details li { flex-direction: column; align-items: flex-start; gap: 4px; }
+}
+
+
+/* =====================================================================
+   ✨ CAMADA PREMIUM — ANIMAÇÕES E IDENTIDADE VISUAL DE ABERTURA
+   ===================================================================== */
+
+/* Tipografia premium */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;700;800&display=swap');
+
+body {
+  font-family: 'Manrope', 'Inter', system-ui, -apple-system, sans-serif !important;
+  letter-spacing: -0.005em;
+}
+
+header h1,
+.landing-shell h1,
+.data-section h2 {
+  font-family: 'Space Grotesk', 'Manrope', sans-serif !important;
+}
+
+.total-card .value,
+.card .number,
+table,
+.badge {
+  font-family: 'JetBrains Mono', 'Manrope', sans-serif !important;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+}
+
+/* Background atmosférico com partículas e grade */
+body {
+  position: relative;
+  isolation: isolate;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(800px circle at var(--mx, 20%) var(--my, 15%),
+      rgba(94, 200, 255, 0.10), transparent 45%),
+    radial-gradient(600px circle at calc(100% - var(--mx, 80%)) calc(100% - var(--my, 70%)),
+      rgba(212, 175, 55, 0.08), transparent 45%);
+  transition: background-position 0.4s ease;
+}
+
+/* Partículas flutuantes no fundo */
+body > .particles-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+body > .particles-bg::before,
+body > .particles-bg::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  animation: floatOrb 18s ease-in-out infinite;
+}
+body > .particles-bg::before {
+  width: 380px; height: 380px;
+  top: 12%; left: 8%;
+  background: radial-gradient(circle, rgba(94,200,255,.40), transparent 70%);
+}
+body > .particles-bg::after {
+  width: 460px; height: 460px;
+  bottom: 8%; right: 6%;
+  background: radial-gradient(circle, rgba(212,175,55,.32), transparent 70%);
+  animation-delay: -9s;
+  animation-duration: 22s;
+}
+
+@keyframes floatOrb {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(40px, -30px) scale(1.08); }
+  66% { transform: translate(-25px, 25px) scale(0.95); }
+}
+
+/* ---------- LANDING DE ABERTURA — ENTRADA CINEMATOGRÁFICA ---------- */
+
+.landing-shell {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Brilho passando atrás do título */
+.landing-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg,
+    transparent 30%,
+    rgba(212, 175, 55, 0.10) 48%,
+    rgba(94, 200, 255, 0.10) 56%,
+    transparent 74%);
+  background-size: 220% 100%;
+  background-position: 200% 0;
+  animation: sheen 5.5s ease-in-out 1.2s infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes sheen {
+  0%   { background-position: 200% 0; opacity: .0; }
+  18%  { opacity: .8; }
+  60%  { background-position: -50% 0; opacity: .8; }
+  100% { background-position: -50% 0; opacity: 0; }
+}
+
+.landing-kicker {
+  opacity: 0;
+  animation: fadeUp .75s cubic-bezier(.2,.8,.2,1) .2s both;
+}
+
+.landing-shell h1 {
+  opacity: 0;
+  animation: revealTitle 1.05s cubic-bezier(.16,.84,.24,1) .45s both;
+  background: linear-gradient(90deg, #ffffff 0%, #ffffff 55%, #f5d27a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 8px 40px rgba(0,0,0,.35);
+}
+
+@keyframes revealTitle {
+  0%   { opacity: 0; transform: translateY(34px) scale(.97); filter: blur(8px); }
+  60%  { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.landing-shell p {
+  opacity: 0;
+  animation: fadeUp .8s cubic-bezier(.2,.8,.2,1) .85s both;
+}
+
+.landing-actions { opacity: 0; animation: fadeUp .8s cubic-bezier(.2,.8,.2,1) 1.05s both; }
+.landing-meta    { opacity: 0; animation: fadeUp .8s cubic-bezier(.2,.8,.2,1) 1.25s both; }
+.landing-shell .mobile-tip { opacity: 0; animation: fadeUp .8s ease 1.45s both; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Botões com efeito de pulso sutil + brilho ao hover */
+.primary-action {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 14px 34px rgba(212,175,55,.35), 0 0 0 0 rgba(212,175,55,.6);
+  animation: gentlePulse 2.6s ease-in-out 2s infinite;
+}
+.primary-action::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -120%;
+  width: 80%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+  transition: left .6s ease;
+}
+.primary-action:hover::after { left: 130%; }
+
+@keyframes gentlePulse {
+  0%, 100% { box-shadow: 0 14px 34px rgba(212,175,55,.35), 0 0 0 0 rgba(212,175,55,.55); }
+  50%      { box-shadow: 0 18px 42px rgba(212,175,55,.45), 0 0 0 14px rgba(212,175,55,0); }
+}
+
+/* Watermark do header com brilho dourado */
+header::after,
+.landing-shell::after {
+  text-shadow: 0 0 60px rgba(212,175,55,.20);
+}
+
+/* ---------- ENTRADA DAS SEÇÕES E CARDS ---------- */
+
+.page-section.active .glass-panel {
+  animation: panelReveal .65s cubic-bezier(.2,.8,.2,1) both;
+}
+.page-section.active .glass-panel:nth-of-type(1) { animation-delay: .04s; }
+.page-section.active .glass-panel:nth-of-type(2) { animation-delay: .12s; }
+.page-section.active .glass-panel:nth-of-type(3) { animation-delay: .20s; }
+.page-section.active .glass-panel:nth-of-type(4) { animation-delay: .28s; }
+.page-section.active .glass-panel:nth-of-type(5) { animation-delay: .36s; }
+.page-section.active .glass-panel:nth-of-type(6) { animation-delay: .44s; }
+.page-section.active .glass-panel:nth-of-type(n+7) { animation-delay: .52s; }
+
+@keyframes panelReveal {
+  from { opacity: 0; transform: translateY(22px); filter: blur(2px); }
+  to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* Cards com 3D feel no hover */
+.card {
+  transition: transform .28s cubic-bezier(.2,.8,.2,1),
+              box-shadow .28s ease,
+              border-color .28s ease;
+  will-change: transform;
+}
+.card:hover {
+  transform: translateY(-6px) scale(1.012);
+  border-color: rgba(212,175,55,.28) !important;
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 0 0 1px rgba(212,175,55,.12) !important;
+}
+
+.total-card {
+  transition: transform .28s ease, box-shadow .28s ease;
+}
+.total-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 32px 72px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* Cascade nos rows de tabelas ao abrir uma página */
+.page-section.active tbody tr {
+  animation: rowIn .45s cubic-bezier(.2,.8,.2,1) both;
+}
+.page-section.active tbody tr:nth-child(1)  { animation-delay: .35s; }
+.page-section.active tbody tr:nth-child(2)  { animation-delay: .40s; }
+.page-section.active tbody tr:nth-child(3)  { animation-delay: .45s; }
+.page-section.active tbody tr:nth-child(4)  { animation-delay: .50s; }
+.page-section.active tbody tr:nth-child(5)  { animation-delay: .55s; }
+.page-section.active tbody tr:nth-child(6)  { animation-delay: .60s; }
+.page-section.active tbody tr:nth-child(7)  { animation-delay: .63s; }
+.page-section.active tbody tr:nth-child(n+8){ animation-delay: .66s; }
+
+@keyframes rowIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Barras com brilho deslizante */
+.bar {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,0.08);
+  box-shadow: inset 0 1px 0 rgba(0,0,0,.20);
+}
+.bar > span {
+  position: relative;
+  background: linear-gradient(90deg,
+    rgba(94,200,255,.95) 0%,
+    rgba(94,200,255,.85) 50%,
+    rgba(212,175,55,.95) 100%) !important;
+  box-shadow: 0 0 12px rgba(94,200,255,.45);
+}
+.bar > span::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -50%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+  animation: barShimmer 2.6s linear infinite;
+}
+@keyframes barShimmer {
+  to { left: 150%; }
+}
+
+/* State-link com sweep dourado */
+.state-link {
+  position: relative;
+  overflow: hidden;
+  transition: all .25s cubic-bezier(.2,.8,.2,1);
+}
+.state-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(212,175,55,.30) 50%,
+    transparent 100%);
+  transform: translateX(-100%);
+  transition: transform .4s ease;
+}
+.state-link:hover::before { transform: translateX(100%); }
+.state-link:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 20px rgba(212,175,55,.30);
+}
+
+/* Badge com leve glow */
+.badge {
+  transition: all .2s ease;
+}
+tbody tr:hover .badge {
+  background: rgba(212,175,55,.18);
+  border-color: rgba(212,175,55,.42);
+  color: #ffe9a8;
+}
+
+/* Navegação superior — botões com feedback refinado */
+.app-nav {
+  animation: navSlideDown .55s cubic-bezier(.2,.8,.2,1) .15s both;
+}
+@keyframes navSlideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.nav-btn {
+  position: relative;
+  overflow: hidden;
+}
+.nav-btn::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+  transition: all .3s ease;
+  transform: translateX(-50%);
+}
+.nav-btn.active::before,
+.nav-btn:hover::before { width: 70%; }
+
+/* Section headers com ornamento */
+.data-section h2 {
+  position: relative;
+}
+.data-section h2::before {
+  content: "";
+  display: inline-block;
+  width: 5px; height: 26px;
+  background: linear-gradient(180deg, var(--gold), var(--gold-soft));
+  border-radius: 3px;
+  margin-right: 14px;
+  vertical-align: -5px;
+  box-shadow: 0 0 14px rgba(212,175,55,.35);
+}
+
+/* Headers de seção com brilho dourado sutil */
+header.glass-panel h1 {
+  background: linear-gradient(90deg, #ffffff 0%, #ffffff 60%, #f5d27a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Total-row com gleam */
+.total-row td {
+  position: relative;
+  font-weight: 900 !important;
+}
+
+/* Conclusão: flow steps com pulse */
+.flow-step {
+  transition: all .3s cubic-bezier(.2,.8,.2,1);
+}
+.flow-step:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212,175,55,.35) !important;
+  box-shadow: 0 18px 40px rgba(0,0,0,.30);
+}
+.flow-step .step-number {
+  box-shadow: 0 4px 14px rgba(212,175,55,.45);
+  animation: stepGlow 3s ease-in-out infinite;
+}
+@keyframes stepGlow {
+  0%, 100% { box-shadow: 0 4px 14px rgba(212,175,55,.30); }
+  50%      { box-shadow: 0 4px 22px rgba(212,175,55,.55); }
+}
+
+/* Highlight cards e closing-quote com elevação */
+.highlight-card {
+  transition: all .28s cubic-bezier(.2,.8,.2,1);
+}
+.highlight-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212,175,55,.30) !important;
+}
+
+.closing-quote {
+  position: relative;
+  overflow: hidden;
+}
+.closing-quote::before {
+  content: "“";
+  position: absolute;
+  top: -20px; left: 12px;
+  font-size: 6rem;
+  font-family: Georgia, serif;
+  color: rgba(212,175,55,.18);
+  line-height: 1;
+  font-weight: 900;
+}
+
+/* Notas — animação ao aparecer */
+.nota {
+  position: relative;
+  overflow: hidden;
+}
+.nota::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(251,191,36,.10), transparent 30%);
+  pointer-events: none;
+}
+
+/* Botão de detalhamento de UF — destaque ao chegar via link */
+.state-details:target {
+  animation: targetPop .8s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes targetPop {
+  0%   { transform: scale(.99); }
+  50%  { transform: scale(1.005); }
+  100% { transform: scale(1); }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="particles-bg" aria-hidden="true"></div>
+
+<!-- Partículas flutuantes de fundo -->
+<div class="bg-particles" aria-hidden="true">
+  <span style="left:5%;animation-duration:18s;animation-delay:0s;"></span>
+  <span style="left:12%;animation-duration:22s;animation-delay:3s;"></span>
+  <span style="left:20%;animation-duration:16s;animation-delay:7s;"></span>
+  <span style="left:28%;animation-duration:24s;animation-delay:1s;"></span>
+  <span style="left:36%;animation-duration:20s;animation-delay:5s;"></span>
+  <span style="left:45%;animation-duration:26s;animation-delay:9s;"></span>
+  <span style="left:54%;animation-duration:18s;animation-delay:2s;"></span>
+  <span style="left:62%;animation-duration:23s;animation-delay:6s;"></span>
+  <span style="left:71%;animation-duration:19s;animation-delay:4s;"></span>
+  <span style="left:80%;animation-duration:25s;animation-delay:8s;"></span>
+  <span style="left:88%;animation-duration:21s;animation-delay:0s;"></span>
+  <span style="left:95%;animation-duration:17s;animation-delay:5s;"></span>
+</div>
+
+<!-- ============= LANDING ============= -->
+<section id="landing" class="landing-section">
+  <div class="landing-shell glass-panel">
+
+    <svg class="corner-deco" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M2 2 L58 2 L58 8 L8 8 L8 58 L2 58 Z" fill="rgba(212,175,55,0.55)"/>
+      <circle cx="14" cy="14" r="3" fill="rgba(94,200,255,0.6)"/>
+    </svg>
+    <svg class="corner-deco corner-deco-2" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M2 2 L58 2 L58 8 L8 8 L8 58 L2 58 Z" fill="rgba(94,200,255,0.45)"/>
+      <circle cx="14" cy="14" r="3" fill="rgba(212,175,55,0.7)"/>
+    </svg>
+
+    <div class="landing-kicker">Polícia Rodoviária Federal</div>
+    <h1>
+      <span class="word" style="animation-delay:0.05s">Painel</span>
+      <span class="word" style="animation-delay:0.15s">Nacional</span>
+      <span class="word" style="animation-delay:0.25s">de</span>
+      <span class="word accent" style="animation-delay:0.35s">Doações</span>
+      <span class="word accent" style="animation-delay:0.45s">PRF</span>
+    </h1>
+    <p>Quantitativo consolidado de armamentos e munições por região do Brasil, organizado para apresentação executiva.</p>
+
+    <div class="landing-actions">
+      <a class="primary-action" href="#geral" data-route="geral">Iniciar apresentação</a>
+      <a class="secondary-action" href="#norte" data-route="norte">Abrir Região Norte</a>
+    </div>
+
+    <div class="landing-meta">
+      <span>Visão Geral</span>
+      <span>Rateio 25 UFs</span>
+      <span>Norte</span>
+      <span>Nordeste</span>
+      <span>Centro-Oeste</span>
+      <span>Sudeste</span>
+      <span>Sul</span>
+      <span>Conclusão</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============= NAV ============= -->
+<nav class="app-nav" aria-label="Navegação da apresentação">
+  <a href="#geral" data-route="geral" class="nav-btn">Visão Geral</a>
+  <a href="#rateio" data-route="rateio" class="nav-btn">Rateio 25 UFs</a>
+  <a href="#norte" data-route="norte" class="nav-btn">Norte</a>
+  <a href="#centro-oeste" data-route="centro-oeste" class="nav-btn">Centro-Oeste</a>
+  <a href="#nordeste" data-route="nordeste" class="nav-btn">Nordeste</a>
+  <a href="#sudeste" data-route="sudeste" class="nav-btn">Sudeste</a>
+  <a href="#sul" data-route="sul" class="nav-btn">Sul</a>
+  <a href="#conclusao" data-route="conclusao" class="nav-btn">Conclusão</a>
+</nav>
+
+<!-- ============= VISÃO GERAL ============= -->
+<section id="page-geral" class="page-section" data-page="geral" aria-label="Visão Geral">
+  <div class="dashboard-container">
+    <header class="glass-panel" data-watermark="BRASIL">
+      <h1>Painel Nacional de Doações PRF</h1>
+      <p>Visão Geral Brasil — Norte, Nordeste, Centro-Oeste, Sudeste e Sul</p>
+    </header>
+
+    <div class="totals-grid">
+      <div class="glass-panel total-card munitions">
+        <span class="label">Total Munições — Planilha</span>
+        <span class="value">1.485.127</span>
+      </div>
+      <div class="glass-panel total-card armaments">
+        <span class="label">Total Armamentos — Planilha</span>
+        <span class="value">4.672</span>
+      </div>
+    </div>
+
+    <div class="sub-cards-grid">
+      <div class="glass-panel card">
+        <h3>Munições de Treinamento</h3>
+        <p class="number">1.081.537</p>
+        <p class="subtitle">Treina / treinamento / recolhida para treinamento</p>
+      </div>
+      <div class="glass-panel card">
+        <h3>Munições Operacionais</h3>
+        <p class="number">359.002</p>
+        <p class="subtitle">Munições sem indicação de treinamento</p>
+      </div>
+      <div class="glass-panel card">
+        <h3>Cartuchos</h3>
+        <p class="number">6.830</p>
+        <p class="subtitle">TASER / SPARK por cor ou sem cor informada</p>
+      </div>
+      <div class="glass-panel card">
+        <h3>Itens em nota</h3>
+        <p class="number">37.758</p>
+        <p class="subtitle">Vencidos, fora de estoque, defeito/recolhido e não munição</p>
+      </div>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>1. Resumo Nacional por Região</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Região</th>
+            <th>Total munições</th>
+            <th>Treinamento</th>
+            <th>Operacional</th>
+            <th>Cartuchos</th>
+            <th>Itens em nota</th>
+            <th>Armamentos</th>
+            <th>Painel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge">Norte</span></td>
+            <td><strong>185.761</strong><div class="bar"><span data-width="32.3"></span></div></td>
+            <td>121.410</td>
+            <td>62.568</td>
+            <td>936</td>
+            <td>847</td>
+            <td><strong>352</strong></td>
+            <td><a class="state-link" href="#norte" data-route="norte">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="badge">Centro-Oeste</span></td>
+            <td><strong>141.607</strong><div class="bar"><span data-width="24.7"></span></div></td>
+            <td>99.367</td>
+            <td>41.640</td>
+            <td>0</td>
+            <td>600</td>
+            <td><strong>608</strong></td>
+            <td><a class="state-link" href="#centro-oeste" data-route="centro-oeste">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="badge">Nordeste</span></td>
+            <td><strong>350.430</strong><div class="bar"><span data-width="61.0"></span></div></td>
+            <td>206.916</td>
+            <td>135.690</td>
+            <td>363</td>
+            <td>7.461</td>
+            <td><strong>852</strong></td>
+            <td><a class="state-link" href="#nordeste" data-route="nordeste">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="badge">Sudeste</span></td>
+            <td><strong>233.070</strong><div class="bar"><span data-width="40.6"></span></div></td>
+            <td>140.200</td>
+            <td>92.100</td>
+            <td>770</td>
+            <td>0</td>
+            <td><strong>1.651</strong></td>
+            <td><a class="state-link" href="#sudeste" data-route="sudeste">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="badge">Sul</span></td>
+            <td><strong>574.259</strong><div class="bar"><span data-width="100.0"></span></div></td>
+            <td>513.644</td>
+            <td>27.004</td>
+            <td>4.761</td>
+            <td>28.850</td>
+            <td><strong>1.209</strong></td>
+            <td><a class="state-link" href="#sul" data-route="sul">Abrir</a></td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL BRASIL</td>
+            <td><strong>1.485.127</strong></td>
+            <td><strong>1.081.537</strong></td>
+            <td><strong>359.002</strong></td>
+            <td><strong>6.830</strong></td>
+            <td><strong>37.758</strong></td>
+            <td><strong>4.672</strong></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>2. Munições por Calibre — Brasil</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Calibre / Grupo</th>
+            <th>Treinamento</th>
+            <th>Operacional</th>
+            <th>Total por calibre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge">.40</span></td>
+            <td>539.363</td>
+            <td>294.485</td>
+            <td><strong>833.848</strong><div class="bar"><span data-width="100.0"></span></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge">12</span></td>
+            <td>467.424</td>
+            <td>61.829</td>
+            <td><strong>529.253</strong><div class="bar"><span data-width="63.5"></span></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge">5,56mm</span></td>
+            <td>36.000</td>
+            <td>292</td>
+            <td><strong>36.292</strong><div class="bar"><span data-width="4.4"></span></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge">9mm</span></td>
+            <td>27.150</td>
+            <td>0</td>
+            <td><strong>27.150</strong><div class="bar"><span data-width="3.3"></span></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge">7,62</span></td>
+            <td>11.600</td>
+            <td>1</td>
+            <td><strong>11.601</strong><div class="bar"><span data-width="3.0"></span></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge">.38</span></td>
+            <td>0</td>
+            <td>237</td>
+            <td><strong>237</strong><div class="bar"><span data-width="3.0"></span></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge">.32</span></td>
+            <td>0</td>
+            <td>1</td>
+            <td><strong>1</strong><div class="bar"><span data-width="3.0"></span></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge">.45</span></td>
+            <td>0</td>
+            <td>3</td>
+            <td><strong>3</strong><div class="bar"><span data-width="3.0"></span></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge">.22</span></td>
+            <td>0</td>
+            <td>4</td>
+            <td><strong>4</strong><div class="bar"><span data-width="3.0"></span></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge">.233 REM POLYMER TIP 55gr</span></td>
+            <td>0</td>
+            <td>150</td>
+            <td><strong>150</strong><div class="bar"><span data-width="3.0"></span></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge">Diversos</span></td>
+            <td>0</td>
+            <td>2.000</td>
+            <td><strong>2.000</strong><div class="bar"><span data-width="3.0"></span></div></td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL MUNIÇÕES CLASSIFICADAS</td>
+            <td><strong>1.081.537</strong></td>
+            <td><strong>359.002</strong></td>
+            <td><strong>1.440.539</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>3. Cartuchos — Brasil</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Cor / Identificação</th>
+            <th>Qtd Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="badge">SPARK</span></td><td>Preto</td><td><strong>100</strong></td></tr>
+          <tr><td><span class="badge">SPARK</span></td><td>Verde</td><td><strong>78</strong></td></tr>
+          <tr><td><span class="badge">SPARK</span></td><td>Sem cor informada</td><td><strong>6.311</strong></td></tr>
+          <tr><td><span class="badge">TASER</span></td><td>Verde</td><td><strong>60</strong></td></tr>
+          <tr><td><span class="badge">TASER</span></td><td>Laranja</td><td><strong>2</strong></td></tr>
+          <tr><td><span class="badge">TASER</span></td><td>Preto</td><td><strong>35</strong></td></tr>
+          <tr><td><span class="badge">TASER</span></td><td>Amarelo</td><td><strong>4</strong></td></tr>
+          <tr><td><span class="badge">TASER</span></td><td>Sem cor informada</td><td><strong>240</strong></td></tr>
+          <tr class="total-row"><td>TOTAL CARTUCHOS</td><td></td><td><strong>6.830</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>4. Armamentos por Calibre / Modelo — Brasil</h2>
+      <table>
+        <thead>
+          <tr><th>Calibre / Modelo</th><th>Qtd Total</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="badge">.40</span></td><td><strong>1.513</strong><div class="bar"><span data-width="68.3"></span></div></td></tr>
+          <tr><td><span class="badge">12</span></td><td><strong>81</strong><div class="bar"><span data-width="3.7"></span></div></td></tr>
+          <tr><td><span class="badge">5,56mm</span></td><td><strong>24</strong><div class="bar"><span data-width="3.0"></span></div></td></tr>
+          <tr><td><span class="badge">9mm</span></td><td><strong>45</strong><div class="bar"><span data-width="3.0"></span></div></td></tr>
+          <tr><td><span class="badge">7,62</span></td><td><strong>18</strong><div class="bar"><span data-width="3.0"></span></div></td></tr>
+          <tr><td><span class="badge">.45</span></td><td><strong>2</strong><div class="bar"><span data-width="3.0"></span></div></td></tr>
+          <tr><td><span class="badge">Taurus 58</span></td><td><strong>3</strong><div class="bar"><span data-width="3.0"></span></div></td></tr>
+          <tr><td><span class="badge">TASER M26</span></td><td><strong>717</strong><div class="bar"><span data-width="32.4"></span></div></td></tr>
+          <tr><td><span class="badge">SPARK Z 2.0</span></td><td><strong>2.214</strong><div class="bar"><span data-width="100.0"></span></div></td></tr>
+          <tr><td><span class="badge">DSK700</span></td><td><strong>52</strong><div class="bar"><span data-width="3.0"></span></div></td></tr>
+          <tr><td><span class="badge">X26</span></td><td><strong>1</strong><div class="bar"><span data-width="3.0"></span></div></td></tr>
+          <tr><td><span class="badge">Ar comprimido</span></td><td><strong>2</strong><div class="bar"><span data-width="3.0"></span></div></td></tr>
+          <tr class="total-row"><td>TOTAL ARMAMENTOS</td><td><strong>4.672</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>5. Itens em Nota / Não Classificados como Munição Útil</h2>
+      <table>
+        <thead>
+          <tr><th>Região</th><th>UF</th><th>Descrição</th><th>Qtd</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Centro-Oeste</td><td><span class="badge">MT</span></td><td>Cartuchos com defeito/recolhidos de 5,56</td><td><strong>600</strong></td></tr>
+          <tr><td>Norte</td><td><span class="badge">PA</span></td><td>CARREGADOR TAURUS PT 100 .40</td><td><strong>833</strong></td></tr>
+          <tr><td>Norte</td><td><span class="badge">PA</span></td><td>CARREGADOR SMT .40</td><td><strong>13</strong></td></tr>
+          <tr><td>Norte</td><td><span class="badge">PA</span></td><td>COLETOR DE DADOS/DATA KIT SPARK</td><td><strong>1</strong></td></tr>
+          <tr><td>Nordeste</td><td><span class="badge">CE</span></td><td>Munição fora de estoque .40 de todos os tipos</td><td><strong>7.313</strong></td></tr>
+          <tr><td>Nordeste</td><td><span class="badge">RN</span></td><td>CARREGADOR SMT .40</td><td><strong>24</strong></td></tr>
+          <tr><td>Nordeste</td><td><span class="badge">RN</span></td><td>CARREGADOR PT100</td><td><strong>124</strong></td></tr>
+          <tr><td>Sul</td><td><span class="badge">PR</span></td><td>Munição .40 SW GOLD HEX EXPO 155gr (vencida)</td><td><strong>28.850</strong></td></tr>
+          <tr class="total-row"><td>TOTAL ITENS EM NOTA</td><td></td><td></td><td><strong>37.758</strong></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Itens com quantitativo a verificar</h3>
+      <table>
+        <thead>
+          <tr><th>Região</th><th>UF</th><th>Descrição</th><th>Situação</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Norte</td><td><span class="badge">AP</span></td><td>NAO APRESENTOU RESPOSTA</td><td><strong>A verificar</strong></td></tr>
+          <tr><td>Nordeste</td><td><span class="badge">PI</span></td><td>Cartuchos Pistola Elétrica TASER M26</td><td><strong>A verificar</strong></td></tr>
+          <tr><td>Nordeste</td><td><span class="badge">PI</span></td><td>Cartuchos Pistola Elétrica SPARK DSK700</td><td><strong>A verificar</strong></td></tr>
+        </tbody>
+      </table>
+
+      <div class="nota">
+        <strong>⚠️ Observação de leitura:</strong>
+        <ul style="margin: 10px 0 0; padding-left: 16px; line-height: 1.8;">
+          <li>O <strong>total geral de munições</strong> apresentado no topo é o total da planilha: <strong>1.485.127</strong>.</li>
+          <li>As tabelas de <strong>treinamento</strong>, <strong>operacional</strong>, <strong>cartuchos</strong> e <strong>itens em nota</strong> fecham exatamente esse total.</li>
+          <li>Itens com quantitativo <strong>"A verificar"</strong> foram listados separadamente e não possuem soma numérica. Neste levantamento, constam na <strong>Região Nordeste</strong>, UF <strong>Piauí (PI)</strong>: <strong>Cartuchos Pistola Elétrica TASER M26</strong> e <strong>Cartuchos Pistola Elétrica SPARK DSK700</strong>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= RATEIO 25 UFs ============= -->
+<section id="page-rateio" class="page-section" data-page="rateio" aria-label="Distribuição Igualitária">
+  <div class="dashboard-container">
+    <header class="glass-panel" data-watermark="RATEIO">
+      <h1>Distribuição Igualitária por 25 Estados</h1>
+      <p>Simulação Técnica — Total Nacional ÷ 25 UFs</p>
+    </header>
+
+    <div class="sub-cards-grid rateio-macro-cards">
+      <div class="glass-panel card"><h3>Estados considerados</h3><p class="number">25</p><p class="subtitle">Base da simulação igualitária</p></div>
+      <div class="glass-panel card"><h3>Munições por Estado</h3><p class="number">57.621</p><p class="subtitle">1.440.539 ÷ 25 UFs</p></div>
+      <div class="glass-panel card"><h3>Armamentos por Estado</h3><p class="number">186</p><p class="subtitle">4.672 ÷ 25 UFs</p></div>
+      <div class="glass-panel card"><h3>Cartuchos por Estado</h3><p class="number">273</p><p class="subtitle">Distribuição prática por Estado</p></div>
+    </div>
+
+    <div class="nota rateio-sobra-nota">
+      <strong>Observação sobre a divisão prática:</strong>
+      A divisão igualitária foi apresentada nos cards em <strong>valores inteiros por Estado</strong>.
+      Como os itens são unidades físicas, a divisão exata gera saldos técnicos:
+      <strong>14 munições</strong>, <strong>22 armamentos</strong> e <strong>5 cartuchos</strong>.
+      A destinação desses saldos deverá ser definida conforme decisão da coordenação/logística responsável.
+    </div>
+
+    <div class="glass-panel data-section rateio-geral-bloco">
+      <h2>1. Rateio Geral — Média Nacional por Estado</h2>
+      <table>
+        <thead><tr><th>Grupo</th><th>Total nacional</th><th>Média exata por UF</th><th>Distribuição prática</th><th>Saldo técnico</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">Munições classificadas</span></td><td><strong>1.440.539</strong></td><td><strong>57.621,56</strong></td><td>57.621 por UF</td><td>14</td></tr>
+          <tr><td><span class="badge">Armamentos</span></td><td><strong>4.672</strong></td><td><strong>186,88</strong></td><td>186 por UF</td><td>22</td></tr>
+          <tr><td><span class="badge">Cartuchos</span></td><td><strong>6.830</strong></td><td><strong>273,20</strong></td><td>273 por UF</td><td>5</td></tr>
+        </tbody>
+      </table>
+      <div class="nota">
+        <strong>Nota 1 — Interpretação do rateio geral:</strong>
+        <ul style="margin: 10px 0 0; padding-left: 16px; line-height: 1.75;">
+          <li>A média exata por UF representa o cálculo matemático do total nacional dividido por <strong>25 Estados</strong>, mesmo quando o resultado é quebrado.</li>
+          <li>A distribuição prática considera apenas unidades inteiras, por isso gera <strong>saldo técnico</strong>.</li>
+          <li>A soma das distribuições por calibre pode ficar próxima, mas não necessariamente idêntica à média geral, porque cada calibre é rateado separadamente e também gera saldo próprio.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub-cards-grid">
+      <div class="glass-panel card"><h3>Estados considerados</h3><p class="number">25</p><p class="subtitle">Base de rateio igualitário</p></div>
+      <div class="glass-panel card"><h3>Munições classificadas</h3><p class="number">1.440.539</p><p class="subtitle">Treinamento + operacional</p></div>
+      <div class="glass-panel card"><h3>Cartuchos</h3><p class="number">6.830</p><p class="subtitle">Por tipo, cor e finalidade</p></div>
+      <div class="glass-panel card"><h3>Armamentos</h3><p class="number">4.672</p><p class="subtitle">Por calibre/modelo</p></div>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>2. Munições de Treinamento — Rateio por Calibre</h2>
+      <table>
+        <thead><tr><th>Calibre</th><th>Total nacional</th><th>Exato por UF</th><th>Distribuição prática</th><th>Saldo</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">.40</span></td><td><strong>539.363</strong></td><td>21.574,52</td><td><strong>21.574 por UF</strong></td><td>13 un.</td></tr>
+          <tr><td><span class="badge">12</span></td><td><strong>467.424</strong></td><td>18.696,96</td><td><strong>18.696 por UF</strong></td><td>24 un.</td></tr>
+          <tr><td><span class="badge">5,56mm</span></td><td><strong>36.000</strong></td><td>1.440,00</td><td><strong>1.440 por UF</strong></td><td>0</td></tr>
+          <tr><td><span class="badge">9mm</span></td><td><strong>27.150</strong></td><td>1.086,00</td><td><strong>1.086 por UF</strong></td><td>0</td></tr>
+          <tr><td><span class="badge">7,62</span></td><td><strong>11.600</strong></td><td>464,00</td><td><strong>464 por UF</strong></td><td>0</td></tr>
+          <tr class="total-row"><td>TOTAL TREINAMENTO</td><td><strong>1.081.537</strong></td><td>43.261,48</td><td><strong>43.261 por UF</strong></td><td>12</td></tr>
+        </tbody>
+      </table>
+
+      <h2 style="margin-top:32px;">2. Munições Operacionais — Rateio por Calibre</h2>
+      <table>
+        <thead><tr><th>Calibre / Grupo</th><th>Total nacional</th><th>Exato por UF</th><th>Distribuição prática</th><th>Saldo</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">.40</span></td><td><strong>294.485</strong></td><td>11.779,40</td><td><strong>11.779 por UF</strong></td><td>10 un.</td></tr>
+          <tr><td><span class="badge">12</span></td><td><strong>61.829</strong></td><td>2.473,16</td><td><strong>2.473 por UF</strong></td><td>4 un.</td></tr>
+          <tr><td><span class="badge">5,56mm</span></td><td><strong>292</strong></td><td>11,68</td><td><strong>11 por UF</strong></td><td>17 un.</td></tr>
+          <tr><td><span class="badge">7,62</span></td><td><strong>1</strong></td><td>0,04</td><td><strong>0 por UF</strong></td><td>1 un.</td></tr>
+          <tr><td><span class="badge">.38</span></td><td><strong>237</strong></td><td>9,48</td><td><strong>9 por UF</strong></td><td>12 un.</td></tr>
+          <tr><td><span class="badge">.32</span></td><td><strong>1</strong></td><td>0,04</td><td><strong>0 por UF</strong></td><td>1 un.</td></tr>
+          <tr><td><span class="badge">.45</span></td><td><strong>3</strong></td><td>0,12</td><td><strong>0 por UF</strong></td><td>3 un.</td></tr>
+          <tr><td><span class="badge">.22</span></td><td><strong>4</strong></td><td>0,16</td><td><strong>0 por UF</strong></td><td>4 un.</td></tr>
+          <tr><td><span class="badge">.233 REM POLYMER TIP 55gr</span></td><td><strong>150</strong></td><td>6,00</td><td><strong>6 por UF</strong></td><td>0</td></tr>
+          <tr><td><span class="badge">Diversos</span></td><td><strong>2.000</strong></td><td>80,00</td><td><strong>80 por UF</strong></td><td>0</td></tr>
+          <tr class="total-row"><td>TOTAL OPERACIONAL</td><td><strong>359.002</strong></td><td>14.360,08</td><td><strong>14.360 por UF</strong></td><td>2</td></tr>
+        </tbody>
+      </table>
+
+      <div class="nota">
+        <strong>Nota 1 — Base dos valores:</strong>
+        <ul style="margin: 10px 0 0; padding-left: 16px; line-height: 1.8;">
+          <li>Os valores utilizados nesta página foram extraídos da <strong>Visão Geral Nacional</strong>. Os dados por Estado servem apenas para conferência e rastreabilidade.</li>
+          <li>Itens com baixa quantidade, calibres específicos ou grupo <strong>"Diversos"</strong> permanecem separados para evitar agrupamento indevido.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>3. Armamentos — Rateio por Calibre / Modelo</h2>
+      <table>
+        <thead><tr><th>Calibre / Modelo</th><th>Total nacional</th><th>Exato por UF</th><th>Distribuição prática</th><th>Saldo</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">.40</span></td><td><strong>1.513</strong></td><td>60,52</td><td><strong>60 por UF</strong></td><td>13 un.</td></tr>
+          <tr><td><span class="badge">12</span></td><td><strong>81</strong></td><td>3,24</td><td><strong>3 por UF</strong></td><td>6 un.</td></tr>
+          <tr><td><span class="badge">5,56mm</span></td><td><strong>24</strong></td><td>0,96</td><td><strong>0 por UF</strong></td><td>24 un.</td></tr>
+          <tr><td><span class="badge">9mm</span></td><td><strong>45</strong></td><td>1,80</td><td><strong>1 por UF</strong></td><td>20 un.</td></tr>
+          <tr><td><span class="badge">7,62</span></td><td><strong>18</strong></td><td>0,72</td><td><strong>0 por UF</strong></td><td>18 un.</td></tr>
+          <tr><td><span class="badge">.45</span></td><td><strong>2</strong></td><td>0,08</td><td><strong>0 por UF</strong></td><td>2 un.</td></tr>
+          <tr><td><span class="badge">Taurus 58</span></td><td><strong>3</strong></td><td>0,12</td><td><strong>0 por UF</strong></td><td>3 un.</td></tr>
+          <tr><td><span class="badge">TASER M26</span></td><td><strong>717</strong></td><td>28,68</td><td><strong>28 por UF</strong></td><td>17 un.</td></tr>
+          <tr><td><span class="badge">SPARK Z 2.0</span></td><td><strong>2.214</strong></td><td>88,56</td><td><strong>88 por UF</strong></td><td>14 un.</td></tr>
+          <tr><td><span class="badge">DSK700</span></td><td><strong>52</strong></td><td>2,08</td><td><strong>2 por UF</strong></td><td>2 un.</td></tr>
+          <tr><td><span class="badge">X26</span></td><td><strong>1</strong></td><td>0,04</td><td><strong>0 por UF</strong></td><td>1 un.</td></tr>
+          <tr><td><span class="badge">Ar comprimido</span></td><td><strong>2</strong></td><td>0,08</td><td><strong>0 por UF</strong></td><td>2 un.</td></tr>
+          <tr class="total-row"><td>TOTAL ARMAMENTOS</td><td><strong>4.672</strong></td><td>186,88</td><td><strong>186 por UF</strong></td><td>22</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>4. Cartuchos — Rateio por Tipo, Cor e Finalidade</h2>
+      <table>
+        <thead><tr><th>Tipo</th><th>Cor / Identificação</th><th>Finalidade adotada</th><th>Total nacional</th><th>Exato por UF</th><th>Distribuição prática</th><th>Saldo</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">SPARK</span></td><td>Preto</td><td>Operacional</td><td><strong>100</strong></td><td>4,00</td><td><strong>4 por UF</strong></td><td>0</td></tr>
+          <tr><td><span class="badge">SPARK</span></td><td>Verde</td><td>Treinamento</td><td><strong>78</strong></td><td>3,12</td><td><strong>3 por UF</strong></td><td>3</td></tr>
+          <tr><td><span class="badge">SPARK</span></td><td>Sem cor informada</td><td>Finalidade não identificada</td><td><strong>6.311</strong></td><td>252,44</td><td><strong>252 por UF</strong></td><td>11</td></tr>
+          <tr><td><span class="badge">TASER</span></td><td>Verde</td><td>Treinamento</td><td><strong>60</strong></td><td>2,40</td><td><strong>2 por UF</strong></td><td>10</td></tr>
+          <tr><td><span class="badge">TASER</span></td><td>Laranja</td><td>Finalidade a confirmar</td><td><strong>2</strong></td><td>0,08</td><td><strong>0 por UF</strong></td><td>2</td></tr>
+          <tr><td><span class="badge">TASER</span></td><td>Preto</td><td>Operacional</td><td><strong>35</strong></td><td>1,40</td><td><strong>1 por UF</strong></td><td>10</td></tr>
+          <tr><td><span class="badge">TASER</span></td><td>Amarelo</td><td>Treinamento</td><td><strong>4</strong></td><td>0,16</td><td><strong>0 por UF</strong></td><td>4</td></tr>
+          <tr><td><span class="badge">TASER</span></td><td>Sem cor informada</td><td>Finalidade não identificada</td><td><strong>240</strong></td><td>9,60</td><td><strong>9 por UF</strong></td><td>15</td></tr>
+          <tr class="total-row"><td>TOTAL CARTUCHOS</td><td></td><td></td><td><strong>6.830</strong></td><td>273,20</td><td><strong>273 por UF</strong></td><td>5</td></tr>
+        </tbody>
+      </table>
+      <div class="nota">
+        <strong>Nota 2 — Cartuchos por cor:</strong>
+        <ul style="margin: 10px 0 0; padding-left: 16px; line-height: 1.8;">
+          <li>Para esta simulação, foi adotado o critério informado: <strong>verde</strong> e <strong>amarelo</strong> como treinamento; <strong>preto</strong> como operacional.</li>
+          <li>Cartuchos <strong>laranja</strong> foram mantidos como <strong>finalidade a confirmar</strong>.</li>
+          <li>Cartuchos <strong>sem cor informada</strong> foram mantidos como <strong>finalidade não identificada</strong>, sem presumir treinamento ou operação.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>5. Sobras Técnicas da Divisão Igualitária</h2>
+      <table>
+        <thead><tr><th>Categoria</th><th>Item</th><th>Total</th><th>Distribuição prática</th><th>Saldo</th></tr></thead>
+        <tbody>
+          <tr><td>Munição treinamento</td><td><span class="badge">.40</span></td><td><strong>539.363</strong></td><td>21.574 por UF</td><td><strong>13</strong></td></tr>
+          <tr><td>Munição treinamento</td><td><span class="badge">12</span></td><td><strong>467.424</strong></td><td>18.696 por UF</td><td><strong>24</strong></td></tr>
+          <tr><td>Munição operacional</td><td><span class="badge">.40</span></td><td><strong>294.485</strong></td><td>11.779 por UF</td><td><strong>10</strong></td></tr>
+          <tr><td>Munição operacional</td><td><span class="badge">12</span></td><td><strong>61.829</strong></td><td>2.473 por UF</td><td><strong>4</strong></td></tr>
+          <tr><td>Munição operacional</td><td><span class="badge">5,56mm</span></td><td><strong>292</strong></td><td>11 por UF</td><td><strong>17</strong></td></tr>
+          <tr><td>Munição operacional</td><td><span class="badge">7,62</span></td><td><strong>1</strong></td><td>0 por UF</td><td><strong>1</strong></td></tr>
+          <tr><td>Munição operacional</td><td><span class="badge">.38</span></td><td><strong>237</strong></td><td>9 por UF</td><td><strong>12</strong></td></tr>
+          <tr><td>Munição operacional</td><td><span class="badge">.32</span></td><td><strong>1</strong></td><td>0 por UF</td><td><strong>1</strong></td></tr>
+          <tr><td>Munição operacional</td><td><span class="badge">.45</span></td><td><strong>3</strong></td><td>0 por UF</td><td><strong>3</strong></td></tr>
+          <tr><td>Munição operacional</td><td><span class="badge">.22</span></td><td><strong>4</strong></td><td>0 por UF</td><td><strong>4</strong></td></tr>
+          <tr><td>Armamento</td><td><span class="badge">.40</span></td><td><strong>1.513</strong></td><td>60 por UF</td><td><strong>13</strong></td></tr>
+          <tr><td>Armamento</td><td><span class="badge">12</span></td><td><strong>81</strong></td><td>3 por UF</td><td><strong>6</strong></td></tr>
+          <tr><td>Armamento</td><td><span class="badge">5,56mm</span></td><td><strong>24</strong></td><td>0 por UF</td><td><strong>24</strong></td></tr>
+          <tr><td>Armamento</td><td><span class="badge">9mm</span></td><td><strong>45</strong></td><td>1 por UF</td><td><strong>20</strong></td></tr>
+          <tr><td>Armamento</td><td><span class="badge">7,62</span></td><td><strong>18</strong></td><td>0 por UF</td><td><strong>18</strong></td></tr>
+          <tr><td>Armamento</td><td><span class="badge">.45</span></td><td><strong>2</strong></td><td>0 por UF</td><td><strong>2</strong></td></tr>
+          <tr><td>Armamento</td><td><span class="badge">Taurus 58</span></td><td><strong>3</strong></td><td>0 por UF</td><td><strong>3</strong></td></tr>
+          <tr><td>Armamento</td><td><span class="badge">TASER M26</span></td><td><strong>717</strong></td><td>28 por UF</td><td><strong>17</strong></td></tr>
+          <tr><td>Armamento</td><td><span class="badge">SPARK Z 2.0</span></td><td><strong>2.214</strong></td><td>88 por UF</td><td><strong>14</strong></td></tr>
+          <tr><td>Armamento</td><td><span class="badge">DSK700</span></td><td><strong>52</strong></td><td>2 por UF</td><td><strong>2</strong></td></tr>
+          <tr><td>Armamento</td><td><span class="badge">X26</span></td><td><strong>1</strong></td><td>0 por UF</td><td><strong>1</strong></td></tr>
+          <tr><td>Armamento</td><td><span class="badge">Ar comprimido</span></td><td><strong>2</strong></td><td>0 por UF</td><td><strong>2</strong></td></tr>
+          <tr><td>Cartucho</td><td><span class="badge">SPARK — Verde — Treinamento</span></td><td><strong>78</strong></td><td>3 por UF</td><td><strong>3</strong></td></tr>
+          <tr><td>Cartucho</td><td><span class="badge">SPARK — Sem cor informada</span></td><td><strong>6.311</strong></td><td>252 por UF</td><td><strong>11</strong></td></tr>
+          <tr><td>Cartucho</td><td><span class="badge">TASER — Verde — Treinamento</span></td><td><strong>60</strong></td><td>2 por UF</td><td><strong>10</strong></td></tr>
+          <tr><td>Cartucho</td><td><span class="badge">TASER — Laranja — A confirmar</span></td><td><strong>2</strong></td><td>0 por UF</td><td><strong>2</strong></td></tr>
+          <tr><td>Cartucho</td><td><span class="badge">TASER — Preto — Operacional</span></td><td><strong>35</strong></td><td>1 por UF</td><td><strong>10</strong></td></tr>
+          <tr><td>Cartucho</td><td><span class="badge">TASER — Amarelo — Treinamento</span></td><td><strong>4</strong></td><td>0 por UF</td><td><strong>4</strong></td></tr>
+          <tr><td>Cartucho</td><td><span class="badge">TASER — Sem cor informada</span></td><td><strong>240</strong></td><td>9 por UF</td><td><strong>15</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="nota">
+        <strong>Nota 3 — Interpretação do saldo:</strong>
+        <ul style="margin: 10px 0 0; padding-left: 16px; line-height: 1.8;">
+          <li>A existência de saldo decorre da impossibilidade de fracionar unidades físicas.</li>
+          <li>Os saldos deverão ser destinados conforme critério operacional, prioridade regional ou necessidade logística definida pela coordenação.</li>
+          <li>Esta página apresenta uma <strong>simulação matemática de rateio igualitário</strong>, não uma proposta final de distribuição.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= NORTE ============= -->
+<section id="page-norte" class="page-section" data-page="norte" aria-label="Norte">
+  <div class="dashboard-container">
+    <header class="glass-panel" data-watermark="NORTE">
+      <h1>Painel de Doações PRF</h1>
+      <p>Região Norte (AC, AM, AP, PA, RO, TO)</p>
+    </header>
+
+    <div class="totals-grid">
+      <div class="glass-panel total-card munitions">
+        <span class="label">Total Munições</span>
+        <span class="value">185.761</span>
+      </div>
+      <div class="glass-panel total-card armaments">
+        <span class="label">Total Armamentos</span>
+        <span class="value">352</span>
+      </div>
+    </div>
+
+    <div class="sub-cards-grid">
+      <div class="glass-panel card"><h3>Total Armas Letais</h3><p class="number">90</p><p class="subtitle">Pistolas, Espingardas, SMT</p></div>
+      <div class="glass-panel card"><h3>Armas Não Letais</h3><p class="number">262</p><p class="subtitle">Incapacitação Neuromuscular</p></div>
+      <div class="glass-panel card"><h3>Munições Treinamento</h3><p class="number">121.410</p><p class="subtitle">Calibres .40 e 12</p></div>
+      <div class="glass-panel card"><h3>Munições Operacionais</h3><p class="number">62.568</p><p class="subtitle">Calibres convencionais</p></div>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>1. Armamentos (Consolidado)</h2>
+      <h3>Armas Letais por Calibre</h3>
+      <table>
+        <thead><tr><th>Calibre</th><th>Qtd Total</th><th>Detalhamento por Estado (Clique no estado)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">.40</span></td><td><strong>69</strong></td><td><a href="#detalhes-ac" class="state-link">AC</a>: 3 | <a href="#detalhes-am" class="state-link">AM</a>: 7 | <a href="#detalhes-pa" class="state-link">PA</a>: 58 | <a href="#detalhes-ro" class="state-link">RO</a>: 1</td></tr>
+          <tr><td><span class="badge">12</span></td><td><strong>20</strong></td><td><a href="#detalhes-am" class="state-link">AM</a>: 3 | <a href="#detalhes-pa" class="state-link">PA</a>: 16 | <a href="#detalhes-ro" class="state-link">RO</a>: 1</td></tr>
+          <tr><td><span class="badge">9mm</span></td><td><strong>1</strong></td><td><a href="#detalhes-pa" class="state-link">PA</a>: 1 (Glock)</td></tr>
+          <tr class="total-row"><td>TOTAL LETAL</td><td><strong>90</strong></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Armas Não Letais</h3>
+      <table>
+        <thead><tr><th>Tipo / Classificação</th><th>Qtd</th><th>Localização (Clique no estado)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Arma de Incapacitação Neuromuscular</strong><br><span style="font-size: 0.85em; color: var(--text-muted);">Taser M26 e Spark Z 2.0</span></td><td><strong>262</strong></td><td><a href="#detalhes-ac" class="state-link">AC</a>: 14 | <a href="#detalhes-am" class="state-link">AM</a>: 26 | <a href="#detalhes-pa" class="state-link">PA</a>: 166 | <a href="#detalhes-to" class="state-link">TO</a>: 56</td></tr>
+          <tr class="total-row"><td>TOTAL NÃO LETAL</td><td><strong>262</strong></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>2. Munições (Consolidado)</h2>
+      <h3>Munições de Treinamento</h3>
+      <table>
+        <thead><tr><th>Calibre</th><th>Qtd Total</th><th>Origem (Clique no estado)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">.40</span></td><td><strong>69.717</strong></td><td><a href="#detalhes-am" class="state-link">AM</a>: 11.567 | <a href="#detalhes-ro" class="state-link">RO</a>: 7.000 | <a href="#detalhes-to" class="state-link">TO</a>: 51.150</td></tr>
+          <tr><td><span class="badge">12</span></td><td><strong>51.693</strong></td><td><a href="#detalhes-ac" class="state-link">AC</a>: 5.019 | <a href="#detalhes-am" class="state-link">AM</a>: 8.800 | <a href="#detalhes-ro" class="state-link">RO</a>: 28.200 | <a href="#detalhes-to" class="state-link">TO</a>: 9.674</td></tr>
+          <tr class="total-row"><td>TOTAL TREINAMENTO</td><td><strong>121.410</strong></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Munições Operacionais</h3>
+      <table>
+        <thead><tr><th>Calibre</th><th>Qtd Total</th><th>Origem (Clique no estado)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">.40</span></td><td><strong>47.994</strong></td><td><a href="#detalhes-am" class="state-link">AM</a>: 13.730 | <a href="#detalhes-pa" class="state-link">PA</a>: 10.464 | <a href="#detalhes-ro" class="state-link">RO</a>: 8.800 | <a href="#detalhes-to" class="state-link">TO</a>: 15.000</td></tr>
+          <tr><td><span class="badge">12</span></td><td><strong>14.277</strong></td><td><a href="#detalhes-am" class="state-link">AM</a>: 500 | <a href="#detalhes-pa" class="state-link">PA</a>: 897 | <a href="#detalhes-ro" class="state-link">RO</a>: 11.438 | <a href="#detalhes-to" class="state-link">TO</a>: 1.442</td></tr>
+          <tr><td><span class="badge">5,56</span></td><td><strong>292</strong></td><td><a href="#detalhes-pa" class="state-link">PA</a>: 270 | <a href="#detalhes-to" class="state-link">TO</a>: 22</td></tr>
+          <tr><td><span class="badge">7,62</span></td><td><strong>1</strong></td><td><a href="#detalhes-pa" class="state-link">PA</a>: 1</td></tr>
+          <tr><td><span class="badge">.22</span></td><td><strong>4</strong></td><td><a href="#detalhes-pa" class="state-link">PA</a>: 4</td></tr>
+          <tr class="total-row"><td>TOTAL OPERACIONAL</td><td><strong>62.568</strong></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Cartuchos (Armas de Incapacitação Neuromuscular)</h3>
+      <table>
+        <thead><tr><th>Tipo</th><th>Qtd Total</th><th>Origem (Clique no estado)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">SPARK Preto</span></td><td><strong>570</strong></td><td><a href="#detalhes-ac" class="state-link">AC</a>: 50 | <a href="#detalhes-am" class="state-link">AM</a>: 50 | <a href="#detalhes-pa" class="state-link">PA</a>: 470</td></tr>
+          <tr><td><span class="badge">SPARK Verde</span></td><td><strong>78</strong></td><td><a href="#detalhes-ac" class="state-link">AC</a>: 23 | <a href="#detalhes-am" class="state-link">AM</a>: 55</td></tr>
+          <tr><td><span class="badge">TASER / Outros</span></td><td><strong>293</strong></td><td><a href="#detalhes-am" class="state-link">AM</a>: 156 | <a href="#detalhes-pa" class="state-link">PA</a>: 137</td></tr>
+          <tr class="total-row"><td>TOTAL CARTUCHOS</td><td><strong>936</strong></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <div class="nota">
+        <strong>⚠️ Nota:</strong> O Estado do Pará possui <strong>833 carregadores TAURUS PT 100 .40</strong>, <strong>13 carregadores SMT 40</strong> e <strong>1 coletor de dados/data kit Spark</strong>, itens não contabilizados como munições ou armamentos.
+      </div>
+    </div>
+
+    <div id="detalhes-ac" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Acre (AC)</h2>
+      <ul>
+        <li><span>SMT .40 (Arma Letal)</span> <strong>3 un.</strong></li>
+        <li><span>Taser M26 (Não Letal)</span> <strong>2 un.</strong></li>
+        <li><span>Spark Z 2.0 (Não Letal)</span> <strong>12 un.</strong></li>
+        <li><span>Munição Treinamento Cal 12</span> <strong>5.019 un.</strong></li>
+        <li><span>Cartuchos SPARK (Preto/Verde)</span> <strong>73 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-am" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Amazonas (AM)</h2>
+      <ul>
+        <li><span>Pistolas/Armas .40 (Letais)</span> <strong>10 un.</strong></li>
+        <li><span>Espingarda Cal 12</span> <strong>3 un.</strong></li>
+        <li><span>Taser M26 (Não Letal)</span> <strong>8 un.</strong></li>
+        <li><span>Spark Z 2.0 (Não Letal)</span> <strong>18 un.</strong></li>
+        <li><span>Munição Treinamento .40</span> <strong>11.567 un.</strong></li>
+        <li><span>Munição Treinamento Cal 12</span> <strong>8.800 un.</strong></li>
+        <li><span>Munição Operacional .40</span> <strong>13.730 un.</strong></li>
+        <li><span>Munição Operacional Cal 12</span> <strong>500 un.</strong></li>
+        <li><span>Cartuchos Especiais (Taser/Spark)</span> <strong>206 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-ap" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Amapá (AP)</h2>
+      <ul>
+        <li><span>Resposta</span> <strong>Não apresentou / A verificar</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-pa" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Pará (PA)</h2>
+      <ul>
+        <li><span>Pistolas .40 (Letais)</span> <strong>35 un.</strong></li>
+        <li><span>Pistola Glock 9mm</span> <strong>1 un.</strong></li>
+        <li><span>Espingarda Cal 12</span> <strong>16 un.</strong></li>
+        <li><span>SMT .40 / Carabina .40</span> <strong>23 un.</strong></li>
+        <li><span>Taser M26 (Não Letal)</span> <strong>21 un.</strong></li>
+        <li><span>Spark Z 2.0 (Não Letal)</span> <strong>145 un.</strong></li>
+        <li><span>Munição Operacional Cal 12</span> <strong>897 un.</strong></li>
+        <li><span>Munição Operacional .40</span> <strong>10.464 un.</strong></li>
+        <li><span>Munição Operacional 5,56</span> <strong>270 un.</strong></li>
+        <li><span>Munição Operacional .22 / 7,62</span> <strong>5 un.</strong></li>
+        <li><span>Cartuchos Especiais e Acessórios</span> <strong>504 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-ro" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Rondônia (RO)</h2>
+      <ul>
+        <li><span>Espingarda Cal 12</span> <strong>1 un.</strong></li>
+        <li><span>SMT .40</span> <strong>1 un.</strong></li>
+        <li><span>Munição Treinamento .40</span> <strong>7.000 un.</strong></li>
+        <li><span>Munição Treinamento Cal 12</span> <strong>28.200 un.</strong></li>
+        <li><span>Munição Operacional Cal 12</span> <strong>11.438 un.</strong></li>
+        <li><span>Munição Operacional .40 EOPP</span> <strong>8.800 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-to" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Tocantins (TO)</h2>
+      <ul>
+        <li><span>Taser M26 (Não Letal)</span> <strong>14 un.</strong></li>
+        <li><span>Spark Z 2.0 (Não Letal)</span> <strong>42 un.</strong></li>
+        <li><span>Munição Treinamento .40</span> <strong>51.150 un.</strong></li>
+        <li><span>Munição Treinamento Cal 12</span> <strong>9.674 un.</strong></li>
+        <li><span>Munição Operacional .40</span> <strong>15.000 un.</strong></li>
+        <li><span>Munição Operacional Cal 12</span> <strong>1.442 un.</strong></li>
+        <li><span>Munição Operacional 5,56</span> <strong>22 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============= CENTRO-OESTE ============= -->
+<section id="page-centro-oeste" class="page-section" data-page="centro-oeste" aria-label="Centro-Oeste">
+  <div class="dashboard-container">
+    <header class="glass-panel" data-watermark="CENTRO-OESTE">
+      <h1>Painel de Doações PRF</h1>
+      <p>Região Centro-Oeste (DF, GO, MT)</p>
+    </header>
+
+    <div class="totals-grid">
+      <div class="glass-panel total-card munitions"><span class="label">Total Munições</span><span class="value">141.607</span></div>
+      <div class="glass-panel total-card armaments"><span class="label">Total Armamentos</span><span class="value">608</span></div>
+    </div>
+
+    <div class="sub-cards-grid">
+      <div class="glass-panel card"><h3>Total Armas Letais</h3><p class="number">414</p><p class="subtitle">Fuzis, Pistolas, Espingardas</p></div>
+      <div class="glass-panel card"><h3>Armas Não Letais</h3><p class="number">194</p><p class="subtitle">Incapacitação Neuromuscular</p></div>
+      <div class="glass-panel card"><h3>Munições Treinamento</h3><p class="number">99.367</p><p class="subtitle">Calibres .40 e 12</p></div>
+      <div class="glass-panel card"><h3>Munições Operacionais</h3><p class="number">41.640</p><p class="subtitle">Prontas para uso</p></div>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>1. Armamentos (Consolidado)</h2>
+      <h3>Armas Letais por Calibre</h3>
+      <table>
+        <thead><tr><th>Calibre</th><th>Qtd Total</th><th>Detalhamento por Estado (Clique no estado)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">.40</span></td><td><strong>408</strong></td><td><a href="#detalhes-df" class="state-link">DF</a>: 396 | <a href="#detalhes-go" class="state-link">GO</a>: 2 | <a href="#detalhes-mt" class="state-link">MT</a>: 10</td></tr>
+          <tr><td><span class="badge">5,56</span></td><td><strong>3</strong></td><td><a href="#detalhes-df" class="state-link">DF</a>: 3</td></tr>
+          <tr><td><span class="badge">12</span></td><td><strong>3</strong></td><td><a href="#detalhes-mt" class="state-link">MT</a>: 3</td></tr>
+          <tr class="total-row"><td>TOTAL LETAL</td><td><strong>414</strong></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Armas Não Letais</h3>
+      <table>
+        <thead><tr><th>Tipo / Classificação</th><th>Qtd</th><th>Localização (Clique no estado)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Arma de Incapacitação Neuromuscular</strong><br><span style="font-size: 0.85em; color: var(--text-muted);">Dispositivos tipo Taser/Spark</span></td><td><strong>194</strong></td><td><a href="#detalhes-mt" class="state-link">MT</a>: 53 (M26) + 141 (Spark Z 2.0)</td></tr>
+          <tr class="total-row"><td>TOTAL NÃO LETAL</td><td><strong>194</strong></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>2. Munições (Consolidado)</h2>
+      <h3>Munições de Treinamento</h3>
+      <table>
+        <thead><tr><th>Calibre</th><th>Qtd Total</th><th>Origem (Clique no estado)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">.40</span></td><td><strong>47.953</strong></td><td><a href="#detalhes-df" class="state-link">DF</a>: 32.650 | <a href="#detalhes-go" class="state-link">GO</a>: 15.303</td></tr>
+          <tr><td><span class="badge">12</span></td><td><strong>51.414</strong></td><td><a href="#detalhes-df" class="state-link">DF</a>: 22.900 | <a href="#detalhes-mt" class="state-link">MT</a>: 28.514</td></tr>
+          <tr class="total-row"><td>TOTAL TREINAMENTO</td><td><strong>99.367</strong></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Munições Operacionais</h3>
+      <table>
+        <thead><tr><th>Calibre</th><th>Qtd Total</th><th>Origem (Clique no estado)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">.40</span></td><td><strong>7.550</strong></td><td><a href="#detalhes-df" class="state-link">DF</a>: 1.550 | <a href="#detalhes-go" class="state-link">GO</a>: 6.000</td></tr>
+          <tr><td><span class="badge">12</span></td><td><strong>33.849</strong></td><td><a href="#detalhes-go" class="state-link">GO</a>: 32.500 | <a href="#detalhes-mt" class="state-link">MT</a>: 1.349</td></tr>
+          <tr><td><span class="badge">.38</span></td><td><strong>237</strong></td><td><a href="#detalhes-mt" class="state-link">MT</a>: 237</td></tr>
+          <tr><td><span class="badge">.32</span></td><td><strong>1</strong></td><td><a href="#detalhes-mt" class="state-link">MT</a>: 1</td></tr>
+          <tr><td><span class="badge">.45</span></td><td><strong>3</strong></td><td><a href="#detalhes-mt" class="state-link">MT</a>: 3</td></tr>
+          <tr class="total-row"><td>TOTAL OPERACIONAL</td><td><strong>41.640</strong></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <div class="nota">
+        <strong>⚠️ Nota:</strong> Foram desconsideradas <strong>600 munições calibre 5,56</strong> defeituosas/recolhidas no MT, por não estarem aptas para uso operacional nem treinamento.
+      </div>
+    </div>
+
+    <div id="detalhes-df" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Distrito Federal (DF)</h2>
+      <ul>
+        <li><span>Pistolas Calibre .40</span> <strong>396 un.</strong></li>
+        <li><span>Fuzis Calibre 5,56</span> <strong>3 un.</strong></li>
+        <li><span>Munição Treinamento .40</span> <strong>32.650 un.</strong></li>
+        <li><span>Munição Treinamento 12</span> <strong>22.900 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-go" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Goiás (GO)</h2>
+      <ul>
+        <li><span>Pistolas Calibre .40</span> <strong>2 un.</strong></li>
+        <li><span>Munição Treinamento .40</span> <strong>15.303 un.</strong></li>
+        <li><span>Munição Operacional .40</span> <strong>6.000 un.</strong></li>
+        <li><span>Munição Operacional 12</span> <strong>32.500 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-mt" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Mato Grosso (MT)</h2>
+      <ul>
+        <li><span>Submetralhadoras/Pistolas .40</span> <strong>10 un.</strong></li>
+        <li><span>Espingardas Calibre 12</span> <strong>3 un.</strong></li>
+        <li><span>Arma Incapacitação Neuromuscular (M26)</span> <strong>53 un.</strong></li>
+        <li><span>Arma Incapacitação Neuromuscular (Spark)</span> <strong>141 un.</strong></li>
+        <li><span>Munição Treinamento 12</span> <strong>28.514 un.</strong></li>
+        <li><span>Munição Operacional 12</span> <strong>1.349 un.</strong></li>
+        <li><span>Munição Operacional .38</span> <strong>237 un.</strong></li>
+        <li><span>Munição Operacional .32</span> <strong>1 un.</strong></li>
+        <li><span>Munição Operacional .45</span> <strong>3 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============= NORDESTE ============= -->
+<section id="page-nordeste" class="page-section" data-page="nordeste" aria-label="Nordeste">
+  <div class="dashboard-container">
+    <header class="glass-panel" data-watermark="NORDESTE">
+      <h1>Painel de Doações PRF</h1>
+      <p>Região Nordeste (AL, BA, CE, MA, PB, PE, PI, RN, SE)</p>
+    </header>
+
+    <div class="totals-grid">
+      <div class="glass-panel total-card munitions"><span class="label">Total Munições</span><span class="value">342.969</span></div>
+      <div class="glass-panel total-card armaments"><span class="label">Total Armamentos</span><span class="value">852</span></div>
+    </div>
+
+    <div class="sub-cards-grid">
+      <div class="glass-panel card"><h3>Total Armas Letais</h3><p class="number">119</p><p class="subtitle">Pistolas, Espingardas, SMT, Carabina</p></div>
+      <div class="glass-panel card"><h3>Armas Não Letais</h3><p class="number">733</p><p class="subtitle">TASER M26, SPARK Z 2.0, DSK700</p></div>
+      <div class="glass-panel card"><h3>Munições Calibre .40</h3><p class="number">252.156</p><p class="subtitle">Operacional + Treinamento</p></div>
+      <div class="glass-panel card"><h3>Munições Calibre 12</h3><p class="number">90.450</p><p class="subtitle">Operacional + Treinamento</p></div>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>1. Armamentos (Consolidado)</h2>
+      <h3>Armas Letais por Calibre</h3>
+      <table>
+        <thead><tr><th>Calibre</th><th>Qtd Total</th><th>Detalhamento por Estado (Clique no estado)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">.40</span></td><td><strong>96</strong></td><td><a href="#detalhes-al" class="state-link">AL</a>: 2 | <a href="#detalhes-ba" class="state-link">BA</a>: 1 | <a href="#detalhes-ce" class="state-link">CE</a>: 3 | <a href="#detalhes-ma" class="state-link">MA</a>: 15 | <a href="#detalhes-pb" class="state-link">PB</a>: 9 | <a href="#detalhes-pe" class="state-link">PE</a>: 1 | <a href="#detalhes-pi" class="state-link">PI</a>: 11 | <a href="#detalhes-rn" class="state-link">RN</a>: 49 | <a href="#detalhes-se" class="state-link">SE</a>: 6</td></tr>
+          <tr><td><span class="badge">12</span></td><td><strong>21</strong></td><td><a href="#detalhes-al" class="state-link">AL</a>: 1 | <a href="#detalhes-ba" class="state-link">BA</a>: 4 | <a href="#detalhes-ma" class="state-link">MA</a>: 2 | <a href="#detalhes-pb" class="state-link">PB</a>: 3 | <a href="#detalhes-pe" class="state-link">PE</a>: 2 | <a href="#detalhes-pi" class="state-link">PI</a>: 3 | <a href="#detalhes-rn" class="state-link">RN</a>: 6</td></tr>
+          <tr><td><span class="badge">5,56mm</span></td><td><strong>1</strong></td><td><a href="#detalhes-ce" class="state-link">CE</a>: 1</td></tr>
+          <tr class="total-row"><td>TOTAL LETAL</td><td><strong>118</strong></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Armas Não Letais (Incapacitação Neuromuscular)</h3>
+      <table>
+        <thead><tr><th>Tipo / Classificação</th><th>Qtd Total</th><th>Localização (Clique no estado)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">TASER M26</span></td><td><strong>225</strong></td><td><a href="#detalhes-ba" class="state-link">BA</a>: 100 | <a href="#detalhes-pe" class="state-link">PE</a>: 89 | <a href="#detalhes-pi" class="state-link">PI</a>: 36</td></tr>
+          <tr><td><span class="badge">SPARK Z 2.0</span></td><td><strong>456</strong></td><td><a href="#detalhes-ba" class="state-link">BA</a>: 227 | <a href="#detalhes-ma" class="state-link">MA</a>: 3 | <a href="#detalhes-pb" class="state-link">PB</a>: 68 | <a href="#detalhes-pe" class="state-link">PE</a>: 119 | <a href="#detalhes-pi" class="state-link">PI</a>: 39</td></tr>
+          <tr><td><span class="badge">DSK700</span></td><td><strong>52</strong></td><td><a href="#detalhes-pi" class="state-link">PI</a>: 52</td></tr>
+          <tr class="total-row"><td>TOTAL NÃO LETAL</td><td><strong>733</strong></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>2. Munições (Consolidado)</h2>
+      <h3>Munições de Treinamento</h3>
+      <table>
+        <thead><tr><th>Calibre</th><th>Qtd Total</th><th>Origem (Clique no estado)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">.40</span></td><td><strong>138.515</strong></td><td><a href="#detalhes-al" class="state-link">AL</a>: 18.468 | <a href="#detalhes-ba" class="state-link">BA</a>: 31.600 | <a href="#detalhes-ce" class="state-link">CE</a>: 50.547 | <a href="#detalhes-pb" class="state-link">PB</a>: 24.000 | <a href="#detalhes-rn" class="state-link">RN</a>: 13.900</td></tr>
+          <tr><td><span class="badge">12</span></td><td><strong>68.401</strong></td><td><a href="#detalhes-al" class="state-link">AL</a>: 216 | <a href="#detalhes-ba" class="state-link">BA</a>: 46.566 | <a href="#detalhes-ce" class="state-link">CE</a>: 21.619</td></tr>
+          <tr class="total-row"><td>TOTAL TREINAMENTO</td><td><strong>206.916</strong></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Munições Operacionais</h3>
+      <table>
+        <thead><tr><th>Calibre</th><th>Qtd Total</th><th>Origem (Clique no estado)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">.40</span></td><td><strong>113.641</strong></td><td><a href="#detalhes-al" class="state-link">AL</a>: 7.150 | <a href="#detalhes-ba" class="state-link">BA</a>: 17.700 | <a href="#detalhes-ce" class="state-link">CE</a>: 5.858 | <a href="#detalhes-ma" class="state-link">MA</a>: 20.300 | <a href="#detalhes-pb" class="state-link">PB</a>: 32.600 | <a href="#detalhes-pe" class="state-link">PE</a>: 19.115 | <a href="#detalhes-rn" class="state-link">RN</a>: 341 | <a href="#detalhes-se" class="state-link">SE</a>: 10.577</td></tr>
+          <tr><td><span class="badge">12</span></td><td><strong>22.049</strong></td><td><a href="#detalhes-ce" class="state-link">CE</a>: 575 | <a href="#detalhes-ma" class="state-link">MA</a>: 18.569 | <a href="#detalhes-pb" class="state-link">PB</a>: 1.000 | <a href="#detalhes-pi" class="state-link">PI</a>: 1.905</td></tr>
+          <tr class="total-row"><td>TOTAL OPERACIONAL</td><td><strong>135.690</strong></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Cartuchos</h3>
+      <table>
+        <thead><tr><th>Tipo</th><th>Qtd Total</th><th>Origem (Clique no estado)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">SPARK</span></td><td><strong>321</strong></td><td><a href="#detalhes-pb" class="state-link">PB</a>: 256 | <a href="#detalhes-pe" class="state-link">PE</a>: 65 | <a href="#detalhes-pi" class="state-link">PI</a>: A verificar</td></tr>
+          <tr><td><span class="badge">TASER</span></td><td><strong>42</strong></td><td><a href="#detalhes-pe" class="state-link">PE</a>: 42 | <a href="#detalhes-pi" class="state-link">PI</a>: A verificar</td></tr>
+          <tr class="total-row"><td>TOTAL CARTUCHOS</td><td><strong>363</strong></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <div class="nota">
+        <strong>⚠️ Notas de restrição / itens não contabilizados na relação consolidada:</strong>
+        <ul style="margin: 10px 0 0; padding-left: 16px; line-height: 1.8;">
+          <li><strong>Ceará (CE):</strong> <strong>7.313 unidades</strong> de <strong>Munição fora de estoque .40 de todos os tipos</strong> não foram contabilizadas no consolidado.</li>
+          <li><strong>Rio Grande do Norte (RN):</strong> <strong>24 unidades</strong> de <strong>CARREGADOR SMT .40</strong> e <strong>124 unidades</strong> de <strong>CARREGADOR PT100</strong> não foram contabilizadas por não se tratarem de munições.</li>
+          <li><strong>Piauí (PI):</strong> os itens <strong>Cartuchos Pistola Elétrica TASER M26</strong> e <strong>Cartuchos Pistola Elétrica SPARK DSK700</strong> permanecem com quantitativo <strong>"A verificar"</strong> e, por isso, não compõem o total consolidado de cartuchos.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="detalhes-al" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Alagoas (AL)</h2>
+      <ul>
+        <li><span>Pistola PT 100 .40 (Letal)</span> <strong>1 un.</strong></li>
+        <li><span>Espingarda Cal. 12 (Letal)</span> <strong>1 un.</strong></li>
+        <li><span>SMT .40 (Letal)</span> <strong>1 un.</strong></li>
+        <li><span>Munição .40 EXPO GOLD HEX (Operacional)</span> <strong>7.150 un.</strong></li>
+        <li><span>Munição .40 EXPO recolhida para treinamento</span> <strong>10.468 un.</strong></li>
+        <li><span>Munição .40 EOPP Treina (Treinamento)</span> <strong>8.000 un.</strong></li>
+        <li><span>Munição Cal 12 recolhida para treinamento</span> <strong>216 un.</strong></li>
+        <li><span>SUBTOTAL MUNIÇÕES</span> <strong>25.834 un.</strong></li>
+        <li><span>SUBTOTAL ARMAMENTOS</span> <strong>3 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-ba" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Bahia (BA)</h2>
+      <ul>
+        <li><span>Pistola PT 100 .40 (Letal)</span> <strong>1 un.</strong></li>
+        <li><span>Espingarda Cal. 12 (Letal)</span> <strong>4 un.</strong></li>
+        <li><span>TASER M26 (Não Letal)</span> <strong>100 un.</strong></li>
+        <li><span>SPARK Z 2.0 (Não Letal)</span> <strong>227 un.</strong></li>
+        <li><span>Munição .40 EXPO GOLD HEX 155gr (Operacional)</span> <strong>17.700 un.</strong></li>
+        <li><span>Munição .40 EOPP Treina 180gr (Treinamento)</span> <strong>31.600 un.</strong></li>
+        <li><span>Munição Cal 12 Hi-Impact Treina CH-3T Plast</span> <strong>13.341 un.</strong></li>
+        <li><span>Munição Cal 12 CBC 12/70 CH-3T A</span> <strong>33.225 un.</strong></li>
+        <li><span>SUBTOTAL MUNIÇÕES</span> <strong>95.866 un.</strong></li>
+        <li><span>SUBTOTAL ARMAMENTOS</span> <strong>332 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-ce" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Ceará (CE)</h2>
+      <ul>
+        <li><span>Pistola PT 100 .40 (Letal)</span> <strong>1 un.</strong></li>
+        <li><span>SMT .40 (Letal)</span> <strong>2 un.</strong></li>
+        <li><span>Carabina Cal. 5,56x45mm (Letal)</span> <strong>1 un.</strong></li>
+        <li><span>Munição .40 EXPO GOLD HEX 155gr (Operacional)</span> <strong>3.800 un.</strong></li>
+        <li><span>Munição .40 GOLD HEX EXPO 155gr (lote adicional)</span> <strong>2.058 un.</strong></li>
+        <li><span>Munição .40 recolhida para treinamento</span> <strong>13.247 un.</strong></li>
+        <li><span>Munição .40 SW EOPP Treina 180gr (Treinamento)</span> <strong>37.300 un.</strong></li>
+        <li><span>Munição .40 fora de estoque (todos os tipos)</span> <strong>7.313 un.</strong></li>
+        <li><span>Munição Cal 12 Hi-Impact balote 28,4g (Operacional)</span> <strong>575 un.</strong></li>
+        <li><span>Munição Cal 12 CBC 12/70 CH-3T A (Treinamento)</span> <strong>21.619 un.</strong></li>
+        <li><span>SUBTOTAL MUNIÇÕES INFORMADO PELA UF</span> <strong>85.912 un.</strong></li>
+        <li><span>SUBTOTAL ARMAMENTOS</span> <strong>4 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-ma" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Maranhão (MA)</h2>
+      <ul>
+        <li><span>Pistola PT 100 .40 (Letal)</span> <strong>3 un.</strong></li>
+        <li><span>Espingarda Cal. 12 (Letal)</span> <strong>2 un.</strong></li>
+        <li><span>SMT .40 (Letal)</span> <strong>12 un.</strong></li>
+        <li><span>SPARK Z 2.0 (Não Letal)</span> <strong>3 un.</strong></li>
+        <li><span>Munição .40 (tipo não especificado)</span> <strong>20.300 un.</strong></li>
+        <li><span>Munição Calibre 12 (tipo não especificado)</span> <strong>18.569 un.</strong></li>
+        <li><span>SUBTOTAL MUNIÇÕES</span> <strong>38.869 un.</strong></li>
+        <li><span>SUBTOTAL ARMAMENTOS</span> <strong>20 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-pb" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Paraíba (PB)</h2>
+      <ul>
+        <li><span>Espingarda Cal. 12 (Letal)</span> <strong>3 un.</strong></li>
+        <li><span>SMT .40 (Letal)</span> <strong>9 un.</strong></li>
+        <li><span>SPARK Z 2.0 (Não Letal)</span> <strong>68 un.</strong></li>
+        <li><span>Munição .40 Expo 155g (Operacional)</span> <strong>32.600 un.</strong></li>
+        <li><span>Munição .40 Treina (Treinamento)</span> <strong>24.000 un.</strong></li>
+        <li><span>Munição 12 SG Operacional</span> <strong>200 un.</strong></li>
+        <li><span>Munição Cal 12 Balote</span> <strong>800 un.</strong></li>
+        <li><span>Cartuchos SPARK</span> <strong>256 un.</strong></li>
+        <li><span>SUBTOTAL MUNIÇÕES</span> <strong>57.856 un.</strong></li>
+        <li><span>SUBTOTAL ARMAMENTOS</span> <strong>80 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-pe" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Pernambuco (PE)</h2>
+      <ul>
+        <li><span>Pistola PT 100 .40 (Letal)</span> <strong>1 un.</strong></li>
+        <li><span>Espingarda Cal. 12 (Letal)</span> <strong>2 un.</strong></li>
+        <li><span>TASER M26 (Não Letal)</span> <strong>89 un.</strong></li>
+        <li><span>SPARK Z 2.0 (Não Letal)</span> <strong>119 un.</strong></li>
+        <li><span>Munição .40 (Operacional / Uso)</span> <strong>19.115 un.</strong></li>
+        <li><span>Cartucho SPARK</span> <strong>65 un.</strong></li>
+        <li><span>Cartucho TASER</span> <strong>42 un.</strong></li>
+        <li><span>SUBTOTAL MUNIÇÕES</span> <strong>19.222 un.</strong></li>
+        <li><span>SUBTOTAL ARMAMENTOS</span> <strong>211 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-pi" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Piauí (PI)</h2>
+      <ul>
+        <li><span>Espingarda Cal. 12 (Letal)</span> <strong>3 un.</strong></li>
+        <li><span>SMT .40 (Letal)</span> <strong>11 un.</strong></li>
+        <li><span>TASER M26 (Não Letal)</span> <strong>36 un.</strong></li>
+        <li><span>SPARK Z 2.0 (Não Letal)</span> <strong>39 un.</strong></li>
+        <li><span>DSK700 — Pistola Elétrica (Não Letal)</span> <strong>52 un.</strong></li>
+        <li><span>Munição Cal 12 Balote singular</span> <strong>951 un.</strong></li>
+        <li><span>Munição Cal 12 SG</span> <strong>954 un.</strong></li>
+        <li><span>Cartuchos Pistola TASER M26</span> <strong>A verificar</strong></li>
+        <li><span>Cartuchos Pistola SPARK DSK700</span> <strong>A verificar</strong></li>
+        <li><span>SUBTOTAL MUNIÇÕES (confirmadas)</span> <strong>1.905 un.</strong></li>
+        <li><span>SUBTOTAL ARMAMENTOS</span> <strong>141 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-rn" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Rio Grande do Norte (RN)</h2>
+      <ul>
+        <li><span>Pistola PT 100 .40 (Letal)</span> <strong>41 un.</strong></li>
+        <li><span>Espingarda Cal. 12 (Letal)</span> <strong>6 un.</strong></li>
+        <li><span>SMT .40 (Letal)</span> <strong>8 un.</strong></li>
+        <li><span>Munição .40 (Uso / Operacional)</span> <strong>341 un.</strong></li>
+        <li><span>Munição .40 (Treino)</span> <strong>13.900 un.</strong></li>
+        <li><span>Carregador SMT .40 (não contabilizado)</span> <strong>24 un.</strong></li>
+        <li><span>Carregador PT100 (não contabilizado)</span> <strong>124 un.</strong></li>
+        <li><span>SUBTOTAL MUNIÇÕES</span> <strong>14.241 un.</strong></li>
+        <li><span>SUBTOTAL ARMAMENTOS</span> <strong>55 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-se" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Sergipe (SE)</h2>
+      <ul>
+        <li><span>SMT .40 (Letal)</span> <strong>6 un.</strong></li>
+        <li><span>Munição CBC Calibre .40</span> <strong>10.577 un.</strong></li>
+        <li><span>SUBTOTAL MUNIÇÕES</span> <strong>10.577 un.</strong></li>
+        <li><span>SUBTOTAL ARMAMENTOS</span> <strong>6 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+  </div>
+
+<section id="page-sudeste" class="page-section" data-page="sudeste" aria-label="Sudeste">
+  <div class="dashboard-container">
+    <header class="glass-panel" data-watermark="SUDESTE">
+      <h1>PAINEL DE DOAÇÕES PRF</h1>
+      <p>REGIÃO SUDESTE (ES, MG, RJ, SP)</p>
+    </header>
+
+    <div class="totals-grid">
+      <div class="glass-panel total-card munitions">
+        <span class="label">TOTAL MUNIÇÕES</span>
+        <span class="value">233.070</span>
+      </div>
+      <div class="glass-panel total-card armaments">
+        <span class="label">TOTAL ARMAMENTOS</span>
+        <span class="value">1.651</span>
+      </div>
+    </div>
+
+    <div class="sub-cards-grid">
+      <div class="glass-panel card">
+        <h3>Total Armas Letais</h3>
+        <p class="number">739</p>
+        <p class="subtitle">Calibres consolidados</p>
+      </div>
+      <div class="glass-panel card">
+        <h3>Armas Não Letais</h3>
+        <p class="number">912</p>
+        <p class="subtitle">TASER M26 e SPARK Z 2.0</p>
+      </div>
+      <div class="glass-panel card">
+        <h3>Munições Calibre .40</h3>
+        <p class="number">123.733</p>
+        <p class="subtitle">Consolidado regional</p>
+      </div>
+      <div class="glass-panel card">
+        <h3>Munições Calibre 12</h3>
+        <p class="number">106.417</p>
+        <p class="subtitle">Consolidado regional</p>
+      </div>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>1. Armamentos (Consolidado)</h2>
+
+      <h3>Armas Letais por Calibre</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Calibre</th>
+            <th>Qtd Total</th>
+            <th>Detalhamento por Estado (Clique no estado)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge">.40</span></td>
+            <td><strong>638</strong></td>
+            <td>
+              <a href="#detalhes-mg" class="state-link">MG</a>: 17 |
+              <a href="#detalhes-rj" class="state-link">RJ</a>: 620 |
+              <a href="#detalhes-sp" class="state-link">SP</a>: 1
+            </td>
+          </tr>
+          <tr>
+            <td><span class="badge">12</span></td>
+            <td><strong>17</strong></td>
+            <td>
+              <a href="#detalhes-es" class="state-link">ES</a>: 7 |
+              <a href="#detalhes-mg" class="state-link">MG</a>: 10
+            </td>
+          </tr>
+          <tr>
+            <td><span class="badge">5,56mm</span></td>
+            <td><strong>20</strong></td>
+            <td>
+              <a href="#detalhes-mg" class="state-link">MG</a>: 4 |
+              <a href="#detalhes-rj" class="state-link">RJ</a>: 9 |
+              <a href="#detalhes-sp" class="state-link">SP</a>: 7
+            </td>
+          </tr>
+          <tr>
+            <td><span class="badge">9mm</span></td>
+            <td><strong>41</strong></td>
+            <td><a href="#detalhes-rj" class="state-link">RJ</a>: 41</td>
+          </tr>
+          <tr>
+            <td><span class="badge">7,62</span></td>
+            <td><strong>18</strong></td>
+            <td><a href="#detalhes-rj" class="state-link">RJ</a>: 18</td>
+          </tr>
+          <tr>
+            <td><span class="badge">.45</span></td>
+            <td><strong>2</strong></td>
+            <td><a href="#detalhes-rj" class="state-link">RJ</a>: 2</td>
+          </tr>
+          <tr>
+            <td><span class="badge">Taurus 58</span></td>
+            <td><strong>3</strong></td>
+            <td><a href="#detalhes-rj" class="state-link">RJ</a>: 3</td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL LETAL</td>
+            <td><strong>739</strong></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Armas Não Letais (Incapacitação Neuromuscular)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo / Classificação</th>
+            <th>Qtd Total</th>
+            <th>Localização (Clique no estado)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge">TASER M26</span></td>
+            <td><strong>284</strong></td>
+            <td>
+              <a href="#detalhes-mg" class="state-link">MG</a>: 125 |
+              <a href="#detalhes-rj" class="state-link">RJ</a>: 81 |
+              <a href="#detalhes-sp" class="state-link">SP</a>: 78
+            </td>
+          </tr>
+          <tr>
+            <td><span class="badge">SPARK Z 2.0</span></td>
+            <td><strong>628</strong></td>
+            <td>
+              <a href="#detalhes-mg" class="state-link">MG</a>: 265 |
+              <a href="#detalhes-rj" class="state-link">RJ</a>: 159 |
+              <a href="#detalhes-sp" class="state-link">SP</a>: 204
+            </td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL NÃO LETAL</td>
+            <td><strong>912</strong></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>2. Munições (Consolidado)</h2>
+
+      <h3>Munições de Treinamento</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Calibre</th>
+            <th>Qtd Total</th>
+            <th>Origem (Clique no estado)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge">.40</span></td>
+            <td><strong>34.283</strong></td>
+            <td><a href="#detalhes-mg" class="state-link">MG</a>: 34.283</td>
+          </tr>
+          <tr>
+            <td><span class="badge">12</span></td>
+            <td><strong>105.917</strong></td>
+            <td>
+              <a href="#detalhes-mg" class="state-link">MG</a>: 62.917 |
+              <a href="#detalhes-rj" class="state-link">RJ</a>: 43.000
+            </td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL TREINAMENTO</td>
+            <td><strong>140.200</strong></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Munições Operacionais</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Calibre</th>
+            <th>Qtd Total</th>
+            <th>Origem (Clique no estado)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge">.40</span></td>
+            <td><strong>89.450</strong></td>
+            <td>
+              <a href="#detalhes-es" class="state-link">ES</a>: 1.850 |
+              <a href="#detalhes-mg" class="state-link">MG</a>: 26.600 |
+              <a href="#detalhes-rj" class="state-link">RJ</a>: 61.000
+            </td>
+          </tr>
+          <tr>
+            <td><span class="badge">12</span></td>
+            <td><strong>500</strong></td>
+            <td><a href="#detalhes-es" class="state-link">ES</a>: 500</td>
+          </tr>
+          <tr>
+            <td><span class="badge">.233 REM</span></td>
+            <td><strong>150</strong></td>
+            <td><a href="#detalhes-mg" class="state-link">MG</a>: 150</td>
+          </tr>
+          <tr>
+            <td><span class="badge">Diversos</span></td>
+            <td><strong>2.000</strong></td>
+            <td><a href="#detalhes-rj" class="state-link">RJ</a>: 2.000</td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL OPERACIONAL</td>
+            <td><strong>92.100</strong></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Cartuchos</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Qtd Total</th>
+            <th>Origem (Clique no estado)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge">TASER</span></td>
+            <td><strong>10</strong></td>
+            <td><a href="#detalhes-mg" class="state-link">MG</a>: 10</td>
+          </tr>
+          <tr>
+            <td><span class="badge">SPARK</span></td>
+            <td><strong>760</strong></td>
+            <td><a href="#detalhes-mg" class="state-link">MG</a>: 760</td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL CARTUCHOS</td>
+            <td><strong>770</strong></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="detalhes-es" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Espírito Santo (ES)</h2>
+      <ul>
+        <li><span>Munição .40 SW GOLD HEX EXPO 155gr</span> <strong>1.850 un.</strong></li>
+        <li><span>Munição Cal 12 proj. singular 12/70 - Balote</span> <strong>500 un.</strong></li>
+        <li><span>Espingarda Cal. 12</span> <strong>7 un.</strong></li>
+        <li><span>SUBTOTAL MUNIÇÕES</span> <strong>2.350 un.</strong></li>
+        <li><span>SUBTOTAL ARMAMENTOS</span> <strong>7 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-mg" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Minas Gerais (MG)</h2>
+      <ul>
+        <li><span>.40 S&amp;W EOPP 180gr (Treina)</span> <strong>23.410 un.</strong></li>
+        <li><span>.40 S&amp;W EXPO 155gr (Treina)</span> <strong>10.873 un.</strong></li>
+        <li><span>.40 S&amp;W GOLD HEX EXPO 155gr</span> <strong>26.600 un.</strong></li>
+        <li><span>Cal 12 Treina CH 3T</span> <strong>62.626 un.</strong></li>
+        <li><span>.233 REM Polymer Tip 55gr</span> <strong>150 un.</strong></li>
+        <li><span>Cal 12 Treina</span> <strong>291 un.</strong></li>
+        <li><span>Cartucho operacional TASER M26</span> <strong>10 un.</strong></li>
+        <li><span>Cartucho operacional SPARK</span> <strong>760 un.</strong></li>
+        <li><span>Pistola PT 840 .40</span> <strong>1 un.</strong></li>
+        <li><span>Pistola PT 100 .40</span> <strong>2 un.</strong></li>
+        <li><span>Espingarda Cal. 12</span> <strong>10 un.</strong></li>
+        <li><span>SMT 40</span> <strong>14 un.</strong></li>
+        <li><span>TASER M26</span> <strong>125 un.</strong></li>
+        <li><span>SPARK Z 2.0</span> <strong>265 un.</strong></li>
+        <li><span>Carabina Cal. 5,56x45mm</span> <strong>4 un.</strong></li>
+        <li><span>SUBTOTAL MUNIÇÕES</span> <strong>124.720 un.</strong></li>
+        <li><span>SUBTOTAL ARMAMENTOS</span> <strong>421 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-rj" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Rio de Janeiro (RJ)</h2>
+      <ul>
+        <li><span>Munição .40 SW GOLD HEX EXPO 155gr</span> <strong>61.000 un.</strong></li>
+        <li><span>Munição Cal 12 CH 3T Treina</span> <strong>43.000 un.</strong></li>
+        <li><span>Calibres diversos soltos 45/40/380/38/12 borracha/12 balote</span> <strong>2.000 un.</strong></li>
+        <li><span>Pistola PT 840 .40</span> <strong>2 un.</strong></li>
+        <li><span>Pistola PT 809 9mm</span> <strong>23 un.</strong></li>
+        <li><span>Pistola PT 100 .40</span> <strong>574 un.</strong></li>
+        <li><span>Pistola Glock 9mm</span> <strong>13 un.</strong></li>
+        <li><span>Pistola Glock .40</span> <strong>6 un.</strong></li>
+        <li><span>Pistola Glock .45</span> <strong>2 un.</strong></li>
+        <li><span>Pistola Taurus 58</span> <strong>3 un.</strong></li>
+        <li><span>Pistola MC21 9mm</span> <strong>3 un.</strong></li>
+        <li><span>SMT 40</span> <strong>38 un.</strong></li>
+        <li><span>TASER M26</span> <strong>81 un.</strong></li>
+        <li><span>SPARK Z 2.0</span> <strong>159 un.</strong></li>
+        <li><span>Fuzil Cal. 5,56x45mm</span> <strong>9 un.</strong></li>
+        <li><span>Fuzil AK72 7,62</span> <strong>1 un.</strong></li>
+        <li><span>Fuzil FAL 7,62</span> <strong>17 un.</strong></li>
+        <li><span>Submetralhadora 9mm</span> <strong>2 un.</strong></li>
+        <li><span>SUBTOTAL MUNIÇÕES</span> <strong>106.000 un.</strong></li>
+        <li><span>SUBTOTAL ARMAMENTOS</span> <strong>933 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-sp" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: São Paulo (SP)</h2>
+      <ul>
+        <li><span>Pistola PT 100 .40</span> <strong>1 un.</strong></li>
+        <li><span>TASER M26</span> <strong>78 un.</strong></li>
+        <li><span>SPARK Z 2.0</span> <strong>204 un.</strong></li>
+        <li><span>Carabina Cal. 5,56x45mm</span> <strong>7 un.</strong></li>
+        <li><span>SUBTOTAL ARMAMENTOS</span> <strong>290 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+  </div>
+</section>
+
+<section id="page-sul" class="page-section" data-page="sul" aria-label="Sul">
+  <div class="dashboard-container">
+    <header class="glass-panel" data-watermark="SUL">
+      <h1>PAINEL DE DOAÇÕES PRF</h1>
+      <p>REGIÃO SUL (PR, RS, SC)</p>
+    </header>
+
+    <div class="totals-grid">
+      <div class="glass-panel total-card munitions">
+        <span class="label">TOTAL MUNIÇÕES</span>
+        <span class="value">545.409</span>
+      </div>
+      <div class="glass-panel total-card armaments">
+        <span class="label">TOTAL ARMAMENTOS</span>
+        <span class="value">1.209</span>
+      </div>
+    </div>
+
+    <div class="sub-cards-grid">
+      <div class="glass-panel card">
+        <h3>Total Armas Letais</h3>
+        <p class="number">324</p>
+        <p class="subtitle">Calibres .40, 12 e 9mm</p>
+      </div>
+      <div class="glass-panel card">
+        <h3>Armas Não Letais</h3>
+        <p class="number">885</p>
+        <p class="subtitle">TASER, SPARK, X26 e ar comprimido</p>
+      </div>
+      <div class="glass-panel card">
+        <h3>Munições Calibre .40</h3>
+        <p class="number">274.745</p>
+        <p class="subtitle">Consolidado regional</p>
+      </div>
+      <div class="glass-panel card">
+        <h3>Munições Calibre 12</h3>
+        <p class="number">191.153</p>
+        <p class="subtitle">Consolidado regional</p>
+      </div>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>1. Armamentos (Consolidado)</h2>
+
+      <h3>Armas Letais por Calibre</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Calibre</th>
+            <th>Qtd Total</th>
+            <th>Detalhamento por Estado (Clique no estado)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge">.40</span></td>
+            <td><strong>301</strong></td>
+            <td>
+              <a href="#detalhes-pr" class="state-link">PR</a>: 174 |
+              <a href="#detalhes-rs" class="state-link">RS</a>: 95 |
+              <a href="#detalhes-sc" class="state-link">SC</a>: 32
+            </td>
+          </tr>
+          <tr>
+            <td><span class="badge">12</span></td>
+            <td><strong>20</strong></td>
+            <td>
+              <a href="#detalhes-pr" class="state-link">PR</a>: 2 |
+              <a href="#detalhes-sc" class="state-link">SC</a>: 18
+            </td>
+          </tr>
+          <tr>
+            <td><span class="badge">9mm</span></td>
+            <td><strong>3</strong></td>
+            <td><a href="#detalhes-sc" class="state-link">SC</a>: 3</td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL LETAL</td>
+            <td><strong>324</strong></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Armas Não Letais</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo / Classificação</th>
+            <th>Qtd Total</th>
+            <th>Localização (Clique no estado)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge">TASER M26</span></td>
+            <td><strong>110</strong></td>
+            <td>
+              <a href="#detalhes-pr" class="state-link">PR</a>: 2 |
+              <a href="#detalhes-rs" class="state-link">RS</a>: 68 |
+              <a href="#detalhes-sc" class="state-link">SC</a>: 40
+            </td>
+          </tr>
+          <tr>
+            <td><span class="badge">SPARK Z 2.0</span></td>
+            <td><strong>772</strong></td>
+            <td>
+              <a href="#detalhes-pr" class="state-link">PR</a>: 206 |
+              <a href="#detalhes-rs" class="state-link">RS</a>: 59 |
+              <a href="#detalhes-sc" class="state-link">SC</a>: 507
+            </td>
+          </tr>
+          <tr>
+            <td><span class="badge">X26</span></td>
+            <td><strong>1</strong></td>
+            <td><a href="#detalhes-sc" class="state-link">SC</a>: 1</td>
+          </tr>
+          <tr>
+            <td><span class="badge">Ar comprimido</span></td>
+            <td><strong>2</strong></td>
+            <td><a href="#detalhes-sc" class="state-link">SC</a>: 2</td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL NÃO LETAL</td>
+            <td><strong>885</strong></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>2. Munições (Consolidado)</h2>
+
+      <h3>Munições de Treinamento</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Calibre</th>
+            <th>Qtd Total</th>
+            <th>Origem (Clique no estado)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge">.40</span></td>
+            <td><strong>248.895</strong></td>
+            <td>
+              <a href="#detalhes-pr" class="state-link">PR</a>: 14.595 |
+              <a href="#detalhes-rs" class="state-link">RS</a>: 155.800 |
+              <a href="#detalhes-sc" class="state-link">SC</a>: 78.500
+            </td>
+          </tr>
+          <tr>
+            <td><span class="badge">12</span></td>
+            <td><strong>189.999</strong></td>
+            <td>
+              <a href="#detalhes-pr" class="state-link">PR</a>: 50.661 |
+              <a href="#detalhes-rs" class="state-link">RS</a>: 139.338
+            </td>
+          </tr>
+          <tr>
+            <td><span class="badge">9mm</span></td>
+            <td><strong>27.150</strong></td>
+            <td><a href="#detalhes-rs" class="state-link">RS</a>: 27.150</td>
+          </tr>
+          <tr>
+            <td><span class="badge">7,62</span></td>
+            <td><strong>11.600</strong></td>
+            <td><a href="#detalhes-rs" class="state-link">RS</a>: 11.600</td>
+          </tr>
+          <tr>
+            <td><span class="badge">5,56mm</span></td>
+            <td><strong>36.000</strong></td>
+            <td><a href="#detalhes-rs" class="state-link">RS</a>: 36.000</td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL TREINAMENTO</td>
+            <td><strong>513.644</strong></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Munições Operacionais</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Calibre</th>
+            <th>Qtd Total</th>
+            <th>Origem (Clique no estado)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge">.40</span></td>
+            <td><strong>25.850</strong></td>
+            <td>
+              <a href="#detalhes-rs" class="state-link">RS</a>: 13.000 |
+              <a href="#detalhes-sc" class="state-link">SC</a>: 12.850
+            </td>
+          </tr>
+          <tr>
+            <td><span class="badge">12</span></td>
+            <td><strong>1.154</strong></td>
+            <td>
+              <a href="#detalhes-pr" class="state-link">PR</a>: 279 |
+              <a href="#detalhes-rs" class="state-link">RS</a>: 875
+            </td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL OPERACIONAL</td>
+            <td><strong>27.004</strong></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Cartuchos</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Qtd Total</th>
+            <th>Origem (Clique no estado)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge">SPARK</span></td>
+            <td><strong>4.710</strong></td>
+            <td>
+              <a href="#detalhes-rs" class="state-link">RS</a>: 571 |
+              <a href="#detalhes-sc" class="state-link">SC</a>: 4.139
+            </td>
+          </tr>
+          <tr>
+            <td><span class="badge">TASER</span></td>
+            <td><strong>51</strong></td>
+            <td><a href="#detalhes-sc" class="state-link">SC</a>: 51</td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL CARTUCHOS</td>
+            <td><strong>4.761</strong></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="nota">
+        <strong>⚠️ Notas de restrição / itens não contabilizados na relação consolidada:</strong>
+        <ul style="margin: 10px 0 0; padding-left: 16px; line-height: 1.8;">
+          <li><strong>Paraná (PR):</strong> <strong>28.850 unidades</strong> de <strong>Munição .40 SW GOLD HEX EXPO 155gr</strong> foram informadas como <strong>vencidas</strong> e, por isso, foram retiradas da relação consolidada de munições operacionais/aptas.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="detalhes-pr" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Paraná (PR)</h2>
+      <ul>
+        <li><span>Munição de treinamento CBC 12/70 CH-3T A</span> <strong>50.661 un.</strong></li>
+        <li><span>Munição Cal 12 Hi-Impact 70mm proj. singular (balote) 28,4g</span> <strong>25 un.</strong></li>
+        <li><span>Munição calibre 12 SG</span> <strong>254 un.</strong></li>
+        <li><span>Munição .40 SW GOLD HEX EXPO 155gr (vencida — não contabilizada no consolidado)</span> <strong>28.850 un.</strong></li>
+        <li><span>Munição .40 recolhida para treinamento</span> <strong>14.595 un.</strong></li>
+        <li><span>Pistola PT 100 .40</span> <strong>151 un.</strong></li>
+        <li><span>Espingarda Cal. 12</span> <strong>2 un.</strong></li>
+        <li><span>SMT 40</span> <strong>23 un.</strong></li>
+        <li><span>TASER M26</span> <strong>2 un.</strong></li>
+        <li><span>SPARK Z 2.0</span> <strong>206 un.</strong></li>
+        <li><span>SUBTOTAL MUNIÇÕES INFORMADO PELA UF</span> <strong>94.385 un.</strong></li>
+        <li><span>SUBTOTAL ARMAMENTOS</span> <strong>384 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-rs" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Rio Grande do Sul (RS)</h2>
+      <ul>
+        <li><span>.40 S&amp;W EXPO GOLD HEX 155gr (expansivo ponta oca)</span> <strong>13.000 un.</strong></li>
+        <li><span>Cartucho SPARK 8M dardo energizado</span> <strong>78 un.</strong></li>
+        <li><span>Cartucho SPARK Treino</span> <strong>493 un.</strong></li>
+        <li><span>Munição 9mm recolhida para treinamento</span> <strong>3.450 un.</strong></li>
+        <li><span>Munição Cal 12 Hi-Impact 70mm proj. singular (balote) 28,4g</span> <strong>875 un.</strong></li>
+        <li><span>Munição CBC 7,62x51 Treina Comum DPRF</span> <strong>11.600 un.</strong></li>
+        <li><span>Munição CBC 9mm LGR Treina EOOG 124gr NTA A</span> <strong>23.700 un.</strong></li>
+        <li><span>Munição de treinamento Cal 12 Hi-Impact Treina CH-3T Plast</span> <strong>42.284 un.</strong></li>
+        <li><span>Munição de treinamento .40 SW Treina EOPP 180gr nao toxica</span> <strong>155.800 un.</strong></li>
+        <li><span>Munição de treinamento Cal 5,56x45mm Treina M193 ETPT 55gr</span> <strong>36.000 un.</strong></li>
+        <li><span>Munição de treinamento CBC 12/70 CH-3T A</span> <strong>97.054 un.</strong></li>
+        <li><span>Pistola PT 640 .40</span> <strong>1 un.</strong></li>
+        <li><span>Pistola PT 100 .40</span> <strong>94 un.</strong></li>
+        <li><span>TASER M26</span> <strong>68 un.</strong></li>
+        <li><span>SPARK Z 2.0</span> <strong>59 un.</strong></li>
+        <li><span>SUBTOTAL MUNIÇÕES</span> <strong>384.334 un.</strong></li>
+        <li><span>SUBTOTAL ARMAMENTOS</span> <strong>222 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+
+    <div id="detalhes-sc" class="glass-panel data-section state-details">
+      <h2>📍 Detalhamento: Santa Catarina (SC)</h2>
+      <ul>
+        <li><span>Munição .40 S&amp;W</span> <strong>2.850 un.</strong></li>
+        <li><span>Cartucho de TASER M26</span> <strong>51 un.</strong></li>
+        <li><span>Cartucho de SPARK</span> <strong>4.139 un.</strong></li>
+        <li><span>.40 S&amp;W EXPO (recolhida para treinamento)</span> <strong>36.000 un.</strong></li>
+        <li><span>.40 S&amp;W EXPO GOLD HEX</span> <strong>10.000 un.</strong></li>
+        <li><span>.40 S&amp;W EOPP Treina</span> <strong>42.500 un.</strong></li>
+        <li><span>Pistola Glock 9mm</span> <strong>3 un.</strong></li>
+        <li><span>SMT 40 — UniPRF - SC</span> <strong>7 un.</strong></li>
+        <li><span>SMT 40 — SC</span> <strong>25 un.</strong></li>
+        <li><span>TASER M26 — UniPRF - SC</span> <strong>5 un.</strong></li>
+        <li><span>TASER M26 — SC</span> <strong>35 un.</strong></li>
+        <li><span>SPARK Z 2.0 — SC</span> <strong>219 un.</strong></li>
+        <li><span>SPARK Z 2.0 — UniPRF - SC</span> <strong>288 un.</strong></li>
+        <li><span>Espingarda Calibre 12 — UniPRF - SC</span> <strong>18 un.</strong></li>
+        <li><span>Carabina de Ar Comprimido — UniPRF - SC</span> <strong>2 un.</strong></li>
+        <li><span>X26 — SC</span> <strong>1 un.</strong></li>
+        <li><span>SUBTOTAL MUNIÇÕES</span> <strong>95.540 un.</strong></li>
+        <li><span>SUBTOTAL ARMAMENTOS</span> <strong>603 un.</strong></li>
+      </ul>
+      <a href="#">↑ Voltar ao topo</a>
+    </div>
+  </div>
+</section>
+
+<section id="page-conclusao" class="page-section" data-page="conclusao" aria-label="Conclusão Estratégica">
+  <div class="dashboard-container">
+    <header class="glass-panel" data-watermark="CONCLUSÃO">
+      <h1>CONCLUSÃO ESTRATÉGICA DA OPERAÇÃO</h1>
+      <p>PRIORIZAÇÃO DO NORTE COM APOIO LOGÍSTICO COMPLEMENTAR DO SUL</p>
+    </header>
+
+    <div class="sub-cards-grid">
+      <div class="glass-panel card"><h3>Prioridade Inicial</h3><p class="number">Norte</p><p class="subtitle">Região prioritária de destino</p></div>
+      <div class="glass-panel card"><h3>Região de Apoio</h3><p class="number">Sul</p><p class="subtitle">Complementação logística</p></div>
+      <div class="glass-panel card"><h3>Objetivo</h3><p class="number">Suprir</p><p class="subtitle">Recomposição operacional do Norte</p></div>
+      <div class="glass-panel card"><h3>Apoio Essencial</h3><p class="number">PRF</p><p class="subtitle">Logística, controle e rastreabilidade</p></div>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>Estratégia Recomendada</h2>
+      <p style="color: var(--text-muted); font-size: 1.03rem; line-height: 1.7; font-weight: 650; margin-top: -8px;">
+        A análise consolidada indica que a Região Norte deve ser tratada como prioridade inicial de atendimento. Contudo, os quantitativos disponíveis na própria região não são suficientes para suprir integralmente a demanda operacional. Dessa forma, recomenda-se uma operação coordenada em etapas, utilizando a Região Sul como apoio complementar para envio dos saldos compatíveis ao Norte.
+      </p>
+      <div class="conclusion-flow">
+        <div class="flow-step"><div class="step-number">1</div><h4>Priorizar o Norte</h4><p>Direcionar a primeira fase da operação para a região com maior necessidade logística de recomposição.</p></div>
+        <div class="flow-step"><div class="step-number">2</div><h4>Conferir disponibilidade</h4><p>Verificar os itens aptos, compatíveis e disponíveis nas regiões com maior capacidade de apoio.</p></div>
+        <div class="flow-step"><div class="step-number">3</div><h4>Atender o Sul primeiro</h4><p>Realizar a etapa no Sul para separar, conferir e organizar os itens excedentes ou compatíveis.</p></div>
+        <div class="flow-step"><div class="step-number">4</div><h4>Redistribuir excedentes</h4><p>Encaminhar o saldo aproveitável para complementar o atendimento da Região Norte.</p></div>
+        <div class="flow-step"><div class="step-number">5</div><h4>Apoio PRF</h4><p>Garantir segurança, transporte, rastreabilidade e controle patrimonial durante toda a operação.</p></div>
+      </div>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>Por que o apoio da PRF é fundamental?</h2>
+      <div class="conclusion-highlight">
+        <div class="highlight-card"><span>Segurança</span><strong>Transporte seguro dos materiais</strong></div>
+        <div class="highlight-card"><span>Controle</span><strong>Conferência e rastreabilidade</strong></div>
+        <div class="highlight-card"><span>Eficiência</span><strong>Redução de gargalos logísticos</strong></div>
+        <div class="highlight-card"><span>Finalidade</span><strong>Recomposição operacional do Norte</strong></div>
+      </div>
+      <table style="margin-top: 22px;">
+        <thead><tr><th>Etapa</th><th>Ação</th><th>Justificativa</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge">1</span></td><td>Atendimento inicial da Região Norte</td><td>Região definida como prioridade de destino, considerando a necessidade de recomposição.</td></tr>
+          <tr><td><span class="badge">2</span></td><td>Operação prévia na Região Sul</td><td>Permite separar, conferir e disponibilizar itens compatíveis para complementar o Norte.</td></tr>
+          <tr><td><span class="badge">3</span></td><td>Redistribuição controlada</td><td>Evita deslocamentos improdutivos e melhora o aproveitamento nacional dos materiais.</td></tr>
+          <tr><td><span class="badge">4</span></td><td>Apoio institucional da PRF</td><td>Essencial para logística, segurança, documentação, transporte e controle patrimonial.</td></tr>
+        </tbody>
+      </table>
+      <div class="closing-quote">A operação não se limita à transferência de materiais; trata-se de uma ação coordenada de redistribuição estratégica, com foco em necessidade operacional, equilíbrio regional e eficiência logística nacional.</div>
+      <p style="text-align:right; margin-top: 22px; color: var(--gold-soft); font-weight: 800; letter-spacing:.05em; font-size:.86rem;">— Jornada Dev do C.Magno</p>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const routeOrder = ['geral', 'rateio', 'norte', 'centro-oeste', 'nordeste', 'sudeste', 'sul', 'conclusao'];
+  const labels = {
+    'geral': 'Visão Geral',
+    'rateio': 'Rateio 25 UFs',
+    'norte': 'Norte',
+    'centro-oeste': 'Centro-Oeste',
+    'nordeste': 'Nordeste',
+    'sudeste': 'Sudeste',
+    'sul': 'Sul',
+    'conclusao': 'Conclusão Estratégica'
+  };
+
+  // ---------- Animação de números ----------
+  function parsePtBrNumber(text) {
+    if (!text || !/[0-9]/.test(text)) return null;
+    const cleaned = String(text).trim();
+    const match = cleaned.match(/^([^0-9-]*)(-?[0-9.]+(?:,[0-9]+)?)(.*)$/);
+    if (!match) return null;
+    const prefix = match[1] || '';
+    const numberPart = match[2] || '';
+    const suffix = match[3] || '';
+    const normalized = numberPart.replace(/\./g, '').replace(',', '.');
+    const value = Number(normalized);
+    if (Number.isNaN(value)) return null;
+    const decimals = (numberPart.split(',')[1] || '').length;
+    return { prefix, value, suffix, decimals };
+  }
+
+  function formatPtBr(value, decimals) {
+    return value.toLocaleString('pt-BR', {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    });
+  }
+
+  function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  function animateCounter(el, duration) {
+    duration = duration || 1100;
+    const finalText = el.dataset.finalText || el.textContent.trim();
+    const parsed = parsePtBrNumber(finalText);
+    if (!parsed) return;
+
+    el.dataset.finalText = finalText;
+    el.classList.add('anim-counter');
+    el.classList.remove('counter-running');
+    void el.offsetWidth;
+    el.classList.add('counter-running');
+
+    const start = performance.now();
+
+    function frame(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = easeOutCubic(progress);
+      let current = parsed.value * eased;
+      if (parsed.decimals === 0) current = Math.floor(current);
+      el.textContent = parsed.prefix + formatPtBr(current, parsed.decimals) + parsed.suffix;
+      if (progress < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        el.textContent = parsed.prefix + formatPtBr(parsed.value, parsed.decimals) + parsed.suffix;
+      }
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  function animateMainNumbers(section) {
+    if (!section) return;
+    const targets = section.querySelectorAll('.total-card .value, .card .number');
+    targets.forEach(function(el, index) {
+      setTimeout(function(){ animateCounter(el); }, index * 110);
+    });
+
+    // Anima também as barras (.bar span) mesmo que tenham width inline
+    const bars = section.querySelectorAll('.bar > span');
+    bars.forEach(function(bar, i) {
+      const finalWidth = bar.style.width || bar.getAttribute('data-width') || '0%';
+      bar.dataset.finalWidth = finalWidth;
+      bar.style.width = '0%';
+      setTimeout(function(){
+        bar.style.transition = 'width 1.1s cubic-bezier(.2,.8,.2,1)';
+        bar.style.width = finalWidth;
+      }, 200 + i * 30);
+    });
+  }
+
+  // ---------- Roteamento ----------
+  const sections = document.querySelectorAll('.page-section');
+
+  function showPage(route, scrollTop) {
+    if (typeof scrollTop === 'undefined') scrollTop = true;
+    if (!routeOrder.includes(route)) route = 'geral';
+
+    document.body.classList.add('app-started');
+
+    sections.forEach(function(section) {
+      section.classList.toggle('active', section.dataset.page === route);
+    });
+
+    document.querySelectorAll('.app-nav [data-route]').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.route === route);
+    });
+
+    history.replaceState(null, '', '#' + route);
+    document.title = 'Apresentação PRF — ' + (labels[route] || 'Painel Nacional');
+
+    if (scrollTop) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    const active = document.querySelector('.page-section.active');
+    setTimeout(function(){ animateMainNumbers(active); }, 200);
+  }
+
+  function currentRoute() {
+    const active = document.querySelector('.page-section.active');
+    return active ? active.dataset.page : null;
+  }
+
+  // Apenas botões/links com data-route disparam a troca de página.
+  // Links de UF (#detalhes-xx) continuam funcionando como âncora normal.
+  document.querySelectorAll('[data-route]').forEach(function(btn) {
+    btn.addEventListener('click', function(event) {
+      const route = btn.dataset.route;
+      if (route && routeOrder.includes(route)) {
+        event.preventDefault();
+        showPage(route);
+      }
+    });
+  });
+
+  // Teclado
+  document.addEventListener('keydown', function(event) {
+    const route = currentRoute();
+    if (!route) return;
+    const idx = routeOrder.indexOf(route);
+    if (event.key === 'ArrowRight' && idx >= 0) {
+      showPage(routeOrder[(idx + 1) % routeOrder.length]);
+    }
+    if (event.key === 'ArrowLeft' && idx >= 0) {
+      showPage(routeOrder[(idx - 1 + routeOrder.length) % routeOrder.length]);
+    }
+  });
+
+  // Hash inicial: se for rota, abre página
+  const initialHash = window.location.hash.replace('#', '');
+  if (routeOrder.includes(initialHash)) {
+    showPage(initialHash, false);
+  }
+
+  window.addEventListener('hashchange', function() {
+    const route = window.location.hash.replace('#', '');
+    if (routeOrder.includes(route)) showPage(route, false);
+  });
+
+  // ---------- Mouse-tracking glow para o landing ----------
+  document.addEventListener('mousemove', function(e) {
+    document.body.style.setProperty('--mx', (e.clientX / window.innerWidth * 100) + '%');
+    document.body.style.setProperty('--my', (e.clientY / window.innerHeight * 100) + '%');
+  });
+})();
+</script>
+
+</body>
+</html>
