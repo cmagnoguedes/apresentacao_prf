@@ -603,7 +603,7 @@
     }
     .page-section { display: none; }
     .page-section.active { display: block; }
-    body.app-started #landing { display: none; }
+    body.app-started #inicio { display: none; }
     .deck-controls {
       position: fixed;
       right: 22px;
@@ -1096,7 +1096,7 @@ html, body {
   display: block !important;
 }
 
-body:has(.page-section:target) #landing {
+body:has(.page-section:target) #inicio {
   display: none !important;
 }
 
@@ -1616,27 +1616,82 @@ header.glass-panel {
   }
 }
 
+
+/* ===== MENU INICIAL CLICÁVEL + BOTÃO INÍCIO ===== */
+.landing-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 32px;
+}
+.landing-module-card {
+  flex-direction: column;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  min-height: 92px;
+  text-align: left;
+  border-radius: 20px !important;
+  white-space: normal;
+}
+.landing-module-card strong {
+  display: block;
+  font-size: 1.02rem;
+  line-height: 1.2;
+}
+.landing-module-card span {
+  display: block;
+  margin-top: 7px;
+  color: rgba(229,246,255,.86);
+  font-size: .82rem;
+  line-height: 1.35;
+  font-weight: 700;
+}
+.primary-action.landing-module-card span { color: rgba(6,26,47,.78); }
+.section-home-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 14px;
+}
+.home-to-start {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 15px;
+  border-radius: 999px;
+  color: #061a2f;
+  background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+  text-decoration: none;
+  font-weight: 900;
+  box-shadow: 0 12px 30px rgba(0,0,0,.22);
+}
+.home-to-start:hover { transform: translateY(-1px); filter: brightness(1.05); }
+@media (max-width: 900px) {
+  .landing-menu-grid { grid-template-columns: 1fr; }
+  .landing-module-card { min-height: 76px; }
+  .section-home-row { justify-content: stretch; }
+  .home-to-start { width: 100%; }
+}
+
 </style>
 </head>
 <body>
   
-<section id="landing" class="landing-section">
+<section id="inicio" class="landing-section">
   <div class="landing-shell glass-panel">
     <div class="landing-kicker">POLÍCIA RODOVIÁRIA FEDERAL</div>
     <h1>Painel Nacional de Doações PRF</h1>
     <p>Quantitativo consolidado de armamentos e munições por região do Brasil.</p>
-    <div class="landing-actions">
-      <a class="primary-action" href="#geral" data-route="geral">Iniciar apresentação</a>
-      <a class="secondary-action" href="#norte" data-route="norte">Abrir Região Norte</a>
-    </div>
-    <div class="landing-meta">
-      <span>Visão Geral</span>
-      <span>Rateio 25 UFs</span>
-      <span>Norte</span>
-      <span>Nordeste</span>
-      <span>Centro-Oeste</span>
-      <span>Sudeste</span>
-      <span>Sul</span>
+    <div class="landing-actions landing-menu-grid" aria-label="Menu principal da apresentação">
+      <a class="landing-module-card primary-action" href="#geral" data-route="geral"><strong>Visão Geral</strong><span>Resumo nacional do painel</span></a>
+      <a class="landing-module-card secondary-action" href="#rateio" data-route="rateio"><strong>Rateio 25 UFs</strong><span>Distribuição consolidada</span></a>
+      <a class="landing-module-card secondary-action" href="#norte" data-route="norte"><strong>Região Norte</strong><span>Detalhamento regional</span></a>
+      <a class="landing-module-card secondary-action" href="#centro-oeste" data-route="centro-oeste"><strong>Centro-Oeste</strong><span>Detalhamento regional</span></a>
+      <a class="landing-module-card secondary-action" href="#nordeste" data-route="nordeste"><strong>Nordeste</strong><span>Detalhamento regional</span></a>
+      <a class="landing-module-card secondary-action" href="#sudeste" data-route="sudeste"><strong>Sudeste</strong><span>Detalhamento regional</span></a>
+      <a class="landing-module-card secondary-action" href="#sul" data-route="sul"><strong>Sul</strong><span>Detalhamento regional</span></a>
+      <a class="landing-module-card secondary-action" href="#conclusao" data-route="conclusao"><strong>Conclusão</strong><span>Fechamento estratégico</span></a>
+      <a class="landing-module-card secondary-action" href="#perguntas" data-route="perguntas"><strong>Perguntas PRF</strong><span>Checklist para alinhamento</span></a>
     </div>
     <div class="mobile-tip">
       Se estiver no iPhone ou Android e o botão não responder na pré-visualização, toque em “abrir no navegador” ou use o link hospedado.
@@ -1646,6 +1701,7 @@ header.glass-panel {
 
 
   <nav class="app-nav" aria-label="Navegação da apresentação">
+    <a href="#inicio" data-home="true" class="nav-btn">Início</a>
     <a href="#geral" data-route="geral" class="nav-btn">Visão Geral</a>
 <a href="#rateio" data-route="rateio" class="nav-btn">Rateio 25 UFs</a>
 <a href="#norte" data-route="norte" class="nav-btn">Norte</a>
@@ -1660,6 +1716,7 @@ header.glass-panel {
   
     <section id="page-geral" class="page-section" data-page="geral" aria-label="Visão Geral">
       <div class="dashboard-container">
+        <div class="section-home-row"><a href="#inicio" class="home-to-start" data-home="true">← Início</a></div>
         <header class="glass-panel" data-watermark="BRASIL">
       <h1>PAINEL NACIONAL DE DOAÇÕES PRF</h1>
       <p>VISÃO GERAL BRASIL — NORTE, NORDESTE, CENTRO-OESTE, SUDESTE E SUL</p>
@@ -2115,6 +2172,7 @@ header.glass-panel {
     
     <section id="page-rateio" class="page-section" data-page="rateio" aria-label="Distribuição Igualitária">
       <div class="dashboard-container">
+        <div class="section-home-row"><a href="#inicio" class="home-to-start" data-home="true">← Início</a></div>
         <header class="glass-panel" data-watermark="RATEIO">
           <h1>DISTRIBUIÇÃO IGUALITÁRIA POR 25 ESTADOS</h1>
           <p>SIMULAÇÃO TÉCNICA — TOTAL NACIONAL ÷ 25 UFs</p>
@@ -2895,6 +2953,7 @@ header.glass-panel {
 
     <section id="page-norte" class="page-section" data-page="norte" aria-label="Norte">
       <div class="dashboard-container">
+        <div class="section-home-row"><a href="#inicio" class="home-to-start" data-home="true">← Início</a></div>
         <header class="glass-panel" data-watermark="NORTE">
       <h1>PAINEL DE DOAÇÕES PRF</h1>
       <p>REGIÃO NORTE (AC, AM, AP, PA, RO, TO)</p>
@@ -3248,6 +3307,7 @@ header.glass-panel {
     
     <section id="page-centro-oeste" class="page-section" data-page="centro-oeste" aria-label="Centro-Oeste">
       <div class="dashboard-container">
+        <div class="section-home-row"><a href="#inicio" class="home-to-start" data-home="true">← Início</a></div>
         <header class="glass-panel" data-watermark="CENTRO-OESTE">
       <h1>PAINEL DE DOAÇÕES PRF</h1>
       <p>REGIÃO CENTRO-OESTE (DF, GO, MT)</p>
@@ -3489,6 +3549,7 @@ header.glass-panel {
     
     <section id="page-nordeste" class="page-section" data-page="nordeste" aria-label="Nordeste">
       <div class="dashboard-container">
+        <div class="section-home-row"><a href="#inicio" class="home-to-start" data-home="true">← Início</a></div>
         <header class="glass-panel" data-watermark="NORDESTE">
       <h1>PAINEL DE DOAÇÕES PRF</h1>
       <p>REGIÃO NORDESTE (AL, BA, CE, MA, PB, PE, PI, RN, SE)</p>
@@ -3912,6 +3973,7 @@ header.glass-panel {
     
     <section id="page-sudeste" class="page-section" data-page="sudeste" aria-label="Sudeste">
       <div class="dashboard-container">
+        <div class="section-home-row"><a href="#inicio" class="home-to-start" data-home="true">← Início</a></div>
         <header class="glass-panel" data-watermark="SUDESTE">
       <h1>PAINEL DE DOAÇÕES PRF</h1>
       <p>REGIÃO SUDESTE (ES, MG, RJ, SP)</p>
@@ -4238,6 +4300,7 @@ header.glass-panel {
     
     <section id="page-sul" class="page-section" data-page="sul" aria-label="Sul">
       <div class="dashboard-container">
+        <div class="section-home-row"><a href="#inicio" class="home-to-start" data-home="true">← Início</a></div>
         <header class="glass-panel" data-watermark="SUL">
       <h1>PAINEL DE DOAÇÕES PRF</h1>
       <p>REGIÃO SUL (PR, RS, SC)</p>
@@ -4566,6 +4629,7 @@ header.glass-panel {
   
 <section id="page-conclusao" class="page-section" data-page="conclusao" aria-label="Conclusão Estratégica">
   <div class="dashboard-container">
+        <div class="section-home-row"><a href="#inicio" class="home-to-start" data-home="true">← Início</a></div>
     <header class="glass-panel" data-watermark="CONCLUSÃO">
       <h1>CONCLUSÃO ESTRATÉGICA DA OPERAÇÃO</h1>
       <p>PRIORIZAÇÃO DO NORTE COM APOIO LOGÍSTICO COMPLEMENTAR DO SUL</p>
@@ -4618,6 +4682,7 @@ header.glass-panel {
 <!-- ============= PERGUNTAS PRF ============= -->
 <section id="page-perguntas" class="page-section" data-page="perguntas" aria-label="Perguntas PRF">
   <div class="dashboard-container">
+        <div class="section-home-row"><a href="#inicio" class="home-to-start" data-home="true">← Início</a></div>
     <header class="glass-panel" data-watermark="PRF">
       <h1>Perguntas Estratégicas para Alinhamento com a PRF</h1>
       <p>Levantamento prévio para reduzir riscos e organizar a logística de entrega</p>
@@ -4790,6 +4855,15 @@ header.glass-panel {
       if (scrollTop) window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    function goHome() {
+      document.body.classList.remove('app-started');
+      sections.forEach(section => section.classList.remove('active'));
+      topNavButtons.forEach(btn => btn.classList.remove('active'));
+      history.replaceState(null, '', '#inicio');
+      document.title = 'Apresentação PRF - Menu Inicial';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     function currentRoute() {
       const active = document.querySelector('.page-section.active');
       return active ? active.dataset.page : 'landing';
@@ -4802,6 +4876,13 @@ header.glass-panel {
           event.preventDefault();
           showPage(route);
         }
+      });
+    });
+
+    document.querySelectorAll('[data-home]').forEach(btn => {
+      btn.addEventListener('click', event => {
+        event.preventDefault();
+        goHome();
       });
     });
 
@@ -4846,7 +4927,9 @@ header.glass-panel {
     });
 
     const initialHash = window.location.hash.replace('#', '');
-    if (routeOrder.includes(initialHash)) {
+    if (initialHash === 'inicio' || initialHash === 'landing') {
+      goHome();
+    } else if (routeOrder.includes(initialHash)) {
       showPage(initialHash, false);
     }
   </script>
@@ -4925,6 +5008,15 @@ header.glass-panel {
     });
   }
 
+  function goHome() {
+    document.body.classList.remove('app-started');
+    document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
+    document.querySelectorAll('[data-route]').forEach(btn => btn.classList.remove('active'));
+    history.replaceState(null, '', '#inicio');
+    document.title = 'Apresentação PRF - Menu Inicial';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   function showPage(route, updateHash = true) {
     if (!allRoutes.includes(route)) route = allRoutes[0];
 
@@ -4959,9 +5051,18 @@ header.glass-panel {
     });
   });
 
+  document.querySelectorAll('[data-home]').forEach(btn => {
+    btn.addEventListener('click', event => {
+      event.preventDefault();
+      goHome();
+    });
+  });
+
   // Se o hash for uma rota, abre página. Se for detalhe de UF, não mexe.
   const initialHash = window.location.hash.replace('#', '');
-  if (allRoutes.includes(initialHash)) {
+  if (initialHash === 'inicio' || initialHash === 'landing') {
+    goHome();
+  } else if (allRoutes.includes(initialHash)) {
     showPage(initialHash, false);
   }
 
