@@ -1589,6 +1589,99 @@ header.glass-panel {
   }
 }
 
+
+
+/* ===== MÓDULO — 2ª ETAPA ESPECÍFICA ===== */
+.specific-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+.specific-callout-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+.specific-ok { color: var(--accent-green); font-weight: 900; }
+.specific-alert { color: var(--warning-color); font-weight: 900; }
+.specific-danger { color: var(--danger-color); font-weight: 900; }
+.specific-warning { color: var(--warning-color); font-weight: 800; }
+.specific-intro .nota, .specific-critical .closing-quote { margin-top: 18px; }
+@media(max-width: 1100px) {
+  .specific-kpi-grid, .specific-callout-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media(max-width: 768px) {
+  .specific-kpi-grid, .specific-callout-grid { grid-template-columns: 1fr; }
+}
+
+
+/* ===== MÓDULO — 3ª ETAPA: PRIORIZAÇÃO OPERACIONAL DO NORTE ===== */
+.priority-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+.priority-note {
+  margin-top: 18px;
+  padding: 18px 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(94,200,255,.18);
+  background: linear-gradient(90deg, rgba(94,200,255,.10), rgba(212,175,55,.06));
+  color: var(--text-main);
+  line-height: 1.65;
+  font-weight: 700;
+}
+.priority-note strong { color: var(--gold-soft); }
+.priority-ok { color: var(--accent-green); font-weight: 900; }
+.priority-alert { color: var(--warning-color); font-weight: 900; }
+.priority-danger { color: var(--danger-color); font-weight: 900; }
+.priority-flow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+.priority-flow-card {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.045);
+  border: 1px solid rgba(173,216,255,.14);
+}
+.priority-flow-card span {
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #061a2f;
+  background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+.priority-flow-card h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.priority-flow-card h3::before { display: none; }
+.priority-flow-card p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.55;
+  font-weight: 650;
+}
+@media(max-width: 1100px) {
+  .priority-kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .priority-flow-grid { grid-template-columns: 1fr; }
+}
+@media(max-width: 768px) {
+  .priority-kpi-grid { grid-template-columns: 1fr; }
+}
+
 /* ===== MÓDULO FINAL — PERGUNTAS PRF ===== */
 .questions-grid {
   display: grid;
@@ -1717,6 +1810,85 @@ header.glass-panel {
   }
 }
 
+
+
+/* ===== AJUSTE FINAL DA NAVEGAÇÃO — QUEBRA EM 2 LINHAS QUANDO NECESSÁRIO ===== */
+.app-nav {
+  width: min(1500px, 100%) !important;
+  max-width: 100% !important;
+  flex-wrap: wrap !important;
+  overflow-x: visible !important;
+  justify-content: center !important;
+  align-items: center !important;
+  row-gap: 10px !important;
+  column-gap: 10px !important;
+  border-radius: 28px !important;
+  padding: 12px 14px !important;
+}
+
+.nav-btn {
+  flex: 0 1 auto !important;
+  white-space: nowrap !important;
+  font-size: 0.82rem !important;
+  padding: 10px 14px !important;
+}
+
+@media (max-width: 900px) {
+  .app-nav {
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    border-radius: 22px !important;
+    gap: 8px !important;
+  }
+
+  .nav-btn {
+    font-size: 0.72rem !important;
+    padding: 8px 10px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .app-nav {
+    justify-content: flex-start !important;
+    max-height: 150px;
+    overflow-y: auto !important;
+  }
+}
+
+
+
+/* ===== AUTORIA DA APRESENTAÇÃO ===== */
+.presentation-author {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  color: #dbeafe;
+  background: rgba(255,255,255,.075);
+  border: 1px solid rgba(212,175,55,.26);
+  font-weight: 800;
+  font-size: .86rem;
+  line-height: 1.35;
+  position: relative;
+  z-index: 1;
+}
+.presentation-author strong {
+  color: var(--gold-soft);
+  font-weight: 900;
+}
+@media (max-width: 768px) {
+  .presentation-author {
+    width: fit-content;
+    max-width: 100%;
+    font-size: .76rem;
+    padding: 8px 11px;
+    white-space: normal;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1726,6 +1898,7 @@ header.glass-panel {
     <div class="landing-kicker">POLÍCIA RODOVIÁRIA FEDERAL</div>
     <h1>Painel Nacional de Doações PRF</h1>
     <p>Quantitativo consolidado de armamentos e munições por região do Brasil.</p>
+    <div class="presentation-author">Apresentação feita por <strong>Carlos Magno Guedes Vieira</strong></div>
     <div class="landing-actions">
       <a class="primary-action" href="#geral" data-route="geral">Iniciar apresentação</a>
       <a class="secondary-action" href="#norte" data-route="norte">Abrir Região Norte</a>
@@ -1739,6 +1912,8 @@ header.glass-panel {
       <span>Sudeste</span>
       <span>Sul</span>
       <span>1ª Etapa de Doação</span>
+      <span>2ª Etapa Específica</span>
+      <span>3ª Etapa Norte</span>
       <span>Perguntas PRF</span>
     </div>
     <div class="mobile-tip">
@@ -1757,6 +1932,8 @@ header.glass-panel {
 <a href="#sudeste" data-route="sudeste" class="nav-btn">Sudeste</a>
 <a href="#sul" data-route="sul" class="nav-btn">Sul</a>
 <a href="#conclusao" data-route="conclusao" class="nav-btn">1ª Etapa de Doação</a>
+<a href="#validacao-especifica" data-route="validacao-especifica" class="nav-btn">2ª Etapa Específica</a>
+<a href="#priorizacao-norte" data-route="priorizacao-norte" class="nav-btn">3ª Etapa Norte</a>
   <a href="#perguntas" data-route="perguntas" class="nav-btn">Perguntas PRF</a>
   </nav>
 
@@ -4701,7 +4878,7 @@ header.glass-panel {
         <thead>
           <tr>
             <th>Grupo</th>
-            <th>Necessário para 6 UFs</th>
+            <th>Necessário para o Norte (6 UFs)</th>
             <th>Disponível no Norte</th>
             <th>Falta no Norte</th>
           </tr>
@@ -4856,6 +5033,1072 @@ header.glass-panel {
 </section>
 
 
+
+<section id="page-validacao-especifica" class="page-section" data-page="validacao-especifica" aria-label="Segunda Etapa - Validação Específica">
+  <div class="dashboard-container">
+    <header class="glass-panel" data-watermark="ETAPA 2">
+      <h1>2ª ETAPA — VALIDAÇÃO ESPECÍFICA POR CALIBRE E TIPO</h1>
+      <p>TESTE DO RATEIO ITEM A ITEM PARA SUPRIR A REGIÃO NORTE</p>
+    </header>
+
+    <div class="glass-panel data-section specific-intro">
+      <h2>1. Premissa técnica do novo módulo</h2>
+      <p class="stage-note">
+        A 1ª etapa usa os totais gerais para construir uma estratégia macro. Nesta 2ª etapa, a conferência é feita por item específico: munição de treinamento por calibre, munição operacional por calibre, cartuchos por tipo/cor e armamentos por modelo. A regra aplicada foi: cada item específico é dividido por 25 UFs; a demanda do Norte considera 6 UFs: AC, AM, AP, PA, RO e TO.
+      </p>
+      <div class="specific-kpi-grid">
+        <div class="stage-kpi"><span>Grupos específicos analisados</span><strong>45</strong><small>Munições, cartuchos e armamentos</small></div>
+        <div class="stage-kpi"><span>Grupos com cota por UF</span><strong>23</strong><small>Itens com total nacional suficiente para rateio</small></div>
+        <div class="stage-kpi"><span>Déficits específicos no Norte</span><strong>16</strong><small>Itens que precisam de recomposição</small></div>
+        <div class="stage-kpi"><span>Plano A fecha pelo Sul</span><strong>8/16</strong><small>Itens supridos após o Sul atender PR, RS e SC</small></div>
+        <div class="stage-kpi"><span>Exigem complemento</span><strong>8</strong><small>Itens em que o Sul não fecha sozinho</small></div>
+        <div class="stage-kpi"><span>Itens dependentes do Sul</span><strong>4</strong><small>Não fecham pelo critério de excedente real sem usar o Sul</small></div>
+      </div>
+      <div class="nota">
+        <strong>Leitura correta:</strong> um excedente geral não autoriza retirada de qualquer item. O Estado ou região só pode ser origem se, naquele calibre/modelo/tipo específico, atender sua própria cota e ainda apresentar sobra real.
+      </div>
+    </div>
+
+    <div class="glass-panel data-section specific-critical">
+      <h2>2. Exemplo crítico — munição operacional calibre .40 no Sul</h2>
+      <div class="specific-callout-grid">
+        <div class="highlight-card"><span>Total nacional do item</span><strong>294.485</strong></div>
+        <div class="highlight-card"><span>Cota por UF</span><strong>11.779</strong></div>
+        <div class="highlight-card"><span>Necessário para PR, RS e SC</span><strong>35.337</strong></div>
+        <div class="highlight-card"><span>Disponível no Sul</span><strong>25.850</strong></div>
+        <div class="highlight-card"><span>Norte já possui</span><strong>57.994</strong></div>
+        <div class="highlight-card"><span>Falta no Norte</span><strong>12.680</strong></div>
+      </div>
+      <div class="closing-quote">
+        Para munição operacional calibre .40, o Norte já possui 57.994 unidades, mas precisa de 70.674 para atender as 6 UFs na cota específica; portanto, faltam 12.680 unidades. O Sul não gera sobra: possui 25.850 unidades, mas precisaria de 35.337 para atender PR, RS e SC. Assim, esse item não deve ser retirado do Sul para o Norte. A origem recomendada para cobrir o déficit do Norte é o RJ, com retirada de 12.680 unidades, pois possui excedente específico suficiente.
+      </div>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>3. Demanda específica do Norte — itens com déficit</h2>
+      <p class="stage-note">Nesta tabela, a coluna <strong>Necessário Norte (6 UFs)</strong> mostra o valor que a Região Norte precisaria para atender AC, AM, AP, PA, RO e TO. A falta é calculada subtraindo o que o Norte já possui desse necessário regional.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Categoria</th>
+            <th>Item específico</th>
+            <th>Total nacional</th>
+            <th>Cota por UF</th>
+            <th>Necessário Norte (6 UFs)</th>
+            <th>Norte tem</th>
+            <th>Falta Norte</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+<tr>
+  <td><span class="badge">Treinamento</span></td>
+  <td>.40</td>
+  <td><strong>539.363</strong></td>
+  <td>21.574</td>
+  <td><strong>129.444</strong></td>
+  <td>69.717</td>
+  <td><strong>59.727</strong></td>
+</tr>
+<tr>
+  <td><span class="badge">Treinamento</span></td>
+  <td>12</td>
+  <td><strong>467.424</strong></td>
+  <td>18.696</td>
+  <td><strong>112.176</strong></td>
+  <td>51.693</td>
+  <td><strong>60.483</strong></td>
+</tr>
+<tr>
+  <td><span class="badge">Treinamento</span></td>
+  <td>5,56mm</td>
+  <td><strong>36.000</strong></td>
+  <td>1.440</td>
+  <td><strong>8.640</strong></td>
+  <td>0</td>
+  <td><strong>8.640</strong></td>
+</tr>
+<tr>
+  <td><span class="badge">Treinamento</span></td>
+  <td>7,62</td>
+  <td><strong>11.600</strong></td>
+  <td>464</td>
+  <td><strong>2.784</strong></td>
+  <td>0</td>
+  <td><strong>2.784</strong></td>
+</tr>
+<tr>
+  <td><span class="badge">Treinamento</span></td>
+  <td>9mm</td>
+  <td><strong>27.150</strong></td>
+  <td>1.086</td>
+  <td><strong>6.516</strong></td>
+  <td>0</td>
+  <td><strong>6.516</strong></td>
+</tr>
+<tr>
+  <td><span class="badge">Operacional</span></td>
+  <td>.233 REM POLYMER TIP 55gr</td>
+  <td><strong>150</strong></td>
+  <td>6</td>
+  <td><strong>36</strong></td>
+  <td>0</td>
+  <td><strong>36</strong></td>
+</tr>
+<tr>
+  <td><span class="badge">Operacional</span></td>
+  <td>.38</td>
+  <td><strong>237</strong></td>
+  <td>9</td>
+  <td><strong>54</strong></td>
+  <td>0</td>
+  <td><strong>54</strong></td>
+</tr>
+<tr>
+  <td><span class="badge">Operacional</span></td>
+  <td>.40</td>
+  <td><strong>294.485</strong></td>
+  <td>11.779</td>
+  <td><strong>70.674</strong></td>
+  <td>57.994</td>
+  <td><strong>12.680</strong></td>
+</tr>
+<tr>
+  <td><span class="badge">Operacional</span></td>
+  <td>12</td>
+  <td><strong>61.829</strong></td>
+  <td>2.473</td>
+  <td><strong>14.838</strong></td>
+  <td>4.277</td>
+  <td><strong>10.561</strong></td>
+</tr>
+<tr>
+  <td><span class="badge">Operacional</span></td>
+  <td>Diversos</td>
+  <td><strong>2.000</strong></td>
+  <td>80</td>
+  <td><strong>480</strong></td>
+  <td>0</td>
+  <td><strong>480</strong></td>
+</tr>
+<tr>
+  <td><span class="badge">Cartucho</span></td>
+  <td>SPARK — Sem cor informada</td>
+  <td><strong>6.311</strong></td>
+  <td>252</td>
+  <td><strong>1.512</strong></td>
+  <td>520</td>
+  <td><strong>992</strong></td>
+</tr>
+<tr>
+  <td><span class="badge">Armamento</span></td>
+  <td>DSK700</td>
+  <td><strong>52</strong></td>
+  <td>2</td>
+  <td><strong>12</strong></td>
+  <td>0</td>
+  <td><strong>12</strong></td>
+</tr>
+<tr>
+  <td><span class="badge">Armamento</span></td>
+  <td>Pistola PT 100 .40</td>
+  <td><strong>1.294</strong></td>
+  <td>51</td>
+  <td><strong>306</strong></td>
+  <td>29</td>
+  <td><strong>277</strong></td>
+</tr>
+<tr>
+  <td><span class="badge">Armamento</span></td>
+  <td>SMT 40</td>
+  <td><strong>195</strong></td>
+  <td>7</td>
+  <td><strong>42</strong></td>
+  <td>31</td>
+  <td><strong>11</strong></td>
+</tr>
+<tr>
+  <td><span class="badge">Armamento</span></td>
+  <td>SPARK Z 2.0</td>
+  <td><strong>2.214</strong></td>
+  <td>88</td>
+  <td><strong>528</strong></td>
+  <td>217</td>
+  <td><strong>311</strong></td>
+</tr>
+<tr>
+  <td><span class="badge">Armamento</span></td>
+  <td>TASER M26</td>
+  <td><strong>717</strong></td>
+  <td>28</td>
+  <td><strong>168</strong></td>
+  <td>45</td>
+  <td><strong>123</strong></td>
+</tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>4. Teste do Plano A — Sul como origem</h2>
+      <p class="stage-note">Aqui aparece quanto o Norte já possui, quanto seria o <strong>necessário para o Norte considerando 6 UFs</strong> e o que ainda falta. O Sul só é considerado origem se, após atender a cota específica de PR, RS e SC, ainda houver sobra daquele mesmo item.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Item específico</th>
+            <th>Norte tem</th>
+            <th>Necessário Norte (6 UFs)</th>
+            <th>Falta Norte</th>
+            <th>Disponível Sul</th>
+            <th>Necessário Sul (3 UFs)</th>
+            <th>Sobra Sul</th>
+            <th>Status Plano A</th>
+            <th>Falta após Sul</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+<tr>
+  <td>Munição Treinamento — <strong>.40</strong></td>
+  <td><strong>69.717</strong></td>
+  <td><strong>129.444</strong></td>
+  <td>59.727</td>
+  <td>248.895</td>
+  <td>64.722</td>
+  <td><strong>184.173</strong></td>
+  <td><span class='stage-result-ok'>Sim</span><br><small>Sul supre 59.727</small></td>
+  <td>0</td>
+</tr>
+<tr>
+  <td>Munição Treinamento — <strong>12</strong></td>
+  <td><strong>51.693</strong></td>
+  <td><strong>112.176</strong></td>
+  <td>60.483</td>
+  <td>189.999</td>
+  <td>56.088</td>
+  <td><strong>133.911</strong></td>
+  <td><span class='stage-result-ok'>Sim</span><br><small>Sul supre 60.483</small></td>
+  <td>0</td>
+</tr>
+<tr>
+  <td>Munição Treinamento — <strong>5,56mm</strong></td>
+  <td><strong>0</strong></td>
+  <td><strong>8.640</strong></td>
+  <td>8.640</td>
+  <td>36.000</td>
+  <td>4.320</td>
+  <td><strong>31.680</strong></td>
+  <td><span class='stage-result-ok'>Sim</span><br><small>Sul supre 8.640</small></td>
+  <td>0</td>
+</tr>
+<tr>
+  <td>Munição Treinamento — <strong>7,62</strong></td>
+  <td><strong>0</strong></td>
+  <td><strong>2.784</strong></td>
+  <td>2.784</td>
+  <td>11.600</td>
+  <td>1.392</td>
+  <td><strong>10.208</strong></td>
+  <td><span class='stage-result-ok'>Sim</span><br><small>Sul supre 2.784</small></td>
+  <td>0</td>
+</tr>
+<tr>
+  <td>Munição Treinamento — <strong>9mm</strong></td>
+  <td><strong>0</strong></td>
+  <td><strong>6.516</strong></td>
+  <td>6.516</td>
+  <td>27.150</td>
+  <td>3.258</td>
+  <td><strong>23.892</strong></td>
+  <td><span class='stage-result-ok'>Sim</span><br><small>Sul supre 6.516</small></td>
+  <td>0</td>
+</tr>
+<tr>
+  <td>Munição Operacional — <strong>.233 REM POLYMER TIP 55gr</strong></td>
+  <td><strong>0</strong></td>
+  <td><strong>36</strong></td>
+  <td>36</td>
+  <td>0</td>
+  <td>18</td>
+  <td><strong>0</strong></td>
+  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td>36</td>
+</tr>
+<tr>
+  <td>Munição Operacional — <strong>.38</strong></td>
+  <td><strong>0</strong></td>
+  <td><strong>54</strong></td>
+  <td>54</td>
+  <td>0</td>
+  <td>27</td>
+  <td><strong>0</strong></td>
+  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td>54</td>
+</tr>
+<tr>
+  <td>Munição Operacional — <strong>.40</strong></td>
+  <td><strong>57.994</strong></td>
+  <td><strong>70.674</strong></td>
+  <td>12.680</td>
+  <td>25.850</td>
+  <td>35.337</td>
+  <td><strong>0</strong></td>
+  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td>12.680</td>
+</tr>
+<tr>
+  <td>Munição Operacional — <strong>12</strong></td>
+  <td><strong>4.277</strong></td>
+  <td><strong>14.838</strong></td>
+  <td>10.561</td>
+  <td>1.154</td>
+  <td>7.419</td>
+  <td><strong>0</strong></td>
+  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td>10.561</td>
+</tr>
+<tr>
+  <td>Munição Operacional — <strong>Diversos</strong></td>
+  <td><strong>0</strong></td>
+  <td><strong>480</strong></td>
+  <td>480</td>
+  <td>0</td>
+  <td>240</td>
+  <td><strong>0</strong></td>
+  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td>480</td>
+</tr>
+<tr>
+  <td>Cartucho — <strong>SPARK — Sem cor informada</strong></td>
+  <td><strong>520</strong></td>
+  <td><strong>1.512</strong></td>
+  <td>992</td>
+  <td>4.710</td>
+  <td>756</td>
+  <td><strong>3.954</strong></td>
+  <td><span class='stage-result-ok'>Sim</span><br><small>Sul supre 992</small></td>
+  <td>0</td>
+</tr>
+<tr>
+  <td>Armamento — <strong>DSK700</strong></td>
+  <td><strong>0</strong></td>
+  <td><strong>12</strong></td>
+  <td>12</td>
+  <td>0</td>
+  <td>6</td>
+  <td><strong>0</strong></td>
+  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td>12</td>
+</tr>
+<tr>
+  <td>Armamento — <strong>Pistola PT 100 .40</strong></td>
+  <td><strong>29</strong></td>
+  <td><strong>306</strong></td>
+  <td>277</td>
+  <td>245</td>
+  <td>153</td>
+  <td><strong>92</strong></td>
+  <td><span class='stage-result-alert'>Parcial</span><br><small>Sul supre 92; faltam 185</small></td>
+  <td>185</td>
+</tr>
+<tr>
+  <td>Armamento — <strong>SMT 40</strong></td>
+  <td><strong>31</strong></td>
+  <td><strong>42</strong></td>
+  <td>11</td>
+  <td>55</td>
+  <td>21</td>
+  <td><strong>34</strong></td>
+  <td><span class='stage-result-ok'>Sim</span><br><small>Sul supre 11</small></td>
+  <td>0</td>
+</tr>
+<tr>
+  <td>Armamento — <strong>SPARK Z 2.0</strong></td>
+  <td><strong>217</strong></td>
+  <td><strong>528</strong></td>
+  <td>311</td>
+  <td>772</td>
+  <td>264</td>
+  <td><strong>508</strong></td>
+  <td><span class='stage-result-ok'>Sim</span><br><small>Sul supre 311</small></td>
+  <td>0</td>
+</tr>
+<tr>
+  <td>Armamento — <strong>TASER M26</strong></td>
+  <td><strong>45</strong></td>
+  <td><strong>168</strong></td>
+  <td>123</td>
+  <td>110</td>
+  <td>84</td>
+  <td><strong>26</strong></td>
+  <td><span class='stage-result-alert'>Parcial</span><br><small>Sul supre 26; faltam 97</small></td>
+  <td>97</td>
+</tr>
+        </tbody>
+      </table>
+      <div class="nota">
+        <strong>Resultado:</strong> o Plano A, usando apenas o Sul, não fecha integralmente a recomposição específica do Norte. Ele fecha 8 dos 16 itens com déficit, mas outros 8 exigem origem complementar fora do Sul.
+      </div>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>5. Plano recomendado — recomposição específica item a item</h2>
+      <p class="stage-note">Para cada item, a origem abaixo considera apenas excedente específico, preservando a cota do Estado/Região de origem. A leitura mostra o que o Norte já possui, o <strong>necessário para 6 UFs</strong>, o que ainda falta, se o Sul consegue suprir essa demanda e quais Estados possuem sobra específica para complementar.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Item específico</th>
+            <th>Norte tem</th>
+            <th>Necessário Norte (6 UFs)</th>
+            <th>Falta Norte</th>
+            <th>Sul supre a demanda?</th>
+            <th>Origem recomendada para suprir o Norte</th>
+            <th>Estados com sobra específica fora do Norte</th>
+            <th>Resultado</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+<tr>
+  <td>Munição Treinamento — <strong>.40</strong></td>
+  <td><strong>69.717</strong></td>
+  <td><strong>129.444</strong></td>
+  <td><strong>59.727</strong></td>
+  <td><span class='stage-result-ok'>Sim</span><br><small>Sul supre 59.727</small></td>
+  <td>Sul: 59.727</td>
+  <td>RS: 134.226; SC: 56.926; CE: 28.973; MG: 12.709; DF: 11.076; BA: 10.026; PB: 2.426</td>
+  <td><span class='stage-result-ok'>Fecha</span></td>
+</tr>
+<tr>
+  <td>Munição Treinamento — <strong>12</strong></td>
+  <td><strong>51.693</strong></td>
+  <td><strong>112.176</strong></td>
+  <td><strong>60.483</strong></td>
+  <td><span class='stage-result-ok'>Sim</span><br><small>Sul supre 60.483</small></td>
+  <td>Sul: 60.483</td>
+  <td>RS: 120.642; MG: 44.221; PR: 31.965; BA: 27.870; RJ: 24.304; MT: 9.818; DF: 4.204; CE: 2.923</td>
+  <td><span class='stage-result-ok'>Fecha</span></td>
+</tr>
+<tr>
+  <td>Munição Treinamento — <strong>5,56mm</strong></td>
+  <td><strong>0</strong></td>
+  <td><strong>8.640</strong></td>
+  <td><strong>8.640</strong></td>
+  <td><span class='stage-result-ok'>Sim</span><br><small>Sul supre 8.640</small></td>
+  <td>Sul: 8.640<br><small class='specific-warning'>Sem Sul, permanece pendente: 8.640</small></td>
+  <td>RS: 34.560</td>
+  <td><span class='stage-result-ok'>Fecha</span></td>
+</tr>
+<tr>
+  <td>Munição Treinamento — <strong>7,62</strong></td>
+  <td><strong>0</strong></td>
+  <td><strong>2.784</strong></td>
+  <td><strong>2.784</strong></td>
+  <td><span class='stage-result-ok'>Sim</span><br><small>Sul supre 2.784</small></td>
+  <td>Sul: 2.784<br><small class='specific-warning'>Sem Sul, permanece pendente: 2.784</small></td>
+  <td>RS: 11.136</td>
+  <td><span class='stage-result-ok'>Fecha</span></td>
+</tr>
+<tr>
+  <td>Munição Treinamento — <strong>9mm</strong></td>
+  <td><strong>0</strong></td>
+  <td><strong>6.516</strong></td>
+  <td><strong>6.516</strong></td>
+  <td><span class='stage-result-ok'>Sim</span><br><small>Sul supre 6.516</small></td>
+  <td>Sul: 6.516<br><small class='specific-warning'>Sem Sul, permanece pendente: 6.516</small></td>
+  <td>RS: 26.064</td>
+  <td><span class='stage-result-ok'>Fecha</span></td>
+</tr>
+<tr>
+  <td>Munição Operacional — <strong>.233 REM POLYMER TIP 55gr</strong></td>
+  <td><strong>0</strong></td>
+  <td><strong>36</strong></td>
+  <td><strong>36</strong></td>
+  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td>MG: 36</td>
+  <td>MG: 144</td>
+  <td><span class='stage-result-ok'>Fecha</span></td>
+</tr>
+<tr>
+  <td>Munição Operacional — <strong>.38</strong></td>
+  <td><strong>0</strong></td>
+  <td><strong>54</strong></td>
+  <td><strong>54</strong></td>
+  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td>MT: 54</td>
+  <td>MT: 228</td>
+  <td><span class='stage-result-ok'>Fecha</span></td>
+</tr>
+<tr>
+  <td>Munição Operacional — <strong>.40</strong></td>
+  <td><strong>57.994</strong></td>
+  <td><strong>70.674</strong></td>
+  <td><strong>12.680</strong></td>
+  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td>RJ: 12.680</td>
+  <td>RJ: 49.221; PB: 20.821; MG: 14.821; MA: 8.521; PE: 7.336; BA: 5.921; RS: 1.221; SC: 1.071</td>
+  <td><span class='stage-result-ok'>Fecha</span></td>
+</tr>
+<tr>
+  <td>Munição Operacional — <strong>12</strong></td>
+  <td><strong>4.277</strong></td>
+  <td><strong>14.838</strong></td>
+  <td><strong>10.561</strong></td>
+  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td>GO: 10.561</td>
+  <td>GO: 30.027; MA: 16.096</td>
+  <td><span class='stage-result-ok'>Fecha</span></td>
+</tr>
+<tr>
+  <td>Munição Operacional — <strong>Diversos</strong></td>
+  <td><strong>0</strong></td>
+  <td><strong>480</strong></td>
+  <td><strong>480</strong></td>
+  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td>RJ: 480</td>
+  <td>RJ: 1.920</td>
+  <td><span class='stage-result-ok'>Fecha</span></td>
+</tr>
+<tr>
+  <td>Cartucho — <strong>SPARK — Sem cor informada</strong></td>
+  <td><strong>520</strong></td>
+  <td><strong>1.512</strong></td>
+  <td><strong>992</strong></td>
+  <td><span class='stage-result-ok'>Sim</span><br><small>Sul supre 992</small></td>
+  <td>Sul: 992<br><small class='specific-warning'>Sem Sul, permanece pendente: 480</small></td>
+  <td>SC: 3.887; MG: 508; RS: 319; PB: 4</td>
+  <td><span class='stage-result-ok'>Fecha</span></td>
+</tr>
+<tr>
+  <td>Armamento — <strong>DSK700</strong></td>
+  <td><strong>0</strong></td>
+  <td><strong>12</strong></td>
+  <td><strong>12</strong></td>
+  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td>PI: 12</td>
+  <td>PI: 50</td>
+  <td><span class='stage-result-ok'>Fecha</span></td>
+</tr>
+<tr>
+  <td>Armamento — <strong>Pistola PT 100 .40</strong></td>
+  <td><strong>29</strong></td>
+  <td><strong>306</strong></td>
+  <td><strong>277</strong></td>
+  <td><span class='stage-result-alert'>Parcial</span><br><small>Sul supre 92; faltam 185</small></td>
+  <td>Sul: 92 + RJ: 185</td>
+  <td>RJ: 523; DF: 341; PR: 100; RS: 43</td>
+  <td><span class='stage-result-ok'>Fecha</span></td>
+</tr>
+<tr>
+  <td>Armamento — <strong>SMT 40</strong></td>
+  <td><strong>31</strong></td>
+  <td><strong>42</strong></td>
+  <td><strong>11</strong></td>
+  <td><span class='stage-result-ok'>Sim</span><br><small>Sul supre 11</small></td>
+  <td>Sul: 11</td>
+  <td>RJ: 31; SC: 25; PR: 16; MG: 7; MA: 5; PI: 4; PB: 2; RN: 1</td>
+  <td><span class='stage-result-ok'>Fecha</span></td>
+</tr>
+<tr>
+  <td>Armamento — <strong>SPARK Z 2.0</strong></td>
+  <td><strong>217</strong></td>
+  <td><strong>528</strong></td>
+  <td><strong>311</strong></td>
+  <td><span class='stage-result-ok'>Sim</span><br><small>Sul supre 311</small></td>
+  <td>Sul: 311</td>
+  <td>SC: 419; MG: 177; BA: 139; PR: 118; SP: 116; RJ: 71; MT: 53; PE: 31</td>
+  <td><span class='stage-result-ok'>Fecha</span></td>
+</tr>
+<tr>
+  <td>Armamento — <strong>TASER M26</strong></td>
+  <td><strong>45</strong></td>
+  <td><strong>168</strong></td>
+  <td><strong>123</strong></td>
+  <td><span class='stage-result-alert'>Parcial</span><br><small>Sul supre 26; faltam 97</small></td>
+  <td>Sul: 26 + MG: 97</td>
+  <td>MG: 97; BA: 72; PE: 61; RJ: 53; SP: 50; RS: 40; MT: 25; SC: 12</td>
+  <td><span class='stage-result-ok'>Fecha</span></td>
+</tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>6. Itens em que o Norte já atende a cota específica</h2>
+      <table>
+        <thead>
+          <tr><th>Categoria</th><th>Item</th><th>Cota por UF</th><th>Necessário Norte (6 UFs)</th><th>Norte tem</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          
+<tr>
+  <td>Munição Operacional</td>
+  <td>5,56mm</td>
+  <td>11</td>
+  <td>66</td>
+  <td>292</td>
+  <td><span class="specific-ok">Norte já atende</span></td>
+</tr>
+<tr>
+  <td>Cartucho</td>
+  <td>SPARK — Preto</td>
+  <td>4</td>
+  <td>24</td>
+  <td>100</td>
+  <td><span class="specific-ok">Norte já atende</span></td>
+</tr>
+<tr>
+  <td>Cartucho</td>
+  <td>SPARK — Verde</td>
+  <td>3</td>
+  <td>18</td>
+  <td>78</td>
+  <td><span class="specific-ok">Norte já atende</span></td>
+</tr>
+<tr>
+  <td>Cartucho</td>
+  <td>TASER — Preto</td>
+  <td>1</td>
+  <td>6</td>
+  <td>35</td>
+  <td><span class="specific-ok">Norte já atende</span></td>
+</tr>
+<tr>
+  <td>Cartucho</td>
+  <td>TASER — Sem cor informada</td>
+  <td>9</td>
+  <td>54</td>
+  <td>137</td>
+  <td><span class="specific-ok">Norte já atende</span></td>
+</tr>
+<tr>
+  <td>Cartucho</td>
+  <td>TASER — Verde</td>
+  <td>2</td>
+  <td>12</td>
+  <td>60</td>
+  <td><span class="specific-ok">Norte já atende</span></td>
+</tr>
+<tr>
+  <td>Armamento</td>
+  <td>Espingarda Cal. 12</td>
+  <td>3</td>
+  <td>18</td>
+  <td>20</td>
+  <td><span class="specific-ok">Norte já atende</span></td>
+</tr>
+        </tbody>
+      </table>
+      <div class="nota">
+        <strong>Observação:</strong> itens com total nacional inferior a 25 unidades geram cota igual a zero no rateio inteiro por UF e, por isso, não foram tratados como déficit operacional neste módulo.
+      </div>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>7. Conclusão da validação específica</h2>
+      <div class="closing-quote">
+        A validação por calibre, tipo e modelo mostra que o Plano A macro não deve ser executado de forma automática. O Sul possui excedente suficiente para vários itens de treinamento, cartuchos SPARK sem cor, SMT 40 e SPARK Z 2.0, mas não supre itens críticos como munição operacional .40, munição operacional 12, DSK700, PT 100 .40 e TASER M26. A estratégia mais segura é um plano híbrido: utilizar o Sul apenas onde há sobra específica real e buscar os demais itens em UFs com excedente específico comprovado, como RJ, GO, MG, MT, PI, BA e outras origens indicadas na matriz.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="page-priorizacao-norte" class="page-section" data-page="priorizacao-norte" aria-label="Terceira Etapa - Priorização Operacional do Norte">
+  <div class="dashboard-container">
+    <header class="glass-panel" data-watermark="ETAPA 3">
+      <h1>3ª ETAPA — PRIORIZAÇÃO OPERACIONAL DO NORTE</h1>
+      <p>CENÁRIO DE ATENDIMENTO PRIORITÁRIO, COM RECOMPOSIÇÃO POSTERIOR DAS UFS IMPACTADAS</p>
+    </header>
+
+    <div class="glass-panel data-section">
+      <h2>1. Premissa operacional do cenário</h2>
+      <p class="stage-note">
+        Esta etapa não substitui o rateio igualitário da 1ª etapa nem a validação de excedente real da 2ª etapa. Aqui o cenário é operacional: priorizar a primeira entrega à Região Norte, usando estoques disponíveis em outras UFs, sem exigir que a UF de origem preserve sua própria cota nesta rodada. As UFs impactadas devem ser recompostas em etapa posterior.
+      </p>
+      <div class="priority-kpi-grid">
+        <div class="stage-kpi"><span>Itens específicos com déficit</span><strong>16/16</strong><small>Todos fecham neste cenário de priorização</small></div>
+        <div class="stage-kpi"><span>Munições a mobilizar</span><strong>161.961</strong><small>138.150 treinamento + 23.811 operacionais</small></div>
+        <div class="stage-kpi"><span>Cartuchos a mobilizar</span><strong>992</strong><small>SPARK sem cor informada</small></div>
+        <div class="stage-kpi"><span>Armamentos a mobilizar</span><strong>734</strong><small>DSK700, PT 100, SMT 40, SPARK Z 2.0 e TASER M26</small></div>
+      </div>
+      <div class="priority-note">
+        <strong>Frase-chave:</strong> neste cenário, a meta não é encerrar simultaneamente a distribuição nacional, mas viabilizar uma primeira entrega prioritária à Região Norte, com posterior recomposição das demais regiões impactadas.
+      </div>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>2. Como ler este cenário</h2>
+      <div class="priority-flow-grid">
+        <div class="priority-flow-card">
+          <span>1</span>
+          <h3>Norte precisa de quê?</h3>
+          <p>Partimos dos 16 déficits específicos já identificados: munições de treinamento, munições operacionais, cartuchos e armamentos por calibre/modelo/tipo.</p>
+        </div>
+        <div class="priority-flow-card">
+          <span>2</span>
+          <h3>Quem possui o item?</h3>
+          <p>Busca-se a UF fora do Norte com maior quantidade disponível daquele mesmo item. Aqui não se usa o conceito de sobra após cota própria.</p>
+        </div>
+        <div class="priority-flow-card">
+          <span>3</span>
+          <h3>Qual o impacto?</h3>
+          <p>A retirada atende o Norte agora, mas cria necessidade de recomposição posterior para as UFs de origem impactadas.</p>
+        </div>
+      </div>
+      <div class="nota">
+        <strong>Importante:</strong> neste módulo, a palavra correta não é “sobra”, e sim <strong>quantidade mobilizável</strong>. A UF de origem está sendo usada como apoio operacional para a primeira entrega ao Norte.
+      </div>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>3. Demanda específica do Norte por categoria</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Categoria</th>
+            <th>Itens com déficit</th>
+            <th>Norte já tem nos itens deficitários</th>
+            <th>Total a mobilizar para o Norte</th>
+            <th>Origens operacionais usadas</th>
+            <th>Resultado</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+<tr>
+  <td><span class="badge">Treinamento</span></td>
+  <td>5</td>
+  <td><strong>121.410</strong></td>
+  <td><strong>138.150</strong></td>
+  <td>RS</td>
+  <td><span class="priority-ok">Fecha</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Operacional</span></td>
+  <td>5</td>
+  <td><strong>62.271</strong></td>
+  <td><strong>23.811</strong></td>
+  <td>GO, MG, MT, RJ</td>
+  <td><span class="priority-ok">Fecha</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Cartucho</span></td>
+  <td>1</td>
+  <td><strong>520</strong></td>
+  <td><strong>992</strong></td>
+  <td>SC</td>
+  <td><span class="priority-ok">Fecha</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Armamento</span></td>
+  <td>5</td>
+  <td><strong>322</strong></td>
+  <td><strong>734</strong></td>
+  <td>MG, PI, RJ, SC</td>
+  <td><span class="priority-ok">Fecha</span></td>
+</tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>4. Plano de mobilização por item específico</h2>
+      <p class="stage-note">A tabela abaixo mostra uma proposta objetiva de origem operacional: para cada déficit específico do Norte, primeiro aparece o que o Norte já possui, depois o <strong>necessário para as 6 UFs do Norte</strong>, a falta e a UF fora do Norte com maior disponibilidade daquele mesmo item, até fechar a quantidade necessária.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Categoria</th>
+            <th>Item específico</th>
+            <th>Norte tem</th>
+            <th>Necessário Norte (6 UFs)</th>
+            <th>Falta Norte</th>
+            <th>Origem operacional</th>
+            <th>Enviar ao Norte</th>
+            <th>Disponível na origem</th>
+            <th>Saldo na origem após envio</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+<tr>
+  <td><span class="badge">Treinamento</span></td>
+  <td>.40</td>
+  <td><strong>69.717</strong></td>
+  <td><strong>129.444</strong></td>
+  <td><strong>59.727</strong></td>
+  <td>RS</td>
+  <td>59.727</td>
+  <td>155.800</td>
+  <td>96.073</td>
+  <td><span class='priority-ok'>Fecha nesta priorização</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Treinamento</span></td>
+  <td>12</td>
+  <td><strong>51.693</strong></td>
+  <td><strong>112.176</strong></td>
+  <td><strong>60.483</strong></td>
+  <td>RS</td>
+  <td>60.483</td>
+  <td>139.338</td>
+  <td>78.855</td>
+  <td><span class='priority-ok'>Fecha nesta priorização</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Treinamento</span></td>
+  <td>5,56mm</td>
+  <td><strong>0</strong></td>
+  <td><strong>8.640</strong></td>
+  <td><strong>8.640</strong></td>
+  <td>RS</td>
+  <td>8.640</td>
+  <td>36.000</td>
+  <td>27.360</td>
+  <td><span class='priority-ok'>Fecha nesta priorização</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Treinamento</span></td>
+  <td>7,62</td>
+  <td><strong>0</strong></td>
+  <td><strong>2.784</strong></td>
+  <td><strong>2.784</strong></td>
+  <td>RS</td>
+  <td>2.784</td>
+  <td>11.600</td>
+  <td>8.816</td>
+  <td><span class='priority-ok'>Fecha nesta priorização</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Treinamento</span></td>
+  <td>9mm</td>
+  <td><strong>0</strong></td>
+  <td><strong>6.516</strong></td>
+  <td><strong>6.516</strong></td>
+  <td>RS</td>
+  <td>6.516</td>
+  <td>27.150</td>
+  <td>20.634</td>
+  <td><span class='priority-ok'>Fecha nesta priorização</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Operacional</span></td>
+  <td>.233 REM POLYMER TIP 55gr</td>
+  <td><strong>0</strong></td>
+  <td><strong>36</strong></td>
+  <td><strong>36</strong></td>
+  <td>MG</td>
+  <td>36</td>
+  <td>150</td>
+  <td>114</td>
+  <td><span class='priority-ok'>Fecha nesta priorização</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Operacional</span></td>
+  <td>.38</td>
+  <td><strong>0</strong></td>
+  <td><strong>54</strong></td>
+  <td><strong>54</strong></td>
+  <td>MT</td>
+  <td>54</td>
+  <td>237</td>
+  <td>183</td>
+  <td><span class='priority-ok'>Fecha nesta priorização</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Operacional</span></td>
+  <td>.40</td>
+  <td><strong>57.994</strong></td>
+  <td><strong>70.674</strong></td>
+  <td><strong>12.680</strong></td>
+  <td>RJ</td>
+  <td>12.680</td>
+  <td>61.000</td>
+  <td>48.320</td>
+  <td><span class='priority-ok'>Fecha nesta priorização</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Operacional</span></td>
+  <td>12</td>
+  <td><strong>4.277</strong></td>
+  <td><strong>14.838</strong></td>
+  <td><strong>10.561</strong></td>
+  <td>GO</td>
+  <td>10.561</td>
+  <td>32.500</td>
+  <td>21.939</td>
+  <td><span class='priority-ok'>Fecha nesta priorização</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Operacional</span></td>
+  <td>Diversos</td>
+  <td><strong>0</strong></td>
+  <td><strong>480</strong></td>
+  <td><strong>480</strong></td>
+  <td>RJ</td>
+  <td>480</td>
+  <td>2.000</td>
+  <td>1.520</td>
+  <td><span class='priority-ok'>Fecha nesta priorização</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Cartucho</span></td>
+  <td>SPARK — Sem cor informada</td>
+  <td><strong>520</strong></td>
+  <td><strong>1.512</strong></td>
+  <td><strong>992</strong></td>
+  <td>SC</td>
+  <td>992</td>
+  <td>4.139</td>
+  <td>3.147</td>
+  <td><span class='priority-ok'>Fecha nesta priorização</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Armamento</span></td>
+  <td>DSK700</td>
+  <td><strong>0</strong></td>
+  <td><strong>12</strong></td>
+  <td><strong>12</strong></td>
+  <td>PI</td>
+  <td>12</td>
+  <td>52</td>
+  <td>40</td>
+  <td><span class='priority-ok'>Fecha nesta priorização</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Armamento</span></td>
+  <td>Pistola PT 100 .40</td>
+  <td><strong>29</strong></td>
+  <td><strong>306</strong></td>
+  <td><strong>277</strong></td>
+  <td>RJ</td>
+  <td>277</td>
+  <td>574</td>
+  <td>297</td>
+  <td><span class='priority-ok'>Fecha nesta priorização</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Armamento</span></td>
+  <td>SMT 40</td>
+  <td><strong>31</strong></td>
+  <td><strong>42</strong></td>
+  <td><strong>11</strong></td>
+  <td>RJ</td>
+  <td>11</td>
+  <td>38</td>
+  <td>27</td>
+  <td><span class='priority-ok'>Fecha nesta priorização</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Armamento</span></td>
+  <td>SPARK Z 2.0</td>
+  <td><strong>217</strong></td>
+  <td><strong>528</strong></td>
+  <td><strong>311</strong></td>
+  <td>SC</td>
+  <td>311</td>
+  <td>507</td>
+  <td>196</td>
+  <td><span class='priority-ok'>Fecha nesta priorização</span></td>
+</tr>
+<tr>
+  <td><span class="badge">Armamento</span></td>
+  <td>TASER M26</td>
+  <td><strong>45</strong></td>
+  <td><strong>168</strong></td>
+  <td><strong>123</strong></td>
+  <td>MG</td>
+  <td>123</td>
+  <td>125</td>
+  <td>2</td>
+  <td><span class='priority-ok'>Fecha nesta priorização</span></td>
+</tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="glass-panel data-section">
+      <h2>5. Impacto da retirada e recomposição posterior</h2>
+      <p class="stage-note">Estas UFs passam a ser impactadas pela priorização do Norte. O próximo ciclo de distribuição deve recompor esses Estados conforme disponibilidade nacional remanescente e nova estratégia regional.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>UF impactada</th>
+            <th>Munições treinamento</th>
+            <th>Munições operacionais</th>
+            <th>Cartuchos</th>
+            <th>Armamentos</th>
+            <th>Itens retirados</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+<tr>
+  <td><span class="badge">RS</span></td>
+  <td>138.150</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>Treinamento .40: 59.727; Treinamento 12: 60.483; Treinamento 5,56mm: 8.640; Treinamento 7,62: 2.784; Treinamento 9mm: 6.516</td>
+</tr>
+<tr>
+  <td><span class="badge">RJ</span></td>
+  <td>-</td>
+  <td>13.160</td>
+  <td>-</td>
+  <td>288</td>
+  <td>Operacional .40: 12.680; Operacional Diversos: 480; Armamento Pistola PT 100 .40: 277; Armamento SMT 40: 11</td>
+</tr>
+<tr>
+  <td><span class="badge">GO</span></td>
+  <td>-</td>
+  <td>10.561</td>
+  <td>-</td>
+  <td>-</td>
+  <td>Operacional 12: 10.561</td>
+</tr>
+<tr>
+  <td><span class="badge">SC</span></td>
+  <td>-</td>
+  <td>-</td>
+  <td>992</td>
+  <td>311</td>
+  <td>Cartucho SPARK — Sem cor informada: 992; Armamento SPARK Z 2.0: 311</td>
+</tr>
+<tr>
+  <td><span class="badge">MG</span></td>
+  <td>-</td>
+  <td>36</td>
+  <td>-</td>
+  <td>123</td>
+  <td>Operacional .233 REM POLYMER TIP 55gr: 36; Armamento TASER M26: 123</td>
+</tr>
+<tr>
+  <td><span class="badge">MT</span></td>
+  <td>-</td>
+  <td>54</td>
+  <td>-</td>
+  <td>-</td>
+  <td>Operacional .38: 54</td>
+</tr>
+<tr>
+  <td><span class="badge">PI</span></td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>12</td>
+  <td>Armamento DSK700: 12</td>
+</tr>
+        </tbody>
+      </table>
+      <div class="closing-quote">
+        Resultado operacional: a Região Norte pode ser suprida neste cenário de priorização, desde que a decisão aceite mobilizar estoques específicos de RS, RJ, GO, SC, MG, MT e PI, com recomposição planejada das UFs impactadas em etapa posterior.
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="page-perguntas" class="page-section" data-page="perguntas" aria-label="Perguntas PRF">
   <div class="dashboard-container">
     <header class="glass-panel" data-watermark="PRF">
@@ -4990,7 +6233,7 @@ header.glass-panel {
 
 
 <div class="slide-progress" id="slideProgress"></div>
-<div class="slide-counter" id="slideCounter">Slide 1/9</div>
+<div class="slide-counter" id="slideCounter">Slide 1/11</div>
 <div class="deck-controls" aria-label="Controles da apresentação">
     <button id="prevBtn" type="button">← Anterior</button>
     <button id="homeBtn" type="button">Início</button>
@@ -4998,8 +6241,10 @@ header.glass-panel {
   </div>
 
   <script>
-    const routeOrder = ['geral', 'rateio', 'norte', 'centro-oeste', 'nordeste', 'sudeste', 'sul', 'conclusao', 'perguntas'];
+    const routeOrder = ['geral', 'rateio', 'norte', 'centro-oeste', 'nordeste', 'sudeste', 'sul', 'conclusao', 'validacao-especifica', 'priorizacao-norte', 'perguntas'];
     const labels = {'geral': 'Visão Geral', 'rateio': 'Rateio 25 UFs', 'rateio': 'Rateio 25 UFs', 'norte': 'Norte', 'centro-oeste': 'Centro-Oeste', 'nordeste': 'Nordeste', 'sudeste': 'Sudeste', 'sul': 'Sul', 'conclusao': '1ª Etapa de Doação',
+      'validacao-especifica': '2ª Etapa Específica',
+      'priorizacao-norte': '3ª Etapa — Priorização Operacional do Norte',
       'perguntas': 'Perguntas PRF'
     };
     const sections = document.querySelectorAll('.page-section');
