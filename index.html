@@ -1889,6 +1889,114 @@ header.glass-panel {
   }
 }
 
+
+/* ===== AJUSTE DE LEITURA — TABELAS DA 2ª E 3ª ETAPAS ===== */
+.table-reading-note {
+  margin: 14px 0 18px;
+  padding: 13px 16px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, rgba(94,200,255,.10), rgba(212,175,55,.06));
+  border: 1px solid rgba(173,216,255,.14);
+  color: #dbeafe;
+  font-size: .92rem;
+  line-height: 1.55;
+  font-weight: 650;
+}
+.table-reading-note strong { color: var(--gold-soft); }
+
+.plan-a-table,
+.plan-recommended-table,
+.priorization-table {
+  table-layout: fixed;
+  min-width: 1180px !important;
+}
+
+.plan-a-table th,
+.plan-a-table td,
+.plan-recommended-table th,
+.plan-recommended-table td,
+.priorization-table th,
+.priorization-table td {
+  padding: 13px 10px;
+  font-size: .82rem;
+  line-height: 1.38;
+  vertical-align: middle;
+}
+
+.plan-a-table th,
+.plan-recommended-table th,
+.priorization-table th {
+  text-align: center;
+  letter-spacing: .065em;
+}
+
+.plan-a-table td:nth-child(n+2),
+.plan-recommended-table td:nth-child(n+2),
+.priorization-table td:nth-child(n+3) {
+  text-align: center;
+}
+
+.plan-a-table td:first-child,
+.plan-recommended-table td:first-child,
+.priorization-table td:nth-child(2) {
+  text-align: left;
+  font-weight: 750;
+}
+
+.plan-a-table th:nth-child(1), .plan-a-table td:nth-child(1) { width: 18%; }
+.plan-a-table th:nth-child(2), .plan-a-table td:nth-child(2) { width: 8%; }
+.plan-a-table th:nth-child(3), .plan-a-table td:nth-child(3) { width: 11%; }
+.plan-a-table th:nth-child(4), .plan-a-table td:nth-child(4) { width: 8%; }
+.plan-a-table th:nth-child(5), .plan-a-table td:nth-child(5) { width: 9%; }
+.plan-a-table th:nth-child(6), .plan-a-table td:nth-child(6) { width: 10%; }
+.plan-a-table th:nth-child(7), .plan-a-table td:nth-child(7) { width: 8%; }
+.plan-a-table th:nth-child(8), .plan-a-table td:nth-child(8) { width: 15%; }
+.plan-a-table th:nth-child(9), .plan-a-table td:nth-child(9) { width: 13%; }
+
+.plan-recommended-table { min-width: 1280px !important; }
+.plan-recommended-table th:nth-child(1), .plan-recommended-table td:nth-child(1) { width: 18%; }
+.plan-recommended-table th:nth-child(2), .plan-recommended-table td:nth-child(2) { width: 8%; }
+.plan-recommended-table th:nth-child(3), .plan-recommended-table td:nth-child(3) { width: 11%; }
+.plan-recommended-table th:nth-child(4), .plan-recommended-table td:nth-child(4) { width: 8%; }
+.plan-recommended-table th:nth-child(5), .plan-recommended-table td:nth-child(5) { width: 13%; }
+.plan-recommended-table th:nth-child(6), .plan-recommended-table td:nth-child(6) { width: 18%; }
+.plan-recommended-table th:nth-child(7), .plan-recommended-table td:nth-child(7) { width: 18%; }
+.plan-recommended-table th:nth-child(8), .plan-recommended-table td:nth-child(8) { width: 6%; }
+
+.priorization-table { min-width: 1280px !important; }
+.priorization-table th:nth-child(1), .priorization-table td:nth-child(1) { width: 11%; }
+.priorization-table th:nth-child(2), .priorization-table td:nth-child(2) { width: 15%; }
+.priorization-table th:nth-child(3), .priorization-table td:nth-child(3) { width: 8%; }
+.priorization-table th:nth-child(4), .priorization-table td:nth-child(4) { width: 8%; }
+.priorization-table th:nth-child(5), .priorization-table td:nth-child(5) { width: 11%; }
+.priorization-table th:nth-child(6), .priorization-table td:nth-child(6) { width: 9%; }
+.priorization-table th:nth-child(7), .priorization-table td:nth-child(7) { width: 10%; }
+.priorization-table th:nth-child(8), .priorization-table td:nth-child(8) { width: 12%; }
+.priorization-table th:nth-child(9), .priorization-table td:nth-child(9) { width: 16%; }
+
+.plan-a-table small,
+.plan-recommended-table small,
+.priorization-table small {
+  display: block;
+  margin-top: 4px;
+  font-size: .72rem;
+  line-height: 1.32;
+  font-weight: 750;
+}
+
+.plan-a-table td:nth-child(9) {
+  font-weight: 900;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .plan-a-table,
+  .plan-recommended-table,
+  .priorization-table {
+    min-width: 1080px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -5242,7 +5350,8 @@ header.glass-panel {
     <div class="glass-panel data-section">
       <h2>4. Teste do Plano A — Sul como origem</h2>
       <p class="stage-note">Aqui aparece quanto o Norte já possui, quanto seria o <strong>necessário para o Norte considerando 6 UFs</strong> e o que ainda falta. O Sul só é considerado origem se, após atender a cota específica de PR, RS e SC, ainda houver sobra daquele mesmo item.</p>
-      <table>
+      <div class="table-reading-note"><strong>Como ler o status:</strong> “Sim” significa que a sobra específica do Sul fecha a falta do Norte. “Parcial” significa que o Sul ajuda, mas ainda fica saldo pendente. “Não pelo Sul” significa que o Sul não possui sobra daquele item específico; o valor em “Ainda falta após Sul” deve ser buscado em outra origem.</div>
+      <table class="plan-a-table">
         <thead>
           <tr>
             <th>Item específico</th>
@@ -5252,8 +5361,8 @@ header.glass-panel {
             <th>Disponível Sul</th>
             <th>Necessário Sul (3 UFs)</th>
             <th>Sobra Sul</th>
-            <th>Status Plano A</th>
-            <th>Falta após Sul</th>
+            <th>Sul consegue suprir?</th>
+            <th>Ainda falta após Sul</th>
           </tr>
         </thead>
         <tbody>
@@ -5321,7 +5430,7 @@ header.glass-panel {
   <td>0</td>
   <td>18</td>
   <td><strong>0</strong></td>
-  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td><span class='stage-result-danger'>Não pelo Sul</span><br><small>sem sobra específica deste item</small></td>
   <td>36</td>
 </tr>
 <tr>
@@ -5332,7 +5441,7 @@ header.glass-panel {
   <td>0</td>
   <td>27</td>
   <td><strong>0</strong></td>
-  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td><span class='stage-result-danger'>Não pelo Sul</span><br><small>sem sobra específica deste item</small></td>
   <td>54</td>
 </tr>
 <tr>
@@ -5343,7 +5452,7 @@ header.glass-panel {
   <td>25.850</td>
   <td>35.337</td>
   <td><strong>0</strong></td>
-  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td><span class='stage-result-danger'>Não pelo Sul</span><br><small>sem sobra específica deste item</small></td>
   <td>12.680</td>
 </tr>
 <tr>
@@ -5354,7 +5463,7 @@ header.glass-panel {
   <td>1.154</td>
   <td>7.419</td>
   <td><strong>0</strong></td>
-  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td><span class='stage-result-danger'>Não pelo Sul</span><br><small>sem sobra específica deste item</small></td>
   <td>10.561</td>
 </tr>
 <tr>
@@ -5365,7 +5474,7 @@ header.glass-panel {
   <td>0</td>
   <td>240</td>
   <td><strong>0</strong></td>
-  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td><span class='stage-result-danger'>Não pelo Sul</span><br><small>sem sobra específica deste item</small></td>
   <td>480</td>
 </tr>
 <tr>
@@ -5387,7 +5496,7 @@ header.glass-panel {
   <td>0</td>
   <td>6</td>
   <td><strong>0</strong></td>
-  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td><span class='stage-result-danger'>Não pelo Sul</span><br><small>sem sobra específica deste item</small></td>
   <td>12</td>
 </tr>
 <tr>
@@ -5444,7 +5553,7 @@ header.glass-panel {
     <div class="glass-panel data-section">
       <h2>5. Plano recomendado — recomposição específica item a item</h2>
       <p class="stage-note">Para cada item, a origem abaixo considera apenas excedente específico, preservando a cota do Estado/Região de origem. A leitura mostra o que o Norte já possui, o <strong>necessário para 6 UFs</strong>, o que ainda falta, se o Sul consegue suprir essa demanda e quais Estados possuem sobra específica para complementar.</p>
-      <table>
+      <table class="plan-recommended-table">
         <thead>
           <tr>
             <th>Item específico</th>
@@ -5514,7 +5623,7 @@ header.glass-panel {
   <td><strong>0</strong></td>
   <td><strong>36</strong></td>
   <td><strong>36</strong></td>
-  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td><span class='stage-result-danger'>Não pelo Sul</span><br><small>sem sobra específica deste item</small></td>
   <td>MG: 36</td>
   <td>MG: 144</td>
   <td><span class='stage-result-ok'>Fecha</span></td>
@@ -5524,7 +5633,7 @@ header.glass-panel {
   <td><strong>0</strong></td>
   <td><strong>54</strong></td>
   <td><strong>54</strong></td>
-  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td><span class='stage-result-danger'>Não pelo Sul</span><br><small>sem sobra específica deste item</small></td>
   <td>MT: 54</td>
   <td>MT: 228</td>
   <td><span class='stage-result-ok'>Fecha</span></td>
@@ -5534,7 +5643,7 @@ header.glass-panel {
   <td><strong>57.994</strong></td>
   <td><strong>70.674</strong></td>
   <td><strong>12.680</strong></td>
-  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td><span class='stage-result-danger'>Não pelo Sul</span><br><small>sem sobra específica deste item</small></td>
   <td>RJ: 12.680</td>
   <td>RJ: 49.221; PB: 20.821; MG: 14.821; MA: 8.521; PE: 7.336; BA: 5.921; RS: 1.221; SC: 1.071</td>
   <td><span class='stage-result-ok'>Fecha</span></td>
@@ -5544,7 +5653,7 @@ header.glass-panel {
   <td><strong>4.277</strong></td>
   <td><strong>14.838</strong></td>
   <td><strong>10.561</strong></td>
-  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td><span class='stage-result-danger'>Não pelo Sul</span><br><small>sem sobra específica deste item</small></td>
   <td>GO: 10.561</td>
   <td>GO: 30.027; MA: 16.096</td>
   <td><span class='stage-result-ok'>Fecha</span></td>
@@ -5554,7 +5663,7 @@ header.glass-panel {
   <td><strong>0</strong></td>
   <td><strong>480</strong></td>
   <td><strong>480</strong></td>
-  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td><span class='stage-result-danger'>Não pelo Sul</span><br><small>sem sobra específica deste item</small></td>
   <td>RJ: 480</td>
   <td>RJ: 1.920</td>
   <td><span class='stage-result-ok'>Fecha</span></td>
@@ -5574,7 +5683,7 @@ header.glass-panel {
   <td><strong>0</strong></td>
   <td><strong>12</strong></td>
   <td><strong>12</strong></td>
-  <td><span class='stage-result-danger'>Não</span><br><small>Sem excedente específico do Sul</small></td>
+  <td><span class='stage-result-danger'>Não pelo Sul</span><br><small>sem sobra específica deste item</small></td>
   <td>PI: 12</td>
   <td>PI: 50</td>
   <td><span class='stage-result-ok'>Fecha</span></td>
@@ -5805,7 +5914,7 @@ header.glass-panel {
     <div class="glass-panel data-section">
       <h2>4. Plano de mobilização por item específico</h2>
       <p class="stage-note">A tabela abaixo mostra uma proposta objetiva de origem operacional: para cada déficit específico do Norte, primeiro aparece o que o Norte já possui, depois o <strong>necessário para as 6 UFs do Norte</strong>, a falta e a UF fora do Norte com maior disponibilidade daquele mesmo item, até fechar a quantidade necessária.</p>
-      <table>
+      <table class="priorization-table">
         <thead>
           <tr>
             <th>Categoria</th>
